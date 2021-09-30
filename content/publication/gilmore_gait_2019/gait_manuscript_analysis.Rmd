@@ -1,0 +1,1406 @@
+---
+title: 'Forward and backward walking in Parkinson disease: A factor analysis.'
+author: ''
+date: ''
+output:
+  word_document:
+    fig_caption: yes
+    reference_docx: word-styles-reference-01.docx
+header-includes: \setlength{\parindent}{4em}
+classoption: man
+bibliography: My Collection.bib
+csl: annals-of-internal-medicine.csl
+---
+
+```{r Import libraries, eval=FALSE, include=FALSE}
+
+#
+#---- Install Required Libraries
+#
+list.of.packages <- c('captioner','caret','compare','corrplot','dplyr','formattable','ggplot2','ggrepel','grid',
+                     'gridExtra','kableExtra','knitr','measurements','mvnormtest','nFactors','pander','plotly',
+                     'plyr','qwraps2','readxl','reshape2','rmarkdown','Rmisc','stringr')
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+library(captioner)
+library(caret)
+library(compare)
+library(corrplot)
+library(dplyr)
+library(formattable)
+library(ggplot2)
+library(ggrepel)
+library(grid)
+library(gridExtra)
+library(kableExtra)
+library(knitr)
+options(knitr.table.format = "html")
+library(measurements)
+library(mvnormtest)
+library(nFactors)
+library(pander)
+library(plotly)
+library(plyr)
+library(qwraps2)
+options(qwraps2_markup = 'html')
+options(qwraps2_frmtp_digits = 3)
+library(readxl)
+library(reshape2)
+library(rmarkdown)
+library(Rmisc)
+library(stringr)
+
+
+if(!"papaja" %in% rownames(installed.packages())) devtools::install_github("crsh/papaja")
+
+#
+#---- Set up captions for manuscript
+#
+table_nums <- captioner(prefix = "Table")
+fig_nums <- captioner(prefix = "Figure")
+tab.1_cap<-table_nums(name = "tab_1", caption = "Patient demographics.")
+tab.1_cap<-table_nums(name = "tab_2", caption = "Gait feature changes in forward and backward walking.")
+tab.2_cap<-table_nums(name = "tab_3", caption = "Gait factor analysis in the OFF medication state during forward and backward walking.")
+tab.3_cap<-table_nums(name = "tab_4", caption = "Gait factor analysis in the ON medication state during forward and backward walking.")
+tab.4_cap<-table_nums(name = "tab_4", caption = "Gait feature changes in forward and backward walking.")
+tab.5_cap<-table_nums(name = "tab_5", caption = "Patient demographics by disease duration.")
+fig.1_cap<-fig_nums(name = "fig_1", caption = "Walkway setup for forwards and backwards walking tasks.")
+fig.2_cap<-fig_nums(name = "fig_2", caption = "Correlation plots for gait features. a) PD OFF medication forward walking, b) PD ON medication forward walking, c) PD OFF medication backward walking, d) PD ON medication backward walking.")
+fig.3_cap<-fig_nums(name = "fig_3", caption = "Gait feature bar graphs group by walking task.")
+fig.4_cap<-fig_nums(name = "fig_4", caption = "Gait feature bar graphs walking task by group.")
+fig.5_cap<-fig_nums(name = "fig_5", caption = "Gait feature bar graphs disease duration by walking task.")
+fig.6_cap<-fig_nums(name = "fig_6", caption = "Gait feature bar graphs walking task by disease duration.")
+
+f.ref <- function(x) {
+  stringr::str_extract(table_nums(x), "[^:]*")
+}
+
+#
+#---- Set up which gait features to analyze
+#
+preprocessData = TRUE
+allGait<-c("StepVelocity","StepVelocitySD", "StepVelocityCV","StepLength","StepLengthSD", "StepLengthCV", "StepLengthAsym",
+            "StepWidth","StepWidthSD","StepTime","StepTimeSD","StepTimeCV","StepTimeAsym","StanceTime","StanceTimeSD","StanceTimeCV","StanceTimeAsym",
+            "SwingTime","SwingTimeSD","SwingTimeCV","SwingTimeAsym","GVI","WalkRatio")
+
+subGait<-c("StepVelocity","StepVelocitySD", "StepLength","StepLengthCV", "StepLengthAsym",
+            "StepWidth","StepWidthSD","StepTime","StepTimeCV","StepTimeAsym","StanceTime","StanceTimeCV","StanceTimeAsym",
+            "SwingTime","SwingTimeCV","SwingTimeAsym","GVI")
+
+verghese<-c("StepVelocity","StepLength","StepLengthCV",
+            "StepTime","StanceTime",
+            "SwingTime","SwingTimeCV")
+gaitParameters<-subGait
+
+```
+
+
+```{r Extract Gait Data, eval=FALSE, include=FALSE}
+
+#
+#---- Import all demographic and gait data
+#
+
+driveLetter <- 'G:/'
+
+filen <- paste0(driveLetter,"manuscripts/off_on_GaitPaper/gaitPosture/re-submission/Complete_Data_for_Greydon_with_CV.xlsx")
+Demographics <- read_excel(filen,'Demographics', skip = 2)
+Demographics$PatientNum<-as.numeric(str_extract(t(Demographics[,1]), "[0-9]+"))
+DemoControl<- read_excel(filen,'DemoControls', skip = 2)
+DemoControl$PatientNum<-as.numeric(str_extract(t(DemoControl[,1]), "[0-9]+"))
+controlData <- read_excel(filen,'Control data')
+colnames(controlData) <- c(controlData[4,])
+
+cnt_NT <- controlData[5:15,4:ncol(controlData)]
+cnt_NT <- cbind(as.numeric(str_extract(t(controlData[5:15,2]), "[0-9]+")),cnt_NT)
+colnames(cnt_NT)[1]<-"PatientNum"
+cnt_NT <- cnt_NT[complete.cases(cnt_NT), ]
+cnt_NT[] <- lapply(cnt_NT, function(x) as.numeric(x))
+
+cnt_FT <- controlData[19:29,4:ncol(controlData)]
+cnt_FT <- cbind(as.numeric(str_extract(t(controlData[19:29,2]), "[0-9]+")),cnt_FT)
+colnames(cnt_FT)[1]<-"PatientNum"
+cnt_FT <- cnt_FT[complete.cases(cnt_FT), ]
+cnt_FT[] <- lapply(cnt_FT, function(x) as.numeric(x))
+
+cnt_BT <- controlData[33:43,4:ncol(controlData)]
+cnt_BT <- cbind(as.numeric(str_extract(t(controlData[33:43,2]), "[0-9]+")),cnt_BT)
+colnames(cnt_BT)[1]<-"PatientNum"
+cnt_BT <- cnt_BT[complete.cases(cnt_BT), ]
+cnt_BT[] <- lapply(cnt_BT, function(x) as.numeric(x))
+
+prePD_NT <- read_excel(filen,'PD Pre - Normal')
+colnames(prePD_NT) <- c(prePD_NT[4,])
+prePD_NT <- cbind(as.numeric(str_extract(t(prePD_NT[5:(nrow(prePD_NT)-2),2]), "[0-9]+")),prePD_NT[5:(nrow(prePD_NT)-2),4:ncol(prePD_NT)])
+colnames(prePD_NT)[1]<-"PatientNum"
+prePD_NT <- prePD_NT[complete.cases(prePD_NT), ]
+prePD_NT[] <- lapply(prePD_NT, function(x) as.numeric(x))
+
+prePD_FT <- read_excel(filen,'PD Pre - Fast')
+colnames(prePD_FT) <- c(prePD_FT[4,])
+prePD_FT <- cbind(as.numeric(str_extract(t(prePD_FT[5:(nrow(prePD_FT)-2),2]), "[0-9]+")),prePD_FT[5:(nrow(prePD_FT)-2),4:ncol(prePD_FT)])
+colnames(prePD_FT)[1]<-"PatientNum"
+prePD_FT <- prePD_FT[complete.cases(prePD_FT), ]
+prePD_FT[] <- lapply(prePD_FT, function(x) as.numeric(x))
+
+prePD_BT <- read_excel(filen,'PD Pre - Backwards')
+colnames(prePD_BT) <- c(prePD_BT[4,])
+prePD_BT <- cbind(as.numeric(str_extract(t(prePD_BT[5:(nrow(prePD_BT)-2),2]), "[0-9]+")),prePD_BT[5:(nrow(prePD_BT)-2),4:ncol(prePD_BT)])
+colnames(prePD_BT)[1]<-"PatientNum"
+prePD_BT <- prePD_BT[complete.cases(prePD_BT), ]
+prePD_BT[] <- lapply(prePD_BT, function(x) as.numeric(x))
+
+postPD_NT <- read_excel(filen,'PD Post - Normal')
+colnames(postPD_NT) <- c(postPD_NT[4,])
+postPD_NT <- cbind(as.numeric(str_extract(t(postPD_NT[5:(nrow(postPD_NT)-2),2]), "[0-9]+")),postPD_NT[5:(nrow(postPD_NT)-2),4:ncol(postPD_NT)])
+colnames(postPD_NT)[1]<-"PatientNum"
+postPD_NT <- postPD_NT[complete.cases(postPD_NT), ]
+postPD_NT[] <- lapply(postPD_NT, function(x) as.numeric(x))
+
+postPD_FT <- read_excel(filen,'PD Post - Fast')
+colnames(postPD_FT) <- c(postPD_FT[4,])
+postPD_FT <- cbind(as.numeric(str_extract(t(postPD_FT[5:(nrow(postPD_FT)-2),2]), "[0-9]+")),postPD_FT[5:(nrow(postPD_FT)-2),4:ncol(postPD_FT)])
+colnames(postPD_FT)[1]<-"PatientNum"
+postPD_FT <- postPD_FT[complete.cases(postPD_FT), ]
+postPD_FT[] <- lapply(postPD_FT, function(x) as.numeric(x))
+
+postPD_BT <- read_excel(filen,'PD Post - Backwards')
+colnames(postPD_BT) <- c(postPD_BT[4,])
+postPD_BT <- cbind(as.numeric(str_extract(t(postPD_BT[5:(nrow(postPD_BT)-2),2]), "[0-9]+")),postPD_BT[5:(nrow(postPD_BT)-2),4:ncol(postPD_BT)])
+colnames(postPD_BT)[1]<-"PatientNum"
+postPD_BT <- postPD_BT[complete.cases(postPD_BT), ]
+postPD_BT[] <- lapply(postPD_BT, function(x) as.numeric(x))
+
+#
+#---- Define function to remove data outliers
+#
+
+remove_outliers <- function(x, na.rm = TRUE) {
+  x<-as.matrix(x)
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm)
+  caps<- quantile(x,probs=c(.05, .95), na.rm = na.rm)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- caps[1]
+  y[x > (qnt[2] + H)] <- caps[2]
+  y
+}
+
+#
+#---- Remove outliers
+#
+
+prePD_NT_final <- matrix(ncol=ncol(prePD_NT),nrow=nrow(prePD_NT))
+prePD_FT_final <- matrix(ncol=ncol(prePD_FT),nrow=nrow(prePD_FT))
+prePD_BT_final <- matrix(ncol=ncol(prePD_BT),nrow=nrow(prePD_BT))
+postPD_NT_final <- matrix(ncol=ncol(postPD_NT),nrow=nrow(postPD_NT))
+postPD_FT_final <- matrix(ncol=ncol(postPD_FT),nrow=nrow(postPD_FT))
+postPD_BT_final <- matrix(ncol=ncol(postPD_BT),nrow=nrow(postPD_BT))
+
+cnt_NT_final <- matrix(ncol=ncol(cnt_NT),nrow=nrow(cnt_NT))
+cnt_FT_final <- matrix(ncol=ncol(cnt_FT),nrow=nrow(cnt_FT))
+cnt_BT_final <- matrix(ncol=ncol(cnt_BT),nrow=nrow(cnt_BT))
+
+for(i in 1:ncol(prePD_NT)){
+  prePD_NT_final[,i] <-remove_outliers(prePD_NT[,i])
+}
+for(i in 1:ncol(prePD_FT)){
+  prePD_FT_final[,i] <-remove_outliers(prePD_FT[,i])
+}
+for(i in 1:ncol(prePD_BT)){
+  prePD_BT_final[,i] <-remove_outliers(prePD_BT[,i])
+}
+
+for(i in 1:ncol(postPD_NT)){
+  postPD_NT_final[,i] <-remove_outliers(postPD_NT[,i])
+}
+for(i in 1:ncol(postPD_FT)){
+  postPD_FT_final[,i] <-remove_outliers(postPD_FT[,i])
+}
+for(i in 1:ncol(postPD_BT)){
+  postPD_BT_final[,i] <-remove_outliers(postPD_BT[,i])
+}
+
+for(i in 1:ncol(cnt_NT)){
+  cnt_NT_final[,i] <-remove_outliers(cnt_NT[,i])
+}
+for(i in 1:ncol(cnt_FT)){
+  cnt_FT_final[,i] <-remove_outliers(cnt_FT[,i])
+}
+for(i in 1:ncol(cnt_BT)){
+  cnt_BT_final[,i] <-remove_outliers(cnt_BT[,i])
+}
+
+#
+#---- Set final dataframe and assign column names
+#
+
+prePD_NT_final<-data.frame(prePD_NT_final)
+prePD_FT_final<-data.frame(prePD_FT_final)
+prePD_BT_final<-data.frame(prePD_BT_final)
+colnames(prePD_NT_final)<-colnames(prePD_NT)
+colnames(prePD_FT_final)<-colnames(prePD_FT)
+colnames(prePD_BT_final)<-colnames(prePD_BT)
+
+postPD_NT_final<-data.frame(postPD_NT_final)
+postPD_FT_final<-data.frame(postPD_FT_final)
+postPD_BT_final<-data.frame(postPD_BT_final)
+colnames(postPD_NT_final)<-colnames(postPD_NT)
+colnames(postPD_FT_final)<-colnames(postPD_FT)
+colnames(postPD_BT_final)<-colnames(postPD_BT)
+
+cnt_NT_final<-data.frame(cnt_NT_final)
+cnt_FT_final<-data.frame(cnt_FT_final)
+cnt_BT_final<-data.frame(cnt_BT_final)
+colnames(cnt_NT_final)<-colnames(cnt_NT)
+colnames(cnt_FT_final)<-colnames(cnt_FT)
+colnames(cnt_BT_final)<-colnames(cnt_BT)
+
+totSubs<- c(nrow(prePD_NT_final), nrow(prePD_FT_final), nrow(prePD_NT_final), nrow(prePD_BT_final), nrow(postPD_NT_final), nrow(postPD_FT_final), nrow(postPD_BT_final))
+
+#
+#---- Clean-up the demographics data
+#
+
+dur1<-subset(Demographics, Duration %in% seq(0, 9, by=0.5))
+dur1$Dur<-c(rep('1', nrow(dur1)))
+dur2<-subset(Demographics, Duration %in% seq(10, 30, by=0.5))
+dur2$Dur<-c(rep('2', nrow(dur2)))
+Demographics<- rbind(dur1, dur2)
+Demographics<-Demographics[order(Demographics$PatientNum),]
+
+#
+#---- Assign factor levels
+# Task = NT (Normal walk), FT (Fast walk), BT (Backward walk)
+# Group = 1 (PD OFF meds), 2 (PD ON meds), 3 (Controls)
+# Duration (disease) = 1 (0-9 years), 2 (10-30 years)
+
+# Normal walk
+prePD_NT_final$Task <- c(rep('NT', nrow(prePD_NT_final)))
+prePD_NT_final$Group <- c(rep(1, nrow(prePD_NT_final)))
+prePD_NT_final$Duration<- as.matrix(Demographics[Demographics$PatientNum %in% prePD_NT_final$PatientNum,36])
+postPD_NT_final$Task <- c(rep('NT', nrow(postPD_NT_final)))
+postPD_NT_final$Group <- c(rep(2, nrow(postPD_NT_final)))
+postPD_NT_final$Duration<- as.matrix(Demographics[Demographics$PatientNum %in% postPD_NT_final$PatientNum,36])
+cnt_NT_final$Task <- c(rep('NT', nrow(cnt_NT_final)))
+cnt_NT_final$Group <- c(rep(3, nrow(cnt_NT_final)))
+cnt_NT_final$Duration<- c(rep('NA', nrow(cnt_NT_final)))
+
+pre_postPD_NT <-rbind(prePD_NT_final, postPD_NT_final, cnt_NT_final)
+pre_postPD_NT$Group<- factor(pre_postPD_NT$Group, levels=unique(as.character(pre_postPD_NT$Group)))
+pre_postPD_NT$Task<- factor(pre_postPD_NT$Task, levels=unique(as.character(pre_postPD_NT$Task)))
+pre_postPD_NT$Duration<- factor(pre_postPD_NT$Duration, levels=unique(as.numeric(pre_postPD_NT$Duration)))
+
+# Fast walk
+prePD_FT_final$Task <- c(rep('FT', nrow(prePD_FT_final)))
+prePD_FT_final$Group <- c(rep(1, nrow(prePD_FT_final)))
+prePD_FT_final$Duration<- as.matrix(Demographics[Demographics$PatientNum %in% prePD_FT_final$PatientNum,36])
+postPD_FT_final$Task <- c(rep('FT', nrow(postPD_FT_final)))
+postPD_FT_final$Group <- c(rep(2, nrow(postPD_FT_final)))
+postPD_FT_final$Duration<- as.matrix(Demographics[Demographics$PatientNum %in% postPD_FT_final$PatientNum,36])
+cnt_FT_final$Task <- c(rep('FT', nrow(cnt_FT_final)))
+cnt_FT_final$Group <- c(rep(3, nrow(cnt_FT_final)))
+cnt_FT_final$Duration<- c(rep('NA', nrow(cnt_FT_final)))
+
+pre_postPD_FT <-rbind(prePD_FT_final, postPD_FT_final, cnt_FT_final)
+pre_postPD_FT$Group<- factor(pre_postPD_FT$Group, levels=unique(as.character(pre_postPD_FT$Group)))
+pre_postPD_FT$Task<- factor(pre_postPD_FT$Task, levels=unique(as.character(pre_postPD_FT$Task)))
+pre_postPD_FT$Duration<- factor(pre_postPD_FT$Duration, levels=unique(as.numeric(pre_postPD_FT$Duration)))
+
+# Backward walk
+prePD_BT_final$Task <- c(rep('BT', nrow(prePD_BT_final)))
+prePD_BT_final$Group <- c(rep(1, nrow(prePD_BT_final)))
+prePD_BT_final$Duration<- as.matrix(Demographics[Demographics$PatientNum %in% prePD_BT_final$PatientNum,36])
+postPD_BT_final$Task <- c(rep('BT', nrow(postPD_BT_final)))
+postPD_BT_final$Group <- c(rep(2, nrow(postPD_BT_final)))
+postPD_BT_final$Duration<- as.matrix(Demographics[Demographics$PatientNum %in% postPD_BT_final$PatientNum,36])
+cnt_BT_final$Task <- c(rep('BT', nrow(cnt_BT_final)))
+cnt_BT_final$Group <- c(rep(3, nrow(cnt_BT_final)))
+cnt_BT_final$Duration<- c(rep('NA', nrow(cnt_BT_final)))
+
+pre_postPD_BT <-rbind(prePD_BT_final, postPD_BT_final, cnt_BT_final)
+pre_postPD_BT$Group<- factor(pre_postPD_BT$Group, levels=unique(as.character(pre_postPD_BT$Group)))
+pre_postPD_BT$Task<- factor(pre_postPD_BT$Task, levels=unique(as.character(pre_postPD_BT$Task)))
+pre_postPD_BT$Duration<- factor(pre_postPD_BT$Duration, levels=unique(as.numeric(pre_postPD_BT$Duration)))
+
+
+#
+#---- Only use NT and BT for manuscript
+#
+
+pre_postPD_Combined <-rbind(pre_postPD_NT,pre_postPD_BT)
+
+patDup<- ddply(pre_postPD_Combined[pre_postPD_Combined$Group!= '3',], .(PatientNum), nrow)
+patDup<- patDup[patDup[,2]==4,]
+subDup<- ddply(pre_postPD_Combined[pre_postPD_Combined$Group== '3',], .(PatientNum), nrow)
+subDup<- subDup[subDup[,2]==2,]
+
+pre_postPD_Combined<-filter(pre_postPD_Combined, PatientNum %in% c(patDup[,1], subDup[,1]))
+pre_postPD_Combined$Duration<-relevel(pre_postPD_Combined$Duration,ref="1")
+
+```
+
+
+Greydon Gilmore, M.Sc.,^1,2^ Arnaud Gouelle, Ph.D^3,4^., Mitchell B. Adamson^2^., Marcus Pieterman^2^., Mandar Jog, MD,^1,2^
+
+^1^School of Biomedical Engineering, Western University, London, Canada
+
+^2^Department of Clinical Neurological Sciences, University Hospital, London, Canada
+
+^3^Gait and Balance Academy, ProtoKinetics, Havertown, Pennsylvania, United States of America
+
+^4^Laboratory Performance, Sante, Metrologie, Societe (PSMS), UFR STAPS, Reims, France
+
+__Correspondence to__: Greydon Gilmore, School of Biomedical Engineering, University Hospital, 339 Windermere Road, Room BLL-250, London, Canada, greydon.gilmore@gmail.com.
+
+__Word Count__: 3,757
+
+__Running Title__: Forward and backward walking factor analysis.
+
+__Keywords__: Gait parameters; Parkinson disease; Factor analysis
+
+__Financial disclosures/Conflict of interest concerning the research related to the manuscript__: none to report
+
+__Funding sources for study__: none
+
+##### Page break
+###### Abstract
+
+__Background:__ Forward and backward walking are both impaired for individuals living with Parkinson disease (PD). In the literature, studies that propose backward walking impairments are simply the reverse of forward walking conflict with those that demonstrate backward walking has greater impairment in PD, when compared to healthy controls. __Methods:__ In this study, an exploratory factor analysis was performed to investigate the realtionship between forward and backward walking in PD. Sixty-four patients with PD (63.1 $\pm$ 8.1 yrs, female = 36.4%, UPDRS OFF = 30.5 $\pm$ 10.3, UPDRS ON = 16.7 $\pm$ 8.2) and eleven healthy age-matched controls (65.1 $\pm$ 7.2 yrs, female = 32.3%) were recruited. A 6.1 meter instrumented walkway (Zeno Walkway) was used to collect gait parameters during walking tasks. PD participants completed the walking tasks OFF levodopa medication, then took their levodopa medication and completed the walking tasks ON medication. Forward walking (5 passes) was completed by walking around a 18 meter track, which contained the instrumented walkway on one half. Backward walking (4 passes) was completed by walking backward across the instrumented walkway, without performing loops. Principle component analysis and exploratory factor analysis with 'Varimax' rotation was used to derive models for both walking tasks in the OFF and ON medication states. __Results:__ Four factors were identified in the OFF medication state: Variability (forward = 30.0%, backward = 17.8%), Rhythm (forward = 14.5%, backward = 17.0%), Asymmetry (forward = 13.7%, backward = 14.3%), and Pace (forward = 12.2%, backward = 17.0%) explaining 70.4% total variance in forward walking and 66.1% of total variance in backward walking. Five factors were identified in the ON medication state: Variability (forward = 21.6%, backward = 25.0%), Rhythm (forward = 17.4%, backward = 19.0%), Asymmetry (forward = 16.1%, backward = 15.2%), and Pace (forward = 13.9%, backward = 8.7%), and Postural Control (forward = 3.8%, backward = 7.7%) explaining 72.8% total variance in forward walking and 75.6% of total variance in backward walking. It was also found that a greater number of gait paramters improved in forward walking, when compared to backward walking. __Conclusion:__ This study demonstrates the similarity in gait domain factors in both forward and backward walking. In response to levodopa, that fewer gait parameters improved in backward walking compared to forward walking. While domains of gait are similar in both walking tasks, levodopa response is reduced in backward walking. This could be a result of the increased complexity of backward walking. This study provides a normative dataset that can be used when assessing forward and backward walking in individuals with PD.  
+
+##### Page break
+##  Introduction
+
+Gait dysfunction can be used to assess quality of life, risk of falling and even mortality in Parkinson disease (PD) [@Maki1997;@Ferrucci2000;@Studenski2011]. Forward and backward walking impairments can be seperately assessed in PD, with backward walking having greater impairment when compared with healthy controls [@Hackney2009;@Myers2018;@Son2018]. Backward walking can more accurately identify elderly fallers than forward walking [@Fritz2013]. Given the additional information provided by backward walking, gait assessment in PD should include other walking tasks beyond forward walking [@Morris2001]. 
+
+Levodopa significantly modifies various aspects of forward walking in individuals with PD [@Morris2001;@Moore2008]. The spatial aspects of gait (e.g. velocity and stride length) are levodopa responsive while temporal parameters of gait (e.g. cadence, swing time) are non-responsive [@Morris2001]. However, the effect of levodopa on backward walking in PD is less clear. Winter et al. (1989) discussed the notion that backward walking is simply a reversal of forward walking and found reversed-image similarity in several EMG and kinetic features [@Winter1989]. However, more recent studies have indicated that the neural control may differ between forward and backward walking [@Choi2007;@Hackney2009] and the limitation of visual cues during backward walking might be challenging in a disease with increased visual dependence [@Azulay2002].
+
+Hackney et al. (2009) were the first to report quantitative gait parameter changes during backward walking in individuals with PD (ON medication). Backward walking was associated with shorter stride lengths, reduced swing percentages and higher double support/stance percentages when compared with controls [@Hackney2009]. Furthermore, in a study about balance stability [@Horak2005], PD produced the smallest stability margin in the backward direction and 30% of the observed falls occurred in this sway direction. However, reporting the changes in individual gait parameters (e.g. gait speed or step length) does not capture the full complexity of gait mechanics. An exploratory factor analysis can be used to elucidate the relationship between various gait parameters and walking conditions. Factor analysis allows for exploration of the covariance between individual gait parameters and provides a broader definition of gait domains [@Gouelle2018a]. Such analysis has been applied to forward walking in the elderly, where five or six gait domains were identified (based on 16 to 23 gait parameters): pace, rhythm, variability, asymmetry, postural control, and phases [@Verghese2007;@Verlinden2013;@Lord2013b;@Lord2014]. Using factor analysis, subsequent work by Lord et al. (2014) identified significant associations between gait and cognitive domains in PD. Grouping individual gait parameters into domains might provide a useful way to explain the changes experienced in response to levodopa treatment. 
+
+Given that levodopa gait parameter response is greater in forward walking compared with backward walking, clinical examination using only forward walking may not provide the full detail of the patient's mobility. The purpose of this study was to explore the additive value of backwards walking in a clinical setting. First, a factor analysis was performed to summarize many gait parameters into a few distinct communalities. The aim was to elucidate the similarities and differences in immediate (1 hour) gait response to levodopa in forward and backward walking conditions. The response was quantified by assessing the patients OFF levodoa, administering 125% of their levodoa dose, and assessing them in the ON levodopa state. We hypothesized that levodopa has differing effects on forward and backward walking due to the increase complexity in backward walking. The results of the study can be used in a clinical setting where forward and backward walking tasks are used to measure a patients mobility.  
+
+##	Methods
+### Participants
+
+Sixty-five individuals with PD and eleven healthy age-matched controls were consented and included in this study. Individuals with PD were recruited from the movement disorders clinic at London Health Sciences Center. This study was approved by the Human Research Ethics Board (REB #107253) of Western University. Participants were included based on the following criteria: (1) have been diagnosed with idiopathic PD for at least 2 years; (2) be 45-85 years of age; (3) have been on stable doses of anti-Parkinson medication, including any levodopa preparation (stable doses indicate that no adjustments to medications have been made within the last 6 months); and (4) able to give informed consent. Participants were excluded on the following criteria: (1) history of any surgical intervention for treating PD (i.e., DBS, Duodopa pump); (2) extreme physical disability that impairs mobility assessment; (3) history or current diagnosis of a psychiatric condition requiring hospitalization; (4) pregnant, planning on becoming pregnant, or breastfeeding; and (5) deemed unable to understand or speak sufficient English.
+
+### Gait evaluation equipment
+
+Footfall data was captured using a 6.10m x 1.22m instrumented walkway with embedded pressure sensors on all this area (ZenoMetrics mat/PKMAS software, v5.07, Havertown, PA, USA). The validity of the walkway system has been previously demonstrated [@Egerton2012], and even used for backward walking assessment in elderly fallers [@Maritz2017]. Gait variability is an important domain and studies have demonstrated that a continuous walking protocol (versus intermittent walking bouts) improves the reliability when older persons or PD patients must walk several times on the electronic walkway [@Galna2013]. For this reason, a walking loop was formed including the mat on one side (Figure 1).
+
+### Walking tasks
+
+Gait was measured in one study session for all participants. Individuals with PD were asked to withhold levodopa medications for 12 hours prior to the study session. Forward walking was performed, at their normal pace, by walking around the track for a total of five passes (~ 1-1.5 mins) (see figure 1.).  Backward walking, being more complex to do, was performed at their normal pace. Participants were asked to walk down the walkway, without making loops, for a total of four passes (see figure 1.). Individuals with PD completed the walking tasks in the OFF-medication state. They were then asked to take 125% of their normal levodopa medication and a 1 hour wait period was given. The walking tasks were then repeated in the ON-medication state.  Controls were asked to complete the walking tasks in the same order, only once, without the use of levodopa medication.  
+
+### Gait parameters
+
+Sixteen gait parameters were used in the analysis, which includes variability and asymmetry of gait parameters. Asymmetry is the gait parameter ratio between left and right sides and is related to the bilateral coordination of left-right limbs; it has been shown to improve between OFF and ON medications states [@Plotnik2005]. Coefficient of variation (CV) is the standard deviation of the gait parameter expressed as a percentage of the mean and explores the variability over the task. The gait parameters used in the current study were:
+  
+* __Step velocity (mean, SD and CV)__: distance travelled in period of time.
+* __Step length (mean, SD, CV and asymmetry)__: distance from initial contact of one foot to the following initial contact of the other foot. Asymmetry has been computed as the absolute difference between left and right sides.
+* __Step width (mean, SD)__: distance between midline of one footfall and the midline of the successive footfall.
+* __Step time (mean, SD and asymmetry)__: period of time taken for one step.
+* __Stance time (mean, SD and CV)__: the period of time when the foot is in contact with the ground.
+* __Swing time (mean, SD, CV and asymmetry)__: period of time foot is in the air during gait cycle
+* __Enhanced gait variability index (eGVI)__: conglomerate measure that objectively quantifies the variability measured in spatiotemporal variables [@Gouelle2018]. 
+* __Walk ratio__: ratio of step length and step cadence, it represents the relationship between the amplitude and the frequency of movement of the legs [@Sekiya1997;@Gouelle2018a].
+
+### Data analysis
+
+Sixteen cross-correlation plots were used to investigate which gait parameters were correlated with each other. Scree plots were then constructed to determine the number of factors to keep in the analysis. Five factors were kept for each walking task. Varimax rotation was performed on the eigenvectors until the 5 factors were maximized and the other factors were reduced to close to zero. Gait parameters that had a minimum loading of 0.5 were considered relevant. Factor analyses were performed in R 3.4.4 [@rstudio] using the stats package factanal() function, scree plots were performed using the nFactors package [@nFactors] and correlation plots were performed using the corrplot package [@corrplot2017]. Analysis of variance was performed on demographic data using the stats package lm() function. Significance level was set at *p* < 0.05. Gait parameters were extracted from the PKMAS software. 
+
+##  Results
+
+Sixty-five individuals with PD (63.1 $\pm$ 8.1 yrs, female = 36.4%) and eleven healthy age-matched controls (65.1 $\pm$ 7.2 yrs, female = 32.3%) performed the walking tests; no significant difference was found in age, height or MoCA between PD and controls (see Table 1.). Individuals with PD were recruited from the Movement Disorders Clinic at London Health Sciences center, based on their disease duration (see Table 1.).
+
+<!-- #### `r table_nums('tab_1')` -->
+
+<!-- ```{r echo=FALSE} -->
+<!-- knitr::include_graphics('figures/table1Demographics.png') -->
+<!-- ``` -->
+
+#### `r table_nums('tab_1')`
+```{r echo=FALSE}
+
+knitr::include_graphics('figures/table1Demographics.png')
+
+```
+
+### Forward and backward gait parameter changes between groups
+  
+In forward walking, the gait parameters that significantly improved between the PD groups (OFF vs. ON) were: step velocity, step velocity CV, step length, step length CV, step width SD, step time SD, step time asymmetry, stance time, stance time SD, stance time CV, GVI and walk ratio. From these parameters, the ones that were not significantly different from controls (PD ON vs. controls) were: step velocity, step velocity CV, step length, step width SD, step time SD, step time asymmetry, stance time, stance time SD, stance time CV and walk ratio. The gait features that did not change OFF to ON and remained significantly different from controls were: step length SD, step length asymmetry and swing time asymmetry. Finally, the gait parameters that were not significantly different across groups were: step velocity SD, step width, step time and swing time.  
+
+In backward walking, the gait parameters that significantly improved between the PD groups (OFF vs. ON) were: step velocity, step velocity SD, step velocity CV, step length, step length SD, stance time SD, and walk ratio. From these parameters, the ones that were not significantly different from controls (PD ON vs. controls) were: step velocity CV, step length SD, stance time SD, and walk ratio. The gait features that did not change OFF to ON and remained significantly different from controls were: step length CV, step time SD, step time asymmetry, stance time CV, swing time asymmetry and GVI. Finally, the gait parameters that were not significantly different across all groups were: step length asymmetry, step width, step time, stance time and swing time. Across all groups/conditions, step width, step time and swing time remained unchanged. Gait parameter changes are outlined in Table 2.
+
+#### `r table_nums('tab_2')`
+```{r echo=FALSE}
+
+knitr::include_graphics('figures/table2GaitFeatures.png')
+
+```
+
+### Factor analysis
+
+In accordance with the previous work of Lord et al. (2013) and Hollman et al. (2011), the identified factors matched the previously identified domains [@Hollman2011;@Lord2013b]. In the OFF medication state, factor analysis revealed that four factors accounted for 70.4% of variance in forward walking and 66.1% of variance in backward walking. Forward walking yielded the factors: variability (30.0%), rhythm (14.5%), asymmetry (13.7%), and pace (12.2%). In backward walking, the factors that were identified were: variability (17.8%), rhythm (17.0%), pace (17.0%) and asymmetry (14.3%). These loadings are shown in Table 3. Factor 5 in both walking conditions did not load highly with the gait parameters in the last gait domain postural control.
+
+#### `r table_nums('tab_3')`
+
+```{r echo=FALSE}
+
+knitr::include_graphics('figures/table3FactorOFF.png')
+
+```
+
+In the ON medication state, factor analysis revealed five factors accounted for 72.8% of variance in forward walking and 75.6% of variance in backward walking. Forward walking yielded the factors: variability (21.6%), rhythm (17.4%), asymmetry (16.1%), pace (13.9%) and posture (3.8%). In backward walking, the factors that were identified were: variability (25.0%), rhythm (19.0%), asymmetry (15.2%), pace (8.7%) and posture (7.7%). These loadings are shown in Table 4.
+
+#### `r table_nums('tab_4')`
+
+```{r echo=FALSE}
+
+knitr::include_graphics('figures/table4FactorON.png')
+
+```
+
+## Discussion
+
+This study explored the factors of PD gait important in forward and backward walking conditions in the ONand OFF states. Independent gait domains were found to be similar between the walking conditions, with greater forward walking variability in the OFF medication state. However, when ON medication, the variability is greater in backwards walking, which has been found previously [@Bryant2016]. A recent study suggested using backward walking as a clinical measure of mobility given the additive information provided. The study found that backward gait velocity can more accurately identify elderly fallers than forward gait velocity [@Fritz2013]. This relationship was found in the current study, gait velocity significantly improved after levodopa administration in both walking conditions, however, backward gait velocity did not return to control levels. The factor domains, and associated gait parameters, in this study closely matched previous work [@Lord2013b]. 
+
+### Gait parameters
+This study demonstrated that levodopa improves PD gait parameters in both forward and backward walking conditions. In response to levodopa, step velocity, step length, step width SD and walk ratio were not significantly different from controls in forward walking but remained significantly different in backward walking. This may suggest that individuals with PD have larger deficits in backward walking compared to forward walking. Another explanation could be that backward walking is a more complex walking task. McNeely et al. (2012) hypothesized that levodopa would only improve normal walking and not improve backward walking as it is a more complex walking task [@McNeely2012a]. They found a significant effect of levodopa on step velocity between forward and backward walking tasks [@McNeely2012a]. This finding supports the notion that forward and backward walking may differ in neural control. Previous literature has demonstrated the potential for separate control systems in forward and backward walking [@Choi2007]. Given that a greater number of gait parameters improved to control levels (ON levodopa) in forward walking compared with backward walking, backward walking may be a more complex walking task. In healthy older adults, decreased backward walking step velocity has been linked to increased risk of falling [@Maritz2017]. 
+
+Interestingly, stance time was the only temporal gait parameter that significantly improved in the presence of levodopa between both walking tasks. Step time and swing time were not significantly different from controls in forward and backward walking. Lack of improvement in the temporal domain of PD gait has been summarized in literature [@Smulders2016]. 
+
+### OFF levodopa: Factor analysis 
+
+The variability factor was comprised of the gait parameter CV values and was the factor that explained most of the variance in the data. Lord et al. (2013) found that, in healthy older individuals, variability was the fourth factor and explained 14.5% of the variance in forward walking. Furthermore, they found that spatial variability loaded onto the variability factor while temporal variability loaded onto the pace factor. The present study found that, in individuals with PD, temporal variability loaded onto the variability factor in both forward and backward walking. This finding suggests that timing of the gait parameter, rather than distance, seems to explain more of the variance in PD OFF levodopa gait.  
+
+The rhythm factor was the second highest contributor in the analysis, being comprised of temporal gait parameters in both walking conditions. This finding matched Lord et. al (2013) who reported all temporal gait parameters loaded onto the rhythm factor, which was also found to be the second factor. In another study, the rhythm factor was associated with memory decline, which indicates the potential usefulness of this factor for early detection of memory deficits [@Verghese2007]. 
+
+Pace was the third factor in backward walking and the fourth factor in forward walking in the OFF medication state. In both walking conditions, the gait parameters that loaded onto the factor included step velocity, step length and step width variability. This finding was contrary to previous work that found a strong negative loading of step velocity and step length to the Pace factor [@Verghese2007;@Lord2013b]. Furthermore, in previous studies the pace factor explained the most variance in the data in the ON medication state. This difference may be due to the patients being OFF levodopa (step velocity and step length would be reduced). Pace explained 12.2% of the variance in forward walking and 17.0% in backward walking. This difference could be associated with the response of levodopa on the gait features that loaded onto Pace. Levodopa returned step velocity and step length to control levels in forward walking but not in backward walking, a finding that has been reported in a previous study [@Hackney2010]. Step velocity and step length were only improved ON levodopa during forward walking and explained a greater amount of variance in the model during backwards walking. Given these findings, step velocity and step length may become impaired earlier in the disease state during backwards walking, which may indicate early risk of falling [@Fritz2013].
+
+An asymmetry factor was the third factor in forward walking and the fourth factor in backward walking. The percent contribution in both walking conditions was similar to previous work which found asymmetry to be the third factor, explaining 15.5% of the variance in forward walking of healthy older individuals [@Lord2013b]. In the present study, and in previous work [@Lord2013b], temporal gait parameter asymmetries were found to load onto this factor and not spatial gait parameters. 
+
+The fifth factor was not well defined by gait parameters, so it was not considered. In this study, step width variability loaded onto the pace factor. Hollman et al. (2011) found that step width variability loaded onto a fifth factor they termed base of support. This contradictory result indicates that factor domains may overlap in the OFF medication state and gives a reason to the lack of a well-defined fifth factor.
+
+### ON levodopa: Factor analysis
+
+As in the OFF medication state, variability was the factor that explained the most variance in both walking conditions ON medication. However, the variance in gait performance explained by the variability factor increased in backward walking and decreased in forward walking when comparing OFF to ON levodopa. Interestingly, both temporal and spatial gait parameter variabilities loaded onto the variability factor in the current paper. This was also found by Hollman et al. (2011) who reported both temporal and spatial gait parameter variabilities loaded onto the variability factor in forward walking of healthy older individuals. Considering the eGVI, which is a gait variability measure, there was a significant improvement from OFF to ON medication in forward walking but not in backward walking (Table 2). This finding matches Hackey et al. (2009), who reported increased gait variability in backward walking when individuals with PD were in the ON state [@Hackney2009].  
+
+The rhythm factor, ON medication state, matched the OFF medication state with regards to factor number and loaded gait parameters. The percent of variance explained by Rhythm increased in both walking conditions from the OFF medication state. It was found that step time and swing time remained not significantly different across groups, while stance time was only significantly different after levodopa administration in forward walking. The lack of levodopa response of temporal gait parameters may explain the similarities found in the factor analysis between OFF and ON medication states.
+
+The asymmetry factor was the third factor in both walking conditions; with similar percent of variance explained. Lord et al. (2013) found asymmetry was the third factor and explained 15.1% of total variance in the data. This previous finding matched the results from the current analysis, which found percent of variance explained in forward walking was 16.1% and in backward walking was 15.2%. 
+
+The pace factor was the fourth factor in the analysis and variance explained was higher in forward walking than in backward walking. A notable difference was that step width variability loaded onto pace in backward walking but not in forward walking. As previously discussed, Hollman et al. (2011) found that step width variability loaded onto base of support in forward walking. This may indicate that, in backward walking, participants had a harder time maintaining their balance and had an increased requirement for a base of support. 
+
+The posture factor was found to be the fifth factor in both walking conditions, the asymmetry of step length was the gait parameter that loaded onto this domain. This factor loading was similar to Lord et al. (2013) who found step length asymmetry and step width loaded onto a fifth factor they termed postural control. The difference from the current results is that step width did not load onto any factor in the analysis. 
+
+### Strengths and limitations
+
+The strengths of the current study include the large PD population and the number of walking passes completed by each patient. The study had a few limitations worth noting. First, this was a cross-sectional study, thus, age and disease related changes could not be studied directly. However, when recruiting patients, PD disease duration was considered to obtain a more representative study cohort. The second limitation is that the forward walking was completed using loops while backward walking was completed in a straight line. The extended walking path in forward walking may have fatigued the patient more than backward walking. Third, cognitive capacity was not considered in the analysis. Previous studies have reported an increased cognitive load during backward walking [@Hackney2010;@Tseng2012;@McNeely2012a], a relationship that, if added in this study, may tease out further relationships between the walking task and levodopa response.
+
+## Clinical Significance and Conclusion
+
+This study provides a large normative dataset for levodopa response in PD patients during forward and backward walking, adding substantially to the existing literature. If using forward and backward walking in a clinical setting, the gait domains provide the clinician with an idea of which gait parameters to monitor in both walking conditions. This study provides a normative PD gait parameter factor analysis for both forward and backward walking, which can be used for assessing and interpreting gait impairment. A factor analysis identified similar gait domains, ON and OFF levodopa, between forward and backward walking. However, it was found that fewer gait parameters improved in response to levodopa during backward walking. Temporal gait parameters were not responsive to levodopa in forward and backward walking. These results support differing neural control networks for forward and backward walking, suggesting that backward walking may provide additive information about mobility and should be used in a clinical setting.
+
+
+```{r Data Analysis Preamble, eval=FALSE, include=FALSE}
+
+# Chunk Order   Description
+# 1   Demographics Table
+# 2   Gait Parameters Summary Table - Normal walk
+# 3   Gait Parameters Summary Table - Backward walk
+# 4   Factor Analysis Preamble
+# 5   PD OFF Normal Walk PCA
+# 6   PD ON Normal Walk PCA
+# 7   PD OFF Backward Walk PCA
+# 8   PD ON Backward Walk PCA
+# 9   Correlation Plots - PD OFF Normal walk
+# 10   Correlation Plots - PD ON Normal walk
+# 11   Correlation Plots - PD OFF Backward walk
+# 12   Correlation Plots - PD ON Backward walk
+# 13-end    Optional analysis not included in manuscript
+
+#
+#---- Install Required Libraries
+#
+list.of.packages <- c('AppliedPredictiveModeling','car','cowplot','ggpubr','lattice')
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+
+library(AppliedPredictiveModeling)
+library(car)
+library(cowplot)
+library(ggpubr)
+library(lattice)
+
+```
+
+
+```{r Demographics Table, eval=FALSE, include=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                                   Demographics Table                                   #
+#----------------------------------------------------------------------------------------#
+
+tableSummaryDemo <-
+  list(list("Age (Years)" = ~ qwraps2::mean_sd(Age, na_rm = TRUE)),
+       list("Sex: Female, %(n)" = ~ qwraps2::perc_n(Sex=="1", na_rm = TRUE)),
+       list("Height (cm)" = ~ qwraps2::mean_sd(Height, na_rm = TRUE)),
+       list("LED (mg)" = ~ qwraps2::mean_sd(LED, na_rm = TRUE)),
+       list("PD Duration (Years)" = ~ qwraps2::mean_sd(Duration, na_rm = TRUE)),
+       list("Levodopa Duration (Years)" = ~ qwraps2::mean_sd(LevodopaDuration, na_rm = TRUE)),
+       list("UPDRS ON" = ~ qwraps2::mean_sd(UPDRSON, na_rm = TRUE)),
+       list("UPDRS OFF" = ~ qwraps2::mean_sd(UPDRSOFF, na_rm = TRUE)),
+       list("MoCA" = ~ qwraps2::mean_sd(MoCA, na_rm = TRUE)))
+       
+demoSummaryRowN<- c("**Age (Years)**", "**Sex: Female, %(n)**", "**Height (cm)**", "**LED (mg)**", "**PD Duration (Years)**", "**Levodopa Duration (Years)**", "**UPDRS ON**", "**UPDRS OFF**", "**MoCA**")
+demoData<- Demographics[Demographics$PatientNum %in% postPD_NT_final$PatientNum, c("Age","Sex","Duration","LevodopaDuration","LED","UPDRSOFF","UPDRSON","Response","FOG-Q","ABC","UDysRS","MoCA","PDQ-8","GDS","Weight","Height","Dur")]
+
+height <- list()
+for (i in 1:nrow(demoData)) {
+  temp<-as.matrix(strsplit(as.matrix(demoData$Height[i]),"\""))
+  feet<-as.integer(as.matrix(strsplit(temp[[1]],"'")[[1]])[1])
+  inch<-as.integer(as.matrix(strsplit(temp[[1]],"'")[[1]])[2])
+  heightTemp<-conv_unit(feet, "ft", "cm")+conv_unit(inch, "inch", "cm")
+  height[i]<-conv_unit(heightTemp, "cm", "m")
+}
+demoData$Height<-as.numeric(height)
+demoData$Group<-c(rep("Patient",nrow(demoData)))
+
+demoDataControl<-DemoControl[DemoControl$PatientNum %in% cnt_NT_final$PatientNum, c("Age","Sex","ABC","MoCA","GDS","Weight","Height")]
+height <- list()
+for (i in 1:nrow(demoDataControl)) {
+  temp<-as.matrix(strsplit(as.matrix(demoDataControl$Height[i]),"\""))
+  feet<-as.integer(as.matrix(strsplit(temp[[1]],"'")[[1]])[1])
+  inch<-as.integer(as.matrix(strsplit(temp[[1]],"'")[[1]])[2])
+  heightTemp<-conv_unit(feet, "ft", "cm")+conv_unit(inch, "inch", "cm")
+  height[i]<-conv_unit(heightTemp, "cm", "m")
+}
+demoDataControl$Height<-as.numeric(height)
+demoDataControl$Group<-c(rep("Control",nrow(demoDataControl)))
+
+demoAll<-rbind.fill(demoData,demoDataControl)
+demoAll$Group<- factor(demoAll$Group)
+
+groupedDemo<-summary_table(dplyr::group_by(demoAll, Group), tableSummaryDemo)
+groupedDemo[c(4,5,6,7,8),1]<-'--'
+countC<-sum(str_count(demoAll[demoAll$Group=='Control','Sex'], "F"))
+percentC<-sprintf("%.2f", round((countC/(nrow(demoAll[demoAll$Group=='Control',])))*100,digits=2))
+groupedDemo[2,1]<-paste(as.character(percentC),"%","(n = ",as.character(countC),")",sep="")
+countP<-sum(str_count(demoAll[demoAll$Group=='Patient','Sex'], "F"))
+percentP<-sprintf("%.2f", round((countP/(nrow(demoAll[demoAll$Group=='Patient',])))*100,digits=2))
+groupedDemo[2,2]<-paste(as.character(percentP),"%","(n = ",as.character(countP),")",sep="")
+
+pvalsDemo <-
+  list(lm(Age ~ Group,  data = demoAll),
+       lm(Height ~ Group,  data = demoAll),
+       lm(MoCA ~ Group,  data = demoAll))%>%
+  lapply(aov) %>%
+  lapply(summary) %>%
+  lapply(function(x) x[[1]][["Pr(>F)"]][1]) %>%
+  lapply(frmtp) %>%
+  do.call(c, .)
+
+for (i in 1:length(pvalsDemo)){
+  temp<-as.numeric(str_extract(t(pvalsDemo[i]), "\\d+\\.*\\d*"))
+  if (temp<0.05){
+    pvalsDemo[i]<-paste("**",str_extract(t(pvalsDemo[i]), "\\d+\\.*\\d*"),"**",sep="")
+  }else{
+    pvalsDemo[i]<-str_extract(t(pvalsDemo[i]), "\\d+\\.*\\d*")
+  }
+}
+coln<-colsplit(string=colnames(groupedDemo), pattern="\\(", names=c("Part1", "Part2"))
+colnam<- c(paste("Control Participants (", coln$Part2[1], sep =""),paste("PD Participants (", coln$Part2[2], sep =""), "P-value") 
+groupedDemo<-cbind(groupedDemo, "P-value" = "")
+groupedDemo[1, "P-value"] <- pvalsDemo[1]
+groupedDemo[3, "P-value"] <- pvalsDemo[2]
+groupedDemo[9, "P-value"] <- pvalsDemo[3]
+
+make <- rep(demoSummaryRowN, each = 1)
+unique_r = unique(make)
+groupedDemoRowName<-lapply(unique_r,function(x)sum(make==x))
+groupedDemoRowName<- matrix(unlist(groupedDemoRowName), ncol = length(tableSummaryDemo), byrow = TRUE)
+rownames(groupedDemo) <- unique_r
+
+```
+
+
+```{r Normal Walking Parameter Summary Table, eval=FALSE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+
+#
+#---- Setup the gait parameters summary table
+#
+
+tableSummary <-
+  list(list("Step Velocity" = ~ qwraps2::mean_sd(StepVelocity, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Velocity SD" = ~ qwraps2::mean_sd(SwingTime, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Velocity CV" = ~ qwraps2::mean_sd(StepVelocityCV, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Length" = ~ qwraps2::mean_sd(StepLength, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Length SD" = ~ qwraps2::mean_sd(StepLengthSD, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Length CV" = ~ qwraps2::mean_sd(StepLengthCV, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Length Asym" = ~ qwraps2::mean_sd(StepLengthAsym, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Width" = ~ qwraps2::mean_sd(StepWidth, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Width SD" = ~ qwraps2::mean_sd(StepWidthSD, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Time" = ~ qwraps2::mean_sd(StepTime, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Time SD" = ~ qwraps2::mean_sd(StepTimeSD, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Step Time Asym" = ~ qwraps2::mean_sd(StepTimeAsym, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Stance Time" = ~ qwraps2::mean_sd(StanceTime, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Stance Time SD" = ~ qwraps2::mean_sd(StanceTimeSD, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Stance Time CV" = ~ qwraps2::mean_sd(StanceTimeCV, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Swing Time" = ~ qwraps2::mean_sd(SwingTime, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Swing Time SD" = ~ qwraps2::mean_sd(SwingTimeSD, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("Swing Time CV" = ~ qwraps2::mean_sd(SwingTimeCV, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("SwingTimeAsym" = ~ qwraps2::mean_sd(SwingTimeAsym, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("GVI" = ~ qwraps2::mean_sd(GVI, digits = getOption("qwraps2_frmt_digits", 3))),
+       list("WalkRatio" = ~ qwraps2::mean_sd(WalkRatio, digits = getOption("qwraps2_frmt_digits", 3))))
+
+tableSummaryRowN<-c("**Step Velocity**", "**Step Velocity SD**", "**Step Velocity CV**", "**Step Length**", "**Step Length SD**", "**Step Length CV**", "**Step Length Asym**", "**Step Width**", 
+                    "**Step Width SD**", "**Step Time**", "**Step Time SD**", "**Step Time Asym**", "**Stance Time**", "**Stance Time SD**", "**Stance Time CV**", "**Swing Time**", "**Swing Time SD**", 
+                    "**Swing Time CV**", "**Swing Time Asym**", "**GVI**", "**Walk Ratio**")
+
+#----------------------------------------------------------------------------------------#
+#                         Gait Parameter Summary Table - Normal walk                     #
+#----------------------------------------------------------------------------------------#
+
+groupedNT<-summary_table(dplyr::group_by(pre_postPD_Combined[pre_postPD_Combined$Task=='NT',], Group), tableSummary)
+
+pvalsPDNT <-
+  list(lm(StepVelocity ~ Group,  data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepVelocitySD ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepVelocityCV ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),  # yeah, silly example this is needed twice
+       lm(StepLength ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepLengthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepLengthCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepLengthAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepWidth ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepWidthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StanceTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StanceTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(StanceTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(GVI ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',]),
+       lm(WalkRatio ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='3',])) %>%
+  lapply(aov) %>%
+  lapply(summary) %>%
+  lapply(function(x) x[[1]][["Pr(>F)"]][1]) %>%
+  lapply(frmtp) %>%
+  do.call(c, .)
+
+for (i in 1:length(pvalsPDNT)){
+  temp<-as.numeric(str_extract(t(pvalsPDNT[i]), "\\d+\\.*\\d*"))
+  if (temp<0.05){
+    pvalsPDNT[i]<-paste("**",pvalsPDNT[i],"**",sep="")
+  }else{
+    pvalsPDNT[i]<-pvalsPDNT[i]
+  }
+}
+
+pvalsPDCNTNT <-
+  list(lm(StepVelocity ~ Group,  data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepVelocitySD ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepVelocityCV ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),  # yeah, silly example this is needed twice
+       lm(StepLength ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepLengthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepLengthCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepLengthAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepWidth ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepWidthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StanceTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StanceTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(StanceTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(GVI ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',]),
+       lm(WalkRatio ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='NT'& pre_postPD_Combined$Group!='1',])) %>%
+  lapply(aov) %>%
+  lapply(summary) %>%
+  lapply(function(x) x[[1]][["Pr(>F)"]][1]) %>%
+  lapply(frmtp) %>%
+  do.call(c, .)
+
+for (i in 1:length(pvalsPDCNTNT)){
+  temp<-as.numeric(str_extract(t(pvalsPDCNTNT[i]), "\\d+\\.*\\d*"))
+  if (temp<0.05){
+    pvalsPDCNTNT[i]<-paste("**",pvalsPDCNTNT[i],"**",sep="")
+  }else{
+    pvalsPDCNTNT[i]<-pvalsPDCNTNT[i]
+  }
+}
+
+coln<-colsplit(string=colnames(groupedNT), pattern="\\(", names=c("Part1", "Part2"))
+colnam<- c(paste("PD OFF (", coln$Part2[1], sep =""),paste("PD ON (", coln$Part2[2], sep =""), "PD OFF vs. PD ON", paste("Control (", coln$Part2[3], sep =""), "PD ON vs. Control") 
+groupedNT<-cbind(groupedNT[,1:2], "PD OFF vs. PD ON" = "", groupedNT[,3], "PD ON vs. Control" = "")
+groupedNT[, "PD OFF vs. PD ON"] <- pvalsPDNT
+groupedNT[, "PD ON vs. Control"] <- pvalsPDCNTNT
+
+kable(groupedNT, format = "markdown", align='c', col.names= colnam)
+
+```
+
+
+```{r Backward Walking Parameter Summary Table, eval=FALSE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                         Gait Parameter Summary Table - Backward walk                   #
+#----------------------------------------------------------------------------------------#
+
+groupedBT<-summary_table(dplyr::group_by(pre_postPD_Combined[pre_postPD_Combined$Task=='BT',], Group), tableSummary)
+
+pvalsPDBT <-
+  list(lm(StepVelocity ~ Group,  data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepVelocitySD ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepVelocityCV ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),  # yeah, silly example this is needed twice
+       lm(StepLength ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepLengthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepLengthCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepLengthAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepWidth ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepWidthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StepTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StanceTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StanceTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(StanceTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(SwingTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(GVI ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',]),
+       lm(WalkRatio ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='3',])) %>%
+  lapply(aov) %>%
+  lapply(summary) %>%
+  lapply(function(x) x[[1]][["Pr(>F)"]][1]) %>%
+  lapply(frmtp) %>%
+  do.call(c, .)
+
+for (i in 1:length(pvalsPDBT)){
+  temp<-as.numeric(str_extract(t(pvalsPDBT[i]), "\\d+\\.*\\d*"))
+  if (temp<0.05){
+    pvalsPDBT[i]<-paste("**",pvalsPDBT[i],"**",sep="")
+  }else{
+    pvalsPDBT[i]<-pvalsPDBT[i]
+  }
+}
+
+pvalsPDCNTBT <-
+  list(lm(StepVelocity ~ Group,  data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepVelocitySD ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepVelocityCV ~ Group, data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),  # yeah, silly example this is needed twice
+       lm(StepLength ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepLengthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepLengthCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepLengthAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepWidth ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepWidthSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StepTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StanceTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StanceTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(StanceTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTime ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTimeSD ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTimeCV ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(SwingTimeAsym ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(GVI ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',]),
+       lm(WalkRatio ~ Group,   data = pre_postPD_Combined[pre_postPD_Combined$Task=='BT'& pre_postPD_Combined$Group!='1',])) %>%
+  lapply(aov) %>%
+  lapply(summary) %>%
+  lapply(function(x) x[[1]][["Pr(>F)"]][1]) %>%
+  lapply(frmtp) %>%
+  do.call(c, .)
+
+for (i in 1:length(pvalsPDCNTBT)){
+  temp<-as.numeric(str_extract(t(pvalsPDCNTBT[i]), "\\d+\\.*\\d*"))
+  if (temp<0.05){
+    pvalsPDCNTBT[i]<-paste("**",pvalsPDCNTBT[i],"**",sep="")
+  }else{
+    pvalsPDCNTBT[i]<-pvalsPDCNTBT[i]
+  }
+}
+
+coln<-colsplit(string=colnames(groupedBT), pattern="\\(", names=c("Part1", "Part2"))
+colnam<- c(paste("PD OFF (", coln$Part2[1], sep =""),paste("PD ON (", coln$Part2[2], sep =""), "PD OFF vs. PD ON", paste("Control (", coln$Part2[3], sep =""), "PD ON vs. Control") 
+groupedBT<-cbind(groupedBT[,1:2], "PD OFF vs. PD ON" = "", groupedBT[,3], "PD ON vs. Control" = "")
+groupedBT[, "PD OFF vs. PD ON"] <- pvalsPDBT
+groupedBT[, "PD ON vs. Control"] <- pvalsPDCNTBT
+
+kable(groupedBT, format = "markdown", align='c', col.names= colnam)
+
+```
+
+
+```{r Factor Analysis Preamble, include=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                         Preamble Prior to PCA and Factor Analysis                      #
+#----------------------------------------------------------------------------------------#
+
+factors1<-c("StepVelocity","StepLength","SwingTimeCV","StepTime", "SwingTime","StanceTime","StepVelocityCV","StepLengthCV","StepTimeCV","StanceTimeCV","SwingTimeAsym","StepTimeAsym","StanceTimeAsym","StepLengthAsym","StepWidth","StepWidthSD","GVI")
+
+factors2<-c("StepVelocity","StepVelocitySD","StepVelocityCV","StepLength","StepLengthSD","StepLengthCV","StepLengthAsym", "StepWidth","StepWidthSD","StepTime","StepTimeSD","StepTimeAsym","StanceTime","StanceTimeSD","StanceTimeCV","SwingTime","SwingTimeSD","SwingTimeCV","SwingTimeAsym","GVI","WalkRatio")
+
+pca_NT_PDOFF<- as.matrix(pre_postPD_Combined[pre_postPD_Combined$Group=='1' & pre_postPD_Combined$Task=='NT',factors1])
+pca_NT_PDON<- as.matrix(pre_postPD_Combined[pre_postPD_Combined$Group=='2' & pre_postPD_Combined$Task=='NT',factors1])
+pca_BT_PDOFF<- as.matrix(pre_postPD_Combined[pre_postPD_Combined$Group=='1' & pre_postPD_Combined$Task=='BT',factors1])
+pca_BT_PDON<- as.matrix(pre_postPD_Combined[pre_postPD_Combined$Group=='2' & pre_postPD_Combined$Task=='BT',factors1])
+
+```
+
+
+```{r PD OFF Normal Walk PCA, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                             PCA: PD OFF NORMAL WALKING                                 #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='1' & pre_postPD_Combined$Task=='NT',1:(length(pre_postPD_Combined)-3)]
+pca_NT_PDOFF<- dataTest[,c("StepVelocity","StepLength","SwingTimeCV","StepTime", "SwingTime","StanceTime","StepVelocityCV","StepLengthCV","StepTimeCV","StanceTimeCV","SwingTimeAsym","StepTimeAsym","StanceTimeAsym","StepLengthAsym","StepWidth","StepWidthSD","GVI")]
+
+segCorr <- cor(pca_NT_PDOFF)
+corrplot(segCorr, order = "hclust", title = "Correlations for PD OFF Normal Walking", mar=c(3,0,3,0))
+
+ev <- eigen(cor(pca_NT_PDOFF)) # get eigenvalues
+ap <- parallel(subject=nrow(pca_NT_PDOFF),var=ncol(pca_NT_PDOFF),
+               rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS, main = "Scree Plot for PD OFF Normal Walking")
+
+fit_NT_PDOFF <- factanal(pca_NT_PDOFF, 5, rotation="varimax", lower = 0.1)
+
+fit_NT_PDOFF$loadings<-fa.sort(fit_NT_PDOFF$loadings)
+my.data<-as.data.frame(unclass(fit_NT_PDOFF$loadings))
+newR<-t(data.frame(unclass(colMeans(fit_NT_PDOFF$loadings^2))))
+rownames(newR)<-c("Percent Variance")
+my.data<-rbind(my.data,newR)
+
+#--- Add asteriks for significance
+myData<-data.frame()
+for (i in 1:nrow(my.data)){
+  for (j in 1:ncol(my.data)){
+    if (abs(my.data[i,j])>0.5){
+      myData[i,j]<-paste("**",as.character(sprintf("%.3f", round(my.data[i,j],digits=3))),"**",sep="")
+    }else{
+      myData[i,j]<-as.character(sprintf("%.3f", round(my.data[i,j],digits=3)))
+    }
+  }
+}
+rownames(myData)<-rownames(my.data)
+colnames(myData)<-colnames(my.data)
+
+#--- Factor Loadings for PD OFF Normal Walking
+kable(myData, format = "markdown", align='c', escape = T)
+
+```
+
+
+```{r PD ON Normal Walk PCA, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                              PCA: PD ON NORMAL WALKING                                 #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='2' & pre_postPD_Combined$Task=='NT',1:(length(pre_postPD_Combined)-3)]
+pca_NT_PDON<- dataTest[,c("StepVelocity","StepLength","SwingTimeCV","StepTime", "SwingTime","StanceTime","StepVelocityCV","StepLengthCV","StepTimeCV","StanceTimeCV","SwingTimeAsym","StepTimeAsym","StanceTimeAsym","StepLengthAsym","StepWidth","StepWidthSD","GVI")]
+
+segCorr <- cor(pca_NT_PDON)
+corrplot(segCorr, order = "hclust", title = "Correlations for PD ON Normal Walking", mar=c(0,0,3,0))
+
+ev <- eigen(cor(pca_NT_PDON)) # get eigenvalues
+ap <- parallel(subject=nrow(pca_NT_PDON),var=ncol(pca_NT_PDON),
+               rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS, main = "Scree Plot for PD ON Normal Walking")
+
+fit_NT_PDON <- factanal(pca_NT_PDON, 5, rotation="varimax", lower = 0.1)
+# print(fit_NT_PDON, digits=2, cutoff=.5, sort=TRUE)
+
+fit_NT_PDON$loadings<-fa.sort(fit_NT_PDON$loadings)
+my.data<-as.data.frame(unclass(fit_NT_PDON$loadings))
+newR<-t(data.frame(unclass(colMeans(fit_NT_PDON$loadings^2))))
+rownames(newR)<-c("Percent Variance")
+my.data<-rbind(my.data,newR)
+
+myData<-data.frame()
+for (i in 1:nrow(my.data)){
+  for (j in 1:ncol(my.data)){
+    if (abs(my.data[i,j])>0.5){
+      myData[i,j]<-paste("**",as.character(sprintf("%.3f", round(my.data[i,j],digits=3))),"**",sep="")
+    }else{
+      myData[i,j]<-as.character(sprintf("%.3f", round(my.data[i,j],digits=3)))
+    }
+  }
+}
+
+rownames(myData)<-rownames(my.data)
+colnames(myData)<-colnames(my.data)
+
+#--- Factor Loadings for PD ON Normal Walking
+kable(myData, format = "markdown", align='c',escape = TRUE)
+
+```
+
+
+```{r PD OFF Backward Walk PCA, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                             PCA: PD OFF Backward WALKING                               #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='1' & pre_postPD_Combined$Task=='BT',1:(length(pre_postPD_Combined)-3)]
+pca_BT_PDOFF<- dataTest[,c("StepVelocity","StepLength","SwingTimeCV","StepTime", "SwingTime","StanceTime","StepVelocityCV","StepLengthCV","StepTimeCV","StanceTimeCV","SwingTimeAsym","StepTimeAsym","StanceTimeAsym","StepLengthAsym","StepWidth","StepWidthSD","GVI")]
+
+segCorr <- cor(pca_BT_PDOFF)
+corrplot(segCorr, order = "hclust", title = "Correlations for PD OFF Backwards Walking", mar=c(0,0,3,0))
+
+ev <- eigen(cor(pca_BT_PDOFF)) # get eigenvalues
+ap <- parallel(subject=nrow(pca_BT_PDOFF),var=ncol(pca_BT_PDOFF),
+               rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS, main = "Scree Plot for PD OFF Backwards Walking")
+
+fit_BT_PDOFF <- factanal(pca_BT_PDOFF, 5, rotation="varimax", lower = 0.1)
+# print(fit_BT_PDOFF, digits=2, cutoff=.5, sort=TRUE)
+
+fit_BT_PDOFF$loadings<-fa.sort(fit_BT_PDOFF$loadings)
+my.data<-as.data.frame(unclass(fit_BT_PDOFF$loadings))
+newR<-t(data.frame(unclass(colMeans(fit_BT_PDOFF$loadings^2))))
+rownames(newR)<-c("Percent Variance")
+my.data<-rbind(my.data,newR)
+
+myData<-data.frame()
+for (i in 1:nrow(my.data)){
+  for (j in 1:ncol(my.data)){
+    if (abs(my.data[i,j])>0.5){
+      myData[i,j]<-paste("**",as.character(sprintf("%.3f", round(my.data[i,j],digits=3))),"**",sep="")
+    }else{
+      myData[i,j]<-as.character(sprintf("%.3f", round(my.data[i,j],digits=3)))
+    }
+  }
+}
+
+rownames(myData)<-rownames(my.data)
+colnames(myData)<-colnames(my.data)
+
+#--- Factor Loadings for PD OFF Backward Walking
+kable(myData, format = "markdown", align='c',escape = TRUE)
+
+```
+
+
+```{r PD ON Backward Walk PCA, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                              PCA: PD ON Backward WALKING                               #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='2' & pre_postPD_Combined$Task=='BT',1:(length(pre_postPD_Combined)-3)]
+pca_BT_PDON<- dataTest[,c("StepVelocity","StepLength","SwingTimeCV","StepTime", "SwingTime","StanceTime","StepVelocityCV","StepLengthCV","StepTimeCV","StanceTimeCV","SwingTimeAsym","StepTimeAsym","StanceTimeAsym","StepLengthAsym","StepWidth","StepWidthSD","GVI")]
+
+segCorr <- cor(pca_BT_PDON)
+corrplot(segCorr, order = "hclust", title = "Correlations for PD ON Backwards Walking", mar=c(0,0,3,0))
+
+ev <- eigen(cor(pca_BT_PDON)) # get eigenvalues
+ap <- parallel(subject=nrow(pca_BT_PDON),var=ncol(pca_BT_PDON),
+               rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS, main = "Scree Plot for PD ON Backwards Walking")
+
+fit_BT_PDON <- factanal(pca_BT_PDON, 5, rotation="varimax", lower = 0.1)
+# print(fit_BT_PDON, digits=2, cutoff=.5, sort=TRUE)
+
+fit_BT_PDON$loadings<-fa.sort(fit_BT_PDON$loadings)
+my.data<-as.data.frame(unclass(fit_BT_PDON$loadings))
+newR<-t(data.frame(unclass(colMeans(fit_BT_PDON$loadings^2))))
+rownames(newR)<-c("Percent Variance")
+my.data<-rbind(my.data,newR)
+
+myData<-data.frame()
+for (i in 1:nrow(my.data)){
+  for (j in 1:ncol(my.data)){
+    if (abs(my.data[i,j])>0.5){
+      myData[i,j]<-paste("**",as.character(sprintf("%.3f", round(my.data[i,j],digits=3))),"**",sep="")
+    }else{
+      myData[i,j]<-as.character(sprintf("%.3f", round(my.data[i,j],digits=3)))
+    }
+  }
+}
+
+rownames(myData)<-rownames(my.data)
+colnames(myData)<-colnames(my.data)
+
+#--- Factor Loadings for PD ON Backward Walking
+kable(myData, format = "markdown", align='c', escape = TRUE)
+
+```
+
+
+```{r PD OFF Normal Corplot, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 6, fig.width = 6}
+
+#----------------------------------------------------------------------------------------#
+#                             PCA: PD OFF NORMAL WALKING                                 #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='1' & pre_postPD_Combined$Task=='NT',1:(length(pre_postPD_Combined)-3)]
+demoPCA<-Demographics[Demographics$PatientNum %in% dataTest$PatientNum,]
+pca_NT_PDOFF<- dataTest[,gaitParameters]
+pca_NT_PDOFF$UPDRS<-demoPCA$UPDRSOFF
+pca_NT_PDOFF$Response<-demoPCA$Response
+pca_NT_PDOFF$LED<-demoPCA$LED
+pca_NT_PDOFF$FOG<-demoPCA$'FOG-Q'
+
+# if (preprocessData ==TRUE){
+#   pca_NT_PDOFF_PP <- preProcess(pca_NT_PDOFF, c("center", "scale"))
+#   pca_NT_PDOFF <- predict(pca_NT_PDOFF_PP, pca_NT_PDOFF)
+# }
+
+segCorr <- cor(pca_NT_PDOFF)
+#corrplot(segCorr, order = "hclust", title = "", mar=c(3,0,3,0))
+
+```
+
+
+```{r PD ON Normal Corplot, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 6, fig.width = 6}
+#----------------------------------------------------------------------------------------#
+#                              PCA: PD ON NORMAL WALKING                                 #
+#----------------------------------------------------------------------------------------#
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='2' & pre_postPD_Combined$Task=='NT',1:(length(pre_postPD_Combined)-3)]
+demoPCA<-Demographics[Demographics$PatientNum %in% dataTest$PatientNum,]
+pca_NT_PDON<- dataTest[,gaitParameters]
+pca_NT_PDON$UPDRS<-demoPCA$UPDRSON
+pca_NT_PDON$Response<-demoPCA$Response
+pca_NT_PDON$LED<-demoPCA$LED
+pca_NT_PDON$FOG<-demoPCA$'FOG-Q'
+
+# if (preprocessData ==TRUE){
+#   pca_NT_PDOFF_PP <- preProcess(pca_NT_PDOFF, c("center", "scale"))
+#   pca_NT_PDOFF <- predict(pca_NT_PDOFF_PP, pca_NT_PDOFF)
+# }
+
+segCorr <- cor(pca_NT_PDON)
+#corrplot(segCorr, order = "hclust", title = "", mar=c(3,0,3,0))
+
+```
+
+
+```{r PD OFF Backward Corplot, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 6, fig.width = 6}
+
+#----------------------------------------------------------------------------------------#
+#                           PCA: PD OFF Backward WALKING                                 #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='1' & pre_postPD_Combined$Task=='BT',1:(length(pre_postPD_Combined)-3)]
+demoPCA<-Demographics[Demographics$PatientNum %in% dataTest$PatientNum,]
+pca_BT_PDOFF<- dataTest[,gaitParameters]
+pca_BT_PDOFF$UPDRS<-demoPCA$UPDRSOFF
+pca_BT_PDOFF$Response<-demoPCA$Response
+pca_BT_PDOFF$LED<-demoPCA$LED
+pca_BT_PDOFF$FOG<-demoPCA$'FOG-Q'
+
+# if (preprocessData ==TRUE){
+#   pca_NT_PDOFF_PP <- preProcess(pca_NT_PDOFF, c("center", "scale"))
+#   pca_NT_PDOFF <- predict(pca_NT_PDOFF_PP, pca_NT_PDOFF)
+# }
+
+segCorr <- cor(pca_BT_PDOFF)
+#corrplot(segCorr, order = "hclust", title = "", mar=c(3,0,3,0))
+
+```
+
+
+```{r PD ON Backward Corplot, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 6, fig.width = 6}
+
+#----------------------------------------------------------------------------------------#
+#                             PCA: PD ON Backward WALKING                                #
+#----------------------------------------------------------------------------------------#
+
+dataTest<-pre_postPD_Combined[pre_postPD_Combined$Group=='2' & pre_postPD_Combined$Task=='BT',1:(length(pre_postPD_Combined)-3)]
+demoPCA<-Demographics[Demographics$PatientNum %in% dataTest$PatientNum,]
+pca_BT_PDON<- dataTest[,gaitParameters]
+pca_BT_PDON$UPDRS<-demoPCA$UPDRSON
+pca_BT_PDON$Response<-demoPCA$Response
+pca_BT_PDON$ABC<-demoPCA$ABC
+pca_BT_PDON$LED<-demoPCA$LED
+pca_BT_PDON$FOG<-demoPCA$'FOG-Q'
+
+# if (preprocessData ==TRUE){
+#   pca_NT_PDOFF_PP <- preProcess(pca_NT_PDOFF, c("center", "scale"))
+#   pca_NT_PDOFF <- predict(pca_NT_PDOFF_PP, pca_NT_PDOFF)
+# }
+
+segCorr <- cor(pca_BT_PDON)
+#corrplot(segCorr, order = "hclust", title = "", mar=c(3,0,3,0))
+
+```
+
+
+```{r Extra Data Figures Not Included, echo=FALSE, warning=FALSE}
+
+# The following chunks were optional data figures that could have been included in the manuscript
+
+```
+
+
+```{r Scatterplot Between Improvement in tasks, eval=FALSE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 4, fig.width = 12}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+tasks<-c('NT','BT')
+subOFF<-unique(pre_postPD_Combined[pre_postPD_Combined$Group==1,1])
+subON<-unique(pre_postPD_Combined[pre_postPD_Combined$Group==2,1])
+d = NULL
+if (length(subOFF)==length(subON)){
+  for (itask in 1:2){
+    tempData<-pre_postPD_Combined[pre_postPD_Combined$Task==tasks[itask],]
+    offtempData<-tempData[tempData$Group==1,]
+    ontempData<-tempData[tempData$Group==2,]
+    for (isub in 1:nrow(ontempData)){
+      subOFFData<-offtempData[offtempData$PatientNum==subOFF[isub],]
+      subONData<-ontempData[ontempData$PatientNum==subOFF[isub],]
+      subChange<-data.frame(t(sapply(c(subOFF[isub],subONData[2:24] - subOFFData[2:24],subOFFData[25:27]),c)))
+      colnames(subChange)<-colnames(subOFFData)
+      subChange$Task<-tasks[itask]
+      d = rbind(d, subChange)
+    }
+  }
+}
+dNT<-d[d$Task=='NT',]
+dBT<-d[d$Task=='BT',]
+
+varNames<-variable.names(dNT)
+varNames<-varNames[2:(length(varNames)-3)]
+plots <- list()  # new empty list
+for (i in 1:length(varNames)) {
+  dataPlot<-data.frame(dNT$PatientNum, dNT[varNames[i]], dBT[varNames[i]])
+  names(dataPlot)<-c('patient','NT','BT')
+  sumNT<- summarySE(dataPlot, measurevar=c('NT'))
+  sumBT<- summarySE(dataPlot, measurevar=c('BT'))
+  ymaxi<-as.numeric(2*max(dataPlot['BT']))
+  outlierNT<-boxplot(dataPlot$NT, plot = FALSE, range=2)
+  outlierBT<-boxplot(dataPlot$BT, plot = FALSE, range=2)
+  yLabel<-gsub("([a-z])([A-Z])", "\\1 \\2", varNames[i])
+  plots[[i]] <- ggplot(dataPlot, aes_string('NT', 'BT', label = 'patient')) + 
+                geom_point() +
+                geom_text_repel(data = subset(dataPlot, dataPlot$NT %in% outlierNT$out | dataPlot$BT %in% outlierBT$out),
+                                # nudge_y = ymaxi - subset(dataPlot, dataPlot$NT %in% outlierNT$out | dataPlot$BT %in% outlierBT$out)$BT,
+                                # direction = 'x',
+                                point.padding = 0.5,
+                                box.padding = 0.5,
+                                size = 3,
+                                fontface = 'bold',
+                                segment.size  = 0.5,
+                                segment.color = "black") +
+                ggtitle(yLabel)  
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+
+```
+
+
+```{r Scatterplot Normal Walking improvement, eval=FALSE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 4, fig.width = 12}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+offStateNT<-pre_postPD_Combined[pre_postPD_Combined$Group==1 & pre_postPD_Combined$Task=='NT', c('PatientNum',varNames)]
+onStateNT<-pre_postPD_Combined[pre_postPD_Combined$Group==2 & pre_postPD_Combined$Task=='NT', c('PatientNum',varNames)]
+plots <- list()  # new empty list
+for (i in 1:length(varNames)) {
+  dataPlot<-data.frame(offStateNT$PatientNum, offStateNT[varNames[i]], onStateNT[varNames[i]])
+  names(dataPlot)<-c('patient','OFF','ON')
+  sumOFF<- summarySE(dataPlot, measurevar=c('OFF'))
+  sumON<- summarySE(dataPlot, measurevar=c('ON'))
+  ymaxi<-as.numeric(max(dataPlot['ON'])+sumON$ON)
+  outlierOFF<-boxplot(dataPlot$OFF, plot = FALSE, range=2)
+  outlierON<-boxplot(dataPlot$ON, plot = FALSE, range=2)
+  yLabel<-gsub("([a-z])([A-Z])", "\\1 \\2", varNames[i])
+  plots[[i]] <- ggplot(dataPlot, aes_string('OFF', 'ON', label = 'patient')) + 
+                geom_point() +
+                geom_text_repel(data = subset(dataPlot, dataPlot$OFF %in% outlierOFF$out | dataPlot$ON %in% outlierON$out),
+                                # nudge_y = ymaxi - subset(dataPlot, dataPlot$OFF %in% outlierOFF$out | dataPlot$ON %in% outlierON$out)$ON,
+                                # direction = 'x',
+                                size = 3,
+                                box.padding = 0.5,
+                                point.padding = 0.5,
+                                fontface = 'bold',
+                                segment.size  = 0.5,
+                                segment.color = "black") +
+                ggtitle(yLabel)
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+```
+
+```{r Scatterplot Backwards Walking improvement, eval=FALSE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 4, fig.width = 12}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+offStateBT<-pre_postPD_Combined[pre_postPD_Combined$Group==1 & pre_postPD_Combined$Task=='BT', c('PatientNum',varNames)]
+onStateBT<-pre_postPD_Combined[pre_postPD_Combined$Group==2 & pre_postPD_Combined$Task=='BT', c('PatientNum',varNames)]
+plots <- list()  # new empty list
+for (i in 1:length(varNames)) {
+  dataPlot<-data.frame(offStateBT$PatientNum, offStateBT[varNames[i]], onStateBT[varNames[i]])
+  names(dataPlot)<-c('patient','OFF','ON')
+  sumOFF<- summarySE(dataPlot, measurevar=c('OFF'))
+  sumON<- summarySE(dataPlot, measurevar=c('ON'))
+  ymaxi<-as.numeric(max(dataPlot['ON'])+sumON$ON)
+  outlierOFF<-boxplot(dataPlot$OFF, plot = FALSE, range=2)
+  outlierON<-boxplot(dataPlot$ON, plot = FALSE, range=2)
+  yLabel<-gsub("([a-z])([A-Z])", "\\1 \\2", varNames[i])
+  
+  plots[[i]] <- ggplot(dataPlot, aes_string('OFF', 'ON', label = 'patient')) + 
+                geom_point() +
+                geom_text_repel(data = subset(dataPlot, dataPlot$OFF %in% outlierOFF$out | dataPlot$ON %in% outlierON$out),
+                                # nudge_y = ymaxi - subset(dataPlot, dataPlot$OFF %in% outlierOFF$out | dataPlot$ON %in% outlierON$out)$ON,
+                                # direction = 'x',
+                                point.padding = 0.5,
+                                box.padding = 0.5,
+                                size = 3,
+                                fontface = 'bold',
+                                segment.size  = 0.5,
+                                segment.color = "black") +
+                ggtitle(yLabel)
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+```
+
+
+```{r BarGraphs(Group BY Task), eval=FALSE, fig.height=4, fig.width=12, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+varNames<-variable.names(pre_postPD_Combined)
+varNames<-varNames[2:(length(varNames)-3)]
+
+plots <- list()  # new empty list
+for (i in 1:length(varNames)) {
+  tgc<- summarySE(pre_postPD_Combined, measurevar=varNames[i], groupvars=c("Task","Group"))
+  tgc$ymini<-tgc[varNames[i]]-tgc$ci
+  tgc$ymaxi<-tgc[varNames[i]]+tgc$ci
+  yLabel<-gsub("([a-z])([A-Z])", "\\1 \\2", varNames[i])
+  plots[[i]] <- ggplot(tgc, aes_string(x="Group", y=varNames[i], fill = "Task")) + 
+    geom_bar( aes(fill = Task), stat = "identity", position = position_dodge(), width = 0.7, colour="black", size=.3) +
+    geom_errorbar(aes(ymin= ymini, ymax=ymaxi), width=.2, position=position_dodge(.7),size=.8) +
+    xlab("Group") + ylab(yLabel) +
+    scale_x_discrete(name="Group",
+                     breaks=c("1", "2", "3"),
+                     labels=c("PD OFF", "PD ON", "CNT")) +
+    theme_bw()
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+```
+
+
+```{r BarGraphs(Task BY Group), eval=FALSE, fig.height=4, fig.width=12, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+varNames<-variable.names(pre_postPD_Combined)
+varNames<-varNames[2:(length(varNames)-3)]
+plots <- list()  # new empty list
+for (i in 1:length(varNames)) {
+  tgc<- summarySE(pre_postPD_Combined, measurevar=varNames[i], groupvars=c("Task","Group"))
+  tgc$ymini<-tgc[varNames[i]]-tgc$ci
+  tgc$ymaxi<-tgc[varNames[i]]+tgc$ci
+  yLabel<-gsub("([a-z])([A-Z])", "\\1 \\2", varNames[i])
+  plots[[i]] <- ggplot(tgc, aes_string(x="Task", y=varNames[i], fill = "Group")) + 
+    geom_bar( aes(fill = Group), stat = "identity", position = position_dodge(), width = 0.7, colour="black", size=.3) +
+    geom_errorbar(aes(ymin= ymini, ymax=ymaxi), width=.2, position=position_dodge(.7),size=.8) +
+    xlab("Task") + ylab(yLabel) +
+    scale_fill_discrete(name="Group",
+                     breaks=c("1", "2", "3"),
+                     labels=c("PD OFF", "PD ON", "CNT")) +
+    theme_bw()
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+```
+
+
+```{r Bargraphs(Disease Duration BY Task), eval=FALSE, fig.height=4, fig.width=12, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+varNames<-variable.names(pre_postPD_Combined)
+varNames<-varNames[2:(length(varNames)-3)]
+plots <- list()  # new empty list
+pre_postPD_Combined_NoControls<-pre_postPD_Combined[pre_postPD_Combined$Group!=3,]
+for (i in 1:length(varNames)) {
+  tgc<- summarySE(pre_postPD_Combined_NoControls, measurevar=varNames[i], groupvars=c("Task","Duration"))
+  tgc$ymini<-tgc[varNames[i]]-tgc$ci
+  tgc$ymaxi<-tgc[varNames[i]]+tgc$ci
+  yLabel<-gsub("([a-z])([A-Z])", "\\1 \\2", varNames[i])
+  plots[[i]] <- ggplot(tgc, aes_string(x="Duration", y=varNames[i], fill = "Task")) + 
+    geom_bar( aes(fill = Task), stat = "identity", position = position_dodge(), width = 0.7, colour="black", size=.3) +
+    geom_errorbar(aes(ymin= ymini, ymax=ymaxi), width=.2, position=position_dodge(.7),size=.8) +
+    xlab("Duration") + ylab(yLabel) +
+    scale_x_discrete(name="Duration (Years)",
+                      breaks=c("1", "2"),
+                      labels=c("2-9", "10+")) +
+    theme_bw()
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+```
+
+
+```{r Bargraphs(Task By Disease Duration), eval=FALSE, fig.height=4, fig.width=12, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
+
+#----------------------------------------------------------------------------------------#
+#                                    NOT IN MANUSCRIPT                                   #
+#----------------------------------------------------------------------------------------#
+
+varNames<-variable.names(pre_postPD_Combined)
+varNames<-varNames[2:(length(varNames)-3)]
+plots <- list()  # new empty list
+pre_postPD_Combined_NoControls<-pre_postPD_Combined[pre_postPD_Combined$Group!=3,]
+for (i in 1:length(varNames)) {
+  tgc<- summarySE(pre_postPD_Combined_NoControls, measurevar=varNames[i], groupvars=c("Task","Duration"))
+  tgc$ymini<-tgc[varNames[i]]-tgc$ci
+  tgc$ymaxi<-tgc[varNames[i]]+tgc$ci
+  plots[[i]] <- ggplot(tgc, aes_string(x="Task", y=varNames[i], fill = "Duration")) + 
+    geom_bar( aes(fill = Duration), stat = "identity", position = position_dodge(), width = 0.7, colour="black", size=.3) +
+    geom_errorbar(aes(ymin= ymini, ymax=ymaxi), width=.2, position=position_dodge(.7),size=.8) +
+    xlab("Task") + ylab(varNames[i]) +
+    scale_fill_discrete(name="Duration",
+                      breaks=c("1", "2"),
+                      labels=c("2-9yrs", "10+yrs")) +
+    theme_bw()
+}
+
+marrangeGrob(plots, nrow=2, ncol=4,top=NULL)
+```
+
+#####
+
+## References

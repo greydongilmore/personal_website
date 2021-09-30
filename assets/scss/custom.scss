@@ -1,0 +1,50 @@
+// Override this file to add your own SCSS styling.
+.navbar-nav {
+    display: flex;
+
+    .nav-link {
+      color: rgba($sta-menu-text, .85);
+
+      &.active,
+      &:focus {
+        color: $sta-menu-text;
+      }
+
+      &.active {
+        font-weight: bold !important;
+        color: $sta-menu-text-active !important;
+      }
+    }
+
+    .nav-link:hover {
+      color: $sta-menu-text-active !important;
+    }
+  }
+
+.dropdown-item:hover {
+  background-color: $sta-menu-primary !important;
+  color: $sta-menu-text-active !important;
+}
+
+
+.docs-article-container {
+  max-width: 1200px;
+}
+
+.docs-content {
+  order: 1;
+  position: relative;
+  text-align:justify;
+}
+
+.article-container{
+    max-width: 1000px
+}
+
+.article-style{
+    text-align:justify
+}
+
+.article h2 {
+    font-weight: bold;
+}

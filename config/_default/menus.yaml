@@ -1,0 +1,42 @@
+# Navigation Links
+#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
+#     desired widget in your `content/home/` folder.
+#   The weight parameter defines the order that the links will appear in.
+
+main:
+  - name: home
+    url: '#about'
+    weight: 10
+  - name: publications
+    url: '#publications'
+    weight: 20
+  - name: grants
+    url: '#grants'
+    weight: 30
+  - name: posts
+    url: '#posts'
+    weight: 40
+  - name: courses
+    url: '#courses'
+    weight: 50
+    identifier: courses_main
+  - name: phys 2130
+    parent: courses_main
+    url: 'courses/phys2130'
+  - name: training
+    url: '#training'
+    weight: 60
+  - name: contact
+    url: '#contact'
+    weight: 70
+  - name: CV
+    weight: 80
+    identifier: cv_main
+  - name: CV short
+    parent: cv_main
+    url: "files/cv/CVShort_Greydon-Gilmore.pdf"
+    target: "_blank"
+  - name: CV long
+    parent: cv_main
+    url: "files/cv/CVLong_Greydon-Gilmore.pdf"
+    target: "_blank"
