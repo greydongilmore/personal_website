@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # links:
-url_pdf: "content/publication/im_dysfluency_2019/Im_et_al_2019_Effect of Levodopa on Speech Dysfluency in Parkinson's Disease.pdf"
+url_pdf: "publication/im_dysfluency_2019/Im_et_al_2019_Effect of Levodopa on Speech Dysfluency in Parkinson's Disease.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

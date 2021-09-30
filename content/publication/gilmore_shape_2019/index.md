@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # links:
-url_pdf: "content/publication/gilmore_shape_2019/Gilmore_et_al_2019_Letter to the Editor Regarding “Statistical Shape Analysis of Subthalamic.pdf"
+url_pdf: "publication/gilmore_shape_2019/Gilmore_et_al_2019_Letter to the Editor Regarding “Statistical Shape Analysis of Subthalamic.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

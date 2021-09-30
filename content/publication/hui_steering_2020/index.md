@@ -33,7 +33,7 @@ tags:
 featured: false
 
 # links:
-url_pdf: "content/publication/hui_steering_2020/Hui_et_al_2020_Assessing the effect of current steering on the total electrical energy.pdf"
+url_pdf: "publication/hui_steering_2020/Hui_et_al_2020_Assessing the effect of current steering on the total electrical energy.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

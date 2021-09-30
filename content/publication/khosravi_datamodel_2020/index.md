@@ -33,7 +33,7 @@ tags:
 featured: false
 
 # links:
-url_pdf: "content/publication/khosravi_datamodel_2020/Khosravi_et_al_2020_Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model.pdf"
+url_pdf: "publication/khosravi_datamodel_2020/Khosravi_et_al_2020_Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

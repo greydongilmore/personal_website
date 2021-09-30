@@ -33,7 +33,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: "content/publication/delrobaei_dyskinesia_2017/Delrobaei_et_al_2017_Using Wearable Technology to Generate Objective Parkinson's Disease Dyskinesia.pdf"
+url_pdf: "publication/delrobaei_dyskinesia_2017/Delrobaei_et_al_2017_Using Wearable Technology to Generate Objective Parkinson's Disease Dyskinesia.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

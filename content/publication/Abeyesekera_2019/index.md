@@ -44,7 +44,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: "content/publication/Abeyesekera_et_al_2019_Effects of Deep Brain Stimulation of the Subthalamic Nucleus Settings on Voice.pdf"
+url_pdf: "publication/Abeyesekera_et_al_2019_Effects of Deep Brain Stimulation of the Subthalamic Nucleus Settings on Voice.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

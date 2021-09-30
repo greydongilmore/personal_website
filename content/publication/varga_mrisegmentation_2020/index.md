@@ -33,7 +33,7 @@ tags:
 featured: false
 
 # links:
-url_pdf: "content/publication/varga_mrisegmentation_2020/Varga_et_al_2020_Image-Based Subthalamic Nucleus Segmentation for Deep Brain Surgery with.pdf"
+url_pdf: "publication/varga_mrisegmentation_2020/Varga_et_al_2020_Image-Based Subthalamic Nucleus Segmentation for Deep Brain Surgery with.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

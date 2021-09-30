@@ -30,7 +30,7 @@ tags: []
 featured: false
 
 # Links (optional).
-url_pdf: "content/publication/gilmore_msc_2015/Gilmore_2015_Deep brain stimulation and its effects on Parkinson disease spatiotemporal gait.pdf"
+url_pdf: "publication/gilmore_msc_2015/Gilmore_2015_Deep brain stimulation and its effects on Parkinson disease spatiotemporal gait.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

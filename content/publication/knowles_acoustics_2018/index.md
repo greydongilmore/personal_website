@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # links:
-url_pdf: "content/publication/knowles_acoustics_2018/Knowles_et_al_2018_Deep Brain Stimulation of the Subthalamic Nucleus Parameter Optimization for.pdf"
+url_pdf: "publication/knowles_acoustics_2018/Knowles_et_al_2018_Deep Brain Stimulation of the Subthalamic Nucleus Parameter Optimization for.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

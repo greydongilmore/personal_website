@@ -33,7 +33,7 @@ tags:
 
 featured: false
 
-url_pdf: "content/publication/memar_segmentation_2017/Memar_et_al_2017_Segmentation and detection of physical activities during a sitting task in.pdf"
+url_pdf: "publication/memar_segmentation_2017/Memar_et_al_2017_Segmentation and detection of physical activities during a sitting task in.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

@@ -31,8 +31,8 @@ tags: []
 featured: false
 
 # Links (optional).
-url_pdf: "content/publication/gilmore_gait_2019/Gilmore_et_al_2019_Forward and backward walking in Parkinson disease.pdf"
-url_code: 'content/publication/gilmore_gait_2019/gait_manuscript_analysis.Rmd'
+url_pdf: "publication/gilmore_gait_2019/Gilmore_et_al_2019_Forward and backward walking in Parkinson disease.pdf"
+url_code: 'publication/gilmore_gait_2019/gait_manuscript_analysis.Rmd'
 url_dataset: ''
 url_poster: ''
 url_project: ''

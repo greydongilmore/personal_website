@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # links:
-url_pdf: "content/publication/gilmore_perspectives_2017/Gilmore_Jog_2017_Future Perspectives.pdf"
+url_pdf: "publication/gilmore_perspectives_2017/Gilmore_Jog_2017_Future Perspectives.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

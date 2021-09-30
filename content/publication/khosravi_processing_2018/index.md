@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # links:
-url_pdf: "content/publication/khosravi_processing_2018/Khosravi_et_al_2018_Electrophysiological signal processing for intraoperative localization of"
+url_pdf: "publication/khosravi_processing_2018/Khosravi_et_al_2018_Electrophysiological signal processing for intraoperative localization of"
 url_code: ''
 url_dataset: ''
 url_poster: ''

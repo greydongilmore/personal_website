@@ -33,7 +33,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: "content/publication/adamson_2019/Adamson_et_al_2019_Medication status and dual-tasking on turning strategies in Parkinson disease.pdf"
+url_pdf: "publication/adamson_2019/Adamson_et_al_2019_Medication status and dual-tasking on turning strategies in Parkinson disease.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

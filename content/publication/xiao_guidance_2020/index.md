@@ -34,7 +34,7 @@ tags:
 featured: false
 
 # links:
-url_pdf: "content/publication/xiao_guidance_2020/Xiao_et_al_2020_Image guidance in deep brain stimulation surgery to treat Parkinson's disease.pdf"
+url_pdf: "publication/xiao_guidance_2020/Xiao_et_al_2020_Image guidance in deep brain stimulation surgery to treat Parkinson's disease.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

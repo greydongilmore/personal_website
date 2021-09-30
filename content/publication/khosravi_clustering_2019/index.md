@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # links:
-url_pdf: "content/publication/khosravi_clustering_2019/Khosravi_et_al_2019_Unsupervised Clustering of Micro-Electrophysiological Signals for localization.pdf"
+url_pdf: "publication/khosravi_clustering_2019/Khosravi_et_al_2019_Unsupervised Clustering of Micro-Electrophysiological Signals for localization.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

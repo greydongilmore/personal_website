@@ -33,7 +33,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: "content/publication/gilmore_dbsimaging_2017/Gilmore_et_al_2017_The current state of postoperative imaging in the presence of deep brain.pdf"
+url_pdf: "publication/gilmore_dbsimaging_2017/Gilmore_et_al_2017_The current state of postoperative imaging in the presence of deep brain.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

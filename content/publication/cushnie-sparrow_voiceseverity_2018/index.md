@@ -31,7 +31,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: "content/publication/cushnie-sparrow_voiceseverity_2018/varga_mrisegmentation_2020/Cushnie-Sparrow_et_al_2018_Voice quality severity and responsiveness to levodopa in Parkinson's disease.pdf"
+url_pdf: "publication/cushnie-sparrow_voiceseverity_2018/varga_mrisegmentation_2020/Cushnie-Sparrow_et_al_2018_Voice quality severity and responsiveness to levodopa in Parkinson's disease.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

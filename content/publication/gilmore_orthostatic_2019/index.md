@@ -31,7 +31,7 @@ tags: []
 featured: false
 
 # Links (optional).
-url_pdf: "content/publication/gilmore_orthostatic_2019/Gilmore_et_al_2019_Zona incerta deep-brain stimulation in orthostatic tremor.pdf"
+url_pdf: "publication/gilmore_orthostatic_2019/Gilmore_et_al_2019_Zona incerta deep-brain stimulation in orthostatic tremor.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''
