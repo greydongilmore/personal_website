@@ -1,4 +1,24 @@
-# Adding application launch icon to favorites
+---
+title: Adding application launch icon to favorites
+subtitle:
+summary:
+date: "2020-09-28T00:00:00Z"
+
+reading_time: false  # Show estimated reading time?
+share: false  # Show social sharing links?
+profile: false  # Show author profile?
+comments: false  # Show comments?
+private: false
+tags: ["Ubuntu"]
+authors: ["admin"]
+
+# Optional header image (relative to `assets/media/` folder).
+header:
+  caption: ""
+  image: ""
+---
+
+
 1. Download your own icon image
 2. Find path to the executable of your application by running (replace brackets with name of applicaion):
 

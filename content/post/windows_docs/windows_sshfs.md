@@ -1,4 +1,22 @@
-# Mount Remote Drive with SSHFS
+---
+title: Mount Remote Drive with SSHFS
+subtitle:
+summary:
+date: "2016-07-28T00:00:00Z"
+
+reading_time: false  # Show estimated reading time?
+share: false  # Show social sharing links?
+profile: false  # Show author profile?
+comments: false  # Show comments?
+private: false
+tags: ["Windows"]
+authors: ["admin"]
+
+# Optional header image (relative to `assets/media/` folder).
+header:
+  caption: ""
+  image: ""
+---
 
 1. Install the latest stable installer of [WinFSP](https://github.com/billziss-gh/winfsp/releases)
 2. Install the latest stable installer of [SSHFS-Win](https://github.com/billziss-gh/sshfs-win/releases)

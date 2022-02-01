@@ -1,27 +1,26 @@
 ---
-title: 
-linktitle: 
-toc: true
-type: docs
-date: "2019-05-05T00:00:00+01:00"
-draft: false
-menu:
-  Blog:
-    parent: PhD Related
-    name: Tips on reading academic papers
-    weight: 1
+title: Tips on reading academic papers
+subtitle:
+summary:
+date: "2018-07-28T00:00:00Z"
 
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 1
----
+reading_time: false  # Show estimated reading time?
+share: false  # Show social sharing links?
+profile: false  # Show author profile?
+comments: false  # Show comments?
+private: false
+tags: ["PhD"]
+authors: ["admin"]
 
-# Tips on reading academic papers
+# Optional header image (relative to `assets/media/` folder).
+header:
+  caption: ""
+  image: ""
 ---
 
 One frequently asked question amoung graduate students is "How do you organize/read manuscripts?". I have found a workflow that works quite well and allows me to stay ontop of the endless amount of new publications.
 
 ## Setup an RSS feed
----
 
 The first step to take is setting up an RSS feed so you are notified when a new article is published in an area you are interested in. The RSS manager I use is <a href="https://feedly.com/i/welcome" target="_blank">Feedly</a>, which is simple and easy to use.
 
@@ -35,7 +34,6 @@ The first step to take is setting up an RSS feed so you are notified when a new 
 You can now login and find all recent articles indexed on PubMed about the topic you are interested in. This is a great tool to use to keep up-to-date on publications.
 
 ## Take Notes
----
 
 With any new article I come across, I try to make a quick summary note about it for later reference. A really nice tool for these notes is a software called <a href="https://notable.md/" target="_blank">Notable</a>. Notable is a Markdown based notetaking application that makes sharing notes very open and easy.
 

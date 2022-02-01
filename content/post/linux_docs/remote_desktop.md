@@ -1,15 +1,23 @@
 ---
 title: Google Remote Desktop
+subtitle:
+summary:
+date: "2019-09-28T00:00:00Z"
 
-date: "2020-06-07T00:00:00+01:00"
-draft: false
+reading_time: false  # Show estimated reading time?
+share: false  # Show social sharing links?
+profile: false  # Show author profile?
+comments: false  # Show comments?
+private: false
+tags: ["Ubuntu"]
+authors: ["admin"]
 
-authors:
-  - admin
-
-tags:
-  - Linux
+# Optional header image (relative to `assets/media/` folder).
+header:
+  caption: ""
+  image: ""
 ---
+
 
 ## Install Remote Desktop Extension
 

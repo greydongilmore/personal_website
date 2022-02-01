@@ -1,14 +1,21 @@
 ---
 title: Activating Windows Linux Subsystem (WSL)
-subtitle: ""
-summary: ""
-authors: []
-tags: []
-categories: []
-date:
-lastmod: 
-featured: false
-draft: false
+subtitle:
+summary:
+date: "2015-01-28T00:00:00Z"
+
+reading_time: false  # Show estimated reading time?
+share: false  # Show social sharing links?
+profile: false  # Show author profile?
+comments: false  # Show comments?
+private: false
+tags: ["Windows"]
+authors: ["admin"]
+
+# Optional header image (relative to `assets/media/` folder).
+header:
+  caption: ""
+  image: ""
 ---
 
 ## Turn on linux subsystem feature
