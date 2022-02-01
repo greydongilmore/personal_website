@@ -1,20 +1,12 @@
 ---
 title: "Effects of Deep Brain Stimulation of the Subthalamic Nucleus Settings on Voice Quality, Intensity, and Prosody in Parkinson's Disease: Preliminary Evidence for Speech Optimization"
 
-authors:
-  - Anita Abeyesekera
-  - Scott Adams
-  - Cynthia Mancinelli
-  - Thea Knowles
-  - admin
-  - Mehdi Delrobaei
-  - Mandar Jog
-
+authors: ['Anita Abeyesekera', 'Scott Adams', 'Cynthia Mancinelli', 'Thea Knowles', admin, 'Mehdi Delrobaei', 'Mandar Jog']
 date: "2019-01-31T00:00:00"
-doi: ""
+doi: "10.1017/cjn.2019.16"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2017-01-01T00:00:00Z"
+publishDate: "2019-01-31T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -44,7 +36,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: "publication/Abeyesekera_et_al_2019_Effects of Deep Brain Stimulation of the Subthalamic Nucleus Settings on Voice.pdf"
+url_pdf: "publication/Abeyesekera_2019/Abeyesekera_et_al_2019_Effects of Deep Brain Stimulation of the Subthalamic Nucleus Settings on Voice.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''

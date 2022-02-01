@@ -3,10 +3,10 @@ title: "Unsupervised Clustering of Micro-Electrophysiological Signals for locali
 
 authors: ["Mahsa Khosravi", "Seyed Farokh Atashzar", admin, "Mandar Jog", "Rajni Patel"]
 date: "2019-05-01T00:00:00"
-doi: ""
+doi: "10.1109/NER.2019.8717184"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2019-05-01T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized

@@ -3,7 +3,7 @@ title: "The current state of postoperative imaging in the presence of deep brain
 
 authors: [admin, "Donald H Lee", "Andrew Parrent", "Mandar Jog"]
 date: "2017-06-01T00:00:00"
-doi: ""
+doi: "10.1002/mds.27028"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ""

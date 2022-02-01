@@ -3,7 +3,7 @@ title: "Image guidance in deep brain stimulation surgery to treat Parkinson's di
 
 authors: ['Yiming Xiao', 'Jonathan Lau', 'Dimuthu Hemachandra', admin, 'Ali Khan', 'Terry Peters']
 date: "2020-07-02T00:00:00"
-doi: ""
+doi: "10.1109/TBME.2020.3006765"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2020-07-02T00:00:00Z"

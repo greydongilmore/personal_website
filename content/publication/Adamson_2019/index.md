@@ -3,10 +3,10 @@ title: "Medication status and dual-tasking on turning strategies in Parkinson di
 
 authors: ["Mitch B. Adamson", admin, "Tyler W. Stratton", "Navid Baktash" , "Mandar Jog"]
 date: "2018-11-30T00:00:00"
-doi: ""
+doi: "10.1016/j.jns.2018.11.028"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2018-11-30T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized

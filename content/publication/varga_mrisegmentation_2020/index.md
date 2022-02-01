@@ -3,7 +3,7 @@ title: "Image-Based Subthalamic Nucleus Segmentation for Deep Brain Surgery with
 
 authors: ['Igor Varga', 'Eduard Bakstein', admin, 'Daniel Novak']
 date: "2020-10-01T00:00:00"
-doi: ""
+doi: "10.1007/978-3-030-60946-7_4"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2020-10-01T00:00:00Z"

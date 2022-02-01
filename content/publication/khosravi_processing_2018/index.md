@@ -3,10 +3,10 @@ title: "Electrophysiological signal processing for intraoperative localization o
 
 authors: ["Mahsa Khosravi", "Seyed Farokh Atashzar", admin, "Mandar Jog", "Rajni Patel"]
 date: "2018-11-29T00:00:00"
-doi: ""
+doi: "10.1109/GlobalSIP.2018.8646606"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2018-11-29T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -16,7 +16,7 @@ publishDate: ""
 # 4 = Report
 # 5 = Book
 # 6 = Book section
-publication_types: ["2"]
+publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
 publication: "In *2018 IEEE Global Conference on Signal and Information Processing*"

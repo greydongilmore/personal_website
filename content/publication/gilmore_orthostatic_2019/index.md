@@ -2,10 +2,10 @@
 title: "Zona incerta deep-brain stimulation in orthostatic tremor: efficacy and mechanism of improvement"
 
 authors: [admin, "Aditya Murgai", "Abdulrahman Nazer", "Andrew Parrent", "Mandar Jog"]
-date: 2019-08-14T00:00:00
-doi: ""
+date: "2019-08-14T00:00:00"
+doi: "10.1007/s00415-019-09505-8"
 
-publishDate: ""
+publishDate: "2019-08-14T00:00:00"
 
 # Publication type.
 # Legend:

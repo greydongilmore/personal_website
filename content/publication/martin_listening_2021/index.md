@@ -1,12 +1,12 @@
 ---
-title: "Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model"
+title: "Adapting the listening time for micro-electrode recordings in deep brain stimulation interventions"
 
-authors: ['Mahsa Khosravi', 'S. Farokh Atashzar', admin, 'Mandar Jog', 'Rajni Patel']
-date: "2020-01-30T00:00:00"
-doi: "10.1109/JTEHM.2020.2969152"
+authors: ['Thibault Martin', admin, 'Claire Haegelen', 'Pierre Jannin', 'John SH Baxter']
+date: "2021-06-01T00:00:00"
+doi: "10.1007/s11548-021-02379-0"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2020-01-30T00:00:00Z"
+publishDate: "2021-06-01T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -19,7 +19,7 @@ publishDate: "2020-01-30T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "In *IEEE Journal of Translational Engineering in Health and Medicine*"
+publication: "In *International Journal of Computer Assisted Radiology and Surgery*"
 publication_short: ""
 
 # Abstract and optional shortened version.
@@ -30,16 +30,19 @@ summary: ""
 
 tags:
 - ""
+
 featured: false
 
 # links:
-url_pdf: "publication/khosravi_datamodel_2020/Khosravi_et_al_2020_Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model.pdf"
+# - name: ""
+#   url: ""
+url_pdf: "publication/martin_listening_2021/Martin_et_al_2021_Adapting the listening time for micro-electrode recordings in deep brain.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
-url_source: 'https://ieeexplore.ieee.org/abstract/document/8976150'
+url_source: 'https://link.springer.com/article/10.1007%2Fs11548-021-02379-0'
 url_video: ''
 
 # Featured image

@@ -2,10 +2,10 @@
 title: "Forward and backward walking in Parkinson disease: A factor analysis"
 
 authors: [admin, "Arnaud Gouelle", "Mitchell Adamson", "Marcus Pieterman", "Mandar Jog"]
-date: 2019-08-07T00:00:00
-doi: ""
+date: "2019-08-07T00:00:00"
+doi: "10.1016/j.gaitpost.2019.08.005"
 
-publishDate: ""
+publishDate: "2019-08-07T00:00:00"
 
 # Publication type.
 # Legend:

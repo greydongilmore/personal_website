@@ -3,7 +3,7 @@ title: "Segmentation and detection of physical activities during a sitting task 
 
 authors: ["Sara Memar", "Mehdi Delrobaei", admin, "Kenneth McIsaac", "Mandar Jog"]
 date: "2017-11-01T00:00:00"
-doi: ""
+doi: "10.1016/j.jab.2017.05.002"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2017-01-01T00:00:00Z"

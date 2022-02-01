@@ -3,7 +3,7 @@ title: "Assessing the effect of current steering on the total electrical energy 
 
 authors: ['Daphne Hui', 'Aditya Murgai', admin, 'Shabna Mohideen', 'Andrew Parrent', 'Mandar Jog']
 date: "2020-05-19T00:00:00"
-doi: ""
+doi: "10.1038/s41598-020-64250-7"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ""

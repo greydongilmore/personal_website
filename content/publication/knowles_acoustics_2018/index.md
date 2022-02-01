@@ -3,10 +3,10 @@ title: "Deep Brain Stimulation of the Subthalamic Nucleus Parameter Optimization
 
 authors: ["Thea Knowles", "Scott Adams", "Anita Abeysekera", "Cynthia Mancinelli", admin , "Mandar Jog"]
 date: "2018-03-15T00:00:00"
-doi: ""
+doi: "10.1044/2017_JSLHR-S-17-0157"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2018-03-15T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized

@@ -1,12 +1,12 @@
 ---
 title: "Voice quality severity and responsiveness to levodopa in Parkinson's disease"
-authors: ["Daryn Cushnie-Sparrow", "Scott Adams", "Anita Abeysekera", "Marcus Pieterman", admin, "Mandar Jog"]
 
+authors: ["Daryn Cushnie-Sparrow", "Scott Adams", "Anita Abeysekera", "Marcus Pieterman", admin, "Mandar Jog"]
 date: "2018-07-22T00:00:00"
-doi: ""
+doi: "10.1016/j.jcomdis.2018.07.003"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2018-07-22T00:00:00"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;

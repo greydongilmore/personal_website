@@ -1,12 +1,12 @@
 ---
-title: "Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model"
+title: "Extending convolutional neural networks for localizing the subthalamic nucleus from microelectrode recordings in Parkinson’s disease"
 
-authors: ['Mahsa Khosravi', 'S. Farokh Atashzar', admin, 'Mandar Jog', 'Rajni Patel']
-date: "2020-01-30T00:00:00"
-doi: "10.1109/JTEHM.2020.2969152"
+authors: ['Thibault Martin', 'Maxime Peralta', admin, 'Paul Sauleau', 'Claire Haegelen', 'Pierre Jannin', 'John SH Baxter']
+date: "2021-05-01T00:00:00"
+doi: "https://doi.org/10.1016/j.bspc.2021.102529"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2020-01-30T00:00:00Z"
+publishDate: "2021-05-01T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -19,7 +19,7 @@ publishDate: "2020-01-30T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "In *IEEE Journal of Translational Engineering in Health and Medicine*"
+publication: "In *Biomedical Signal Processing and Control*"
 publication_short: ""
 
 # Abstract and optional shortened version.
@@ -30,16 +30,19 @@ summary: ""
 
 tags:
 - ""
+
 featured: false
 
 # links:
-url_pdf: "publication/khosravi_datamodel_2020/Khosravi_et_al_2020_Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model.pdf"
+# - name: ""
+#   url: ""
+url_pdf: "publication/martin_cnn_2021/Martin et al_2021_Extending Convolutional Neural Networks for Localizing the Subthalamic Nucleus.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
-url_source: 'https://ieeexplore.ieee.org/abstract/document/8976150'
+url_source: 'https://www.sciencedirect.com/science/article/abs/pii/S1746809421001269?via%3Dihub'
 url_video: ''
 
 # Featured image

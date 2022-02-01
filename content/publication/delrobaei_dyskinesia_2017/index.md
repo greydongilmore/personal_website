@@ -3,10 +3,10 @@ title: "Using Wearable Technology to Generate Objective Parkinson’s Disease Dy
 
 authors: ["Mehdi Delrobaei", "Navid Baktash", admin, "Kenneth McIsaac", "Mandar Jog"]
 date: "2017-10-30T00:00:00"
-doi: ""
+doi: "10.1109/TNSRE.2017.2690578"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2017-10-30T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized

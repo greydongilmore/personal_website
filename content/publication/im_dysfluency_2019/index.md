@@ -3,10 +3,10 @@ title: "Effect of Levodopa on Speech Dysfluency in Parkinson's Disease"
 
 authors: ["Hannah Im", "Scott Adams", "Anita Abeyesekera", "Marcus Pieterman", admin, "Mandar Jog"]
 date: "2018-11-01T00:00:00"
-doi: ""
+doi: "10.1002/mdc3.12714"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2018-11-01T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized

@@ -3,10 +3,10 @@ title: "Future Perspectives: Assessment Tools and Rehabilitation in the New Age"
 
 authors: [admin, "Mandar Jog"]
 date: "2017-03-22T00:00:00"
-doi: ""
+doi: "10.1007/978-3-319-46062-8_10"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: "2017-03-22T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -16,7 +16,7 @@ publishDate: ""
 # 4 = Report
 # 5 = Book
 # 6 = Book section
-publication_types: ["2"]
+publication_types: ["6"]
 
 # Publication name and optional abbreviated publication name.
 publication: "In *Movement Disorders Rehabilitation*"

@@ -1,12 +1,12 @@
 ---
-title: "Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model"
+title: "Application of the anatomical fiducials framework to a clinical dataset of patients with Parkinson’s disease"
 
-authors: ['Mahsa Khosravi', 'S. Farokh Atashzar', admin, 'Mandar Jog', 'Rajni Patel']
-date: "2020-01-30T00:00:00"
-doi: "10.1109/JTEHM.2020.2969152"
+authors: ['Mohamad Abbass', admin, 'Alaa Taha', 'Ryan Chevalier', 'Magdalena Jach', 'Terry M Peters', 'Ali R Khan', 'Jonathan C Lau']
+date: "2022-01-01T00:00:00"
+doi: "10.1007/s00429-021-02408-3"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2020-01-30T00:00:00Z"
+publishDate: "2022-01-01T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -19,7 +19,7 @@ publishDate: "2020-01-30T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "In *IEEE Journal of Translational Engineering in Health and Medicine*"
+publication: "In *Brain Structure and Function*"
 publication_short: ""
 
 # Abstract and optional shortened version.
@@ -30,16 +30,19 @@ summary: ""
 
 tags:
 - ""
+
 featured: false
 
 # links:
-url_pdf: "publication/khosravi_datamodel_2020/Khosravi_et_al_2020_Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model.pdf"
+# - name: ""
+#   url: ""
+url_pdf: "publication/abbass_afids_2022/Abbass et al_2022_Application of the anatomical fiducials framework to a clinical dataset of.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
-url_source: 'https://ieeexplore.ieee.org/abstract/document/8976150'
+url_source: 'https://link.springer.com/article/10.1007%2Fs00429-021-02408-3'
 url_video: ''
 
 # Featured image

@@ -3,7 +3,7 @@ title: "Letter to the Editor Regarding “Statistical Shape Analysis of Subthala
 
 authors: [admin, "Aditya Murgai","Mandar Jog"]
 date: "2019-08-01T00:00:00"
-doi: ""
+doi: "10.1016/j.wneu.2019.03.266"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ""
