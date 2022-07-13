@@ -19,15 +19,18 @@ spacing:
 # - Add/remove as many `feature` blocks below as you like.
 # - For available icons, see: https://wowchemy.com/docs/page-builder/#icons
 feature:
-- description: "**Python**, Matlab, Bash, R, git"
+- description: "Python, Bash, R, Matlab, git"
   icon: code
   icon_pack: fa
   name: Programming
-- description: "**FSL**, **ANTS**, 3D Slicer, BrainVoyager"
+- description: "FSL, ANTS, NiftyReg, 3D Slicer"
   icon: brain
   icon_pack: fa
-  name: Neuroimaging software
-
+  name: Neuroimaging
+- description: "Extracellular, LFP"
+  icon: "spike"
+  icon_pack: "custom"
+  name: "Electrophysiology"
 # Uncomment to use emoji icons.
 #- icon: ":smile:"
 #  icon_pack: "emoji"

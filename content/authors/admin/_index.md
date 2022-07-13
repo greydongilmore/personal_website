@@ -6,11 +6,11 @@ title: Greydon Gilmore
 superuser: true
 
 # Role/position/tagline
-role: Ph.D. Candidate in Biomedical Engineering
+role: Electrophysiologist
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: Western University
+- name: London Health Sciences Centre
   url:
 
 # Short bio (displayed in user profile at end of posts)
@@ -18,16 +18,17 @@ bio: My research interests include deep brain stimulation, machine learning and 
 
 # Interests to show in About widget
 interests:
-- Deep brain stimulation
-- Machine learning
-- Signal processing
+- deep brain stimulation
+- stereoelectroencephalography
+- medical image processing
+- clinical software development
 
 # Education to show in About widget
 education:
   courses:
   - course: Ph.D. Biomedical Engineering
     institution: Western University
-    year: 2021
+    year: 2022
   - course: M.Sc. Neuroscience
     institution: Western University
     year: 2015
@@ -72,4 +73,4 @@ email: ""
 highlight_name: true
 ---
 
-<p style='text-align: justify;'> <b>Greydon Gilmore</b> is a current Ph.D. candidate in Biomedical Engineering in the lab of <a href="http://www.schulich.uwo.ca/cns/people/bios_neurologists/bio-jog.html" target="_blank">Dr. Mandar Jog</a> and <a href="https://www.eng.uwo.ca/electrical/faculty/patel_r/index.html" target="_blank">Dr. Rajni Patel</a>. His research interests include deep brain stimulation and localization techniques for electrodes post-operation. He has several industry partnered grants focused on improving precision and outcome of deep brain stimulation surgery for movement disorders.</p>
+<p style='text-align: justify;'> <b>Greydon Gilmore</b> obtained a Ph.D. in Biomedical Engineering at Western University (<a href="https://ir.lib.uwo.ca/etd/8545/" target="_blank">Western thesis repository</a>). His thesis work involved the development of an open-source stereotactic planning software for functional neurosurgery. His primary research interests include cranial electrodes inserted for movement disorders and epilepsy. The goal is to improve surgical targetting accuracy and post-operative localization of electrodes.</p>
