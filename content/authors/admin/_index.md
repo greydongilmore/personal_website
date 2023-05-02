@@ -26,7 +26,7 @@ interests:
 # Education to show in About widget
 education:
   courses:
-  - course: Postdoctoral fellowship in Department of Mathmatics
+  - course: Postdoc in Department of Mathematics
     institution: Western University
     year: 2022-current
   - course: Ph.D. Biomedical Engineering
