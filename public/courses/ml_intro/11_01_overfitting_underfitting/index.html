@@ -1,0 +1,1425 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Greydon Gilmore" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="We ended the last section observing some puzzling behavior: the performance of our linear regression model appeared to decrease with increasing sample size, which is probably not what we would have intuitively expected." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#3f51b5" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cb6b3f381d83e23d75cbf78dd7485887.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Greydon Gilmore" />
+  <meta property="og:url" content="https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/" />
+  <meta property="og:title" content="Over and Underfitting | Greydon Gilmore" />
+  <meta property="og:description" content="We ended the last section observing some puzzling behavior: the performance of our linear regression model appeared to decrease with increasing sample size, which is probably not what we would have intuitively expected." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2019-05-05T00:00:00&#43;01:00"
+      />
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Over and Underfitting | Greydon Gilmore</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="c20ff4d5fede091d98e83bab58eb140a" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#grants"><span>grants</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#training"><span>training</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>CV</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/files/cv/CVLong_Greydon-Gilmore.pdf"><span>CV long</span></a>
+            
+              <a class="dropdown-item" href="/files/cv/CVShort_Greydon-Gilmore.pdf"><span>CV short</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Over and Underfitting</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 5, 2019
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>We ended the last section observing some puzzling behavior: the performance of our linear regression model appeared to <em>decrease</em> with increasing sample size, which is probably not what we would have intuitively expected. In this section, we&rsquo;ll explore the reasons for, and implications of, this important phenomenon.</p>
+<pre><code class="language-python"># our core libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# scikit-learn stuff we've already encountered
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+</code></pre>
+<p>To get a better understanding of what&rsquo;s going on, we&rsquo;ll set aside our relatively complex personality dataset in this section in favor of simpler bivariate examples. Once we&rsquo;re comfortable with the key ideas, we&rsquo;ll bring the data back and explore it some more in the next sections.</p>
+<p>Let&rsquo;s start by sampling some data from a noisy function where the underlying functional form is quadratic.</p>
+<pre><code class="language-python"># we wrap the data generation code in a function so we can call
+# it again later.
+def make_xy(n, sd=0.5):
+    ''' Generate x and y variables from a fixed quadratic function,
+    adding noise. '''
+    x = np.random.normal(size=n)
+    y = (0.7 * x) ** 2 + 0.1 * x + np.random.normal(10, sd, size=n)
+    return x, y
+</code></pre>
+<pre><code class="language-python"># fix the random number generator so we get reproducible results
+np.random.seed(10)
+
+x, y = make_xy(30)
+plt.scatter(x, y);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./11_01_overfitting_underfitting_4_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>Suppose we try to fit these data with a linear model&hellip;</p>
+<pre><code class="language-python">est = LinearRegression()
+est.fit(x[:, None], y)
+
+x_range = np.linspace(x.min(), x.max(), 100)
+reg_line = est.predict(x_range[:, None])
+
+plt.scatter(x, y)
+plt.plot(x_range, reg_line);
+mse = mean_squared_error(y, est.predict(x[:, None]))
+plt.title(f&quot;Mean squared error: {mse:.2f}&quot;);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./11_01_overfitting_underfitting_6_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>The fit looks&hellip; meh. It seems pretty clear that our linear regression model is <em>underfitting</em> the data—meaning, there are clear patterns in the data that the fitted model fails to describe.</p>
+<p>What can we do about this? Well, the problem here is that our model is insufficiently flexible; our straight regression line can&rsquo;t bend itself to fit the contours of the observed data. Clearly, the solution is to use a more flexible estimator! A linear fit won&rsquo;t cut it—we need to fit <em>curves</em>.</p>
+<p>Just to make sure we don&rsquo;t underfit again, let&rsquo;s use a <em>really</em> flexible estimator—specifically, 10th degree polynomial regression.</p>
+<p>This is also a good opportunity to introduce a helpful object in scikit-learn called a <code>Pipeline</code>. The idea behind a <code>Pipeline</code> is that we can stack arbitrarily many transformation steps together in a sequence, and then cap them off with an estimator of our choice. The whole pipeline will then behave like a single estimator—i.e., we only need to call <code>fit()</code> and <code>predict()</code> once. This will allow us to introduce a preprocessing step before the <code>LinearRegression</code> model gets our data, in which we create a bunch of polynomial features (by taking <code>x**2</code>, <code>x**3</code>, <code>x**4</code>, and so on—all the way up to <code>x**10</code>). We&rsquo;ll make use of scikit-learn&rsquo;s handy <code>PolynomialFeatures</code> transformer, which can be found in the <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing" target="_blank" rel="noopener"><code>preprocessing</code> module</a> (there are all kinds of other useful data preprocessing tools in there).</p>
+<p>Here&rsquo;s the result of our second model-fitting exercise:</p>
+<pre><code class="language-python">from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+
+# wrap the pipeline creation process in a function, so we can
+# conveniently parameterize the degree of the polynomial.
+def make_pipeline(degree=1): 
+    # Polynomial regression is just linear regression with polynomial
+    # features, so we can use scikit-learn's PolyNomialFeatures helper
+    # to generate an expanded design matrix as an extra pipeline step
+    # before model estimation.
+    polynomial_features = PolynomialFeatures(degree=degree, include_bias=False)
+    
+    # Construct an sklearn Pipeline, which behaves like a single Estimator.
+    pipeline = Pipeline([
+        (&quot;polynomial_features&quot;, polynomial_features),
+        (&quot;linear_regression&quot;, LinearRegression())
+    ])
+    return pipeline
+</code></pre>
+<p>Now we can initialize a pipeline with <code>degree=10</code>, and fit it to our toy data:</p>
+<pre><code class="language-python"># play with this!
+DEGREE = 10
+
+pipeline = make_pipeline(DEGREE)
+
+pipeline.fit(x[:, None], y)
+reg_line = pipeline.predict(x_range[:, None])
+
+plt.scatter(x, y)
+plt.plot(x_range, reg_line)
+mse = mean_squared_error(y, pipeline.predict(x[:, None]))
+plt.title(f&quot;Mean squared error: {mse:.2f}&quot;);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./11_01_overfitting_underfitting_10_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>On paper, this model fits the data much better than the first model, in the sense that it reduces the mean squared error relative to the simpler linear model. But, much as it seemed clear that the previous model was underfitting, it should now be intuitively obvious to you that the 10th-degree polynomial model is <em>overfitting</em>. That is, the line of best fit bends in some fairly unnatural ways in order to capture individual data points. While this helps reduce the error in <em>these</em> particular data, it&rsquo;s hard to imagine that the same line would still be very close to the data if we sampled from the same distribution a second or third time.</p>
+<p>We can test this intuition by doing exactly that: we sample some more data from the same process, and see how well our fitted model predicts the new scores.</p>
+<pre><code class="language-python">test_x, test_y = make_xy(30)
+
+plt.scatter(test_x, test_y)
+
+# Update the x range
+x_range = np.linspace(test_x.min(), test_x.max(), 100)
+reg_line = pipeline.predict(x_range[:, None])
+plt.plot(x_range, reg_line)
+
+mse = mean_squared_error(y, pipeline.predict(test_x[:, None]))
+plt.title(f&quot;Mean squared error: {mse:.2f}&quot;);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./11_01_overfitting_underfitting_12_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>That&rsquo;s&hellip; not so good. We can see that the fitted model generates wildly off-base predictions for new observations outside its original training range (though, if we zoomed in, we&rsquo;d find that it&rsquo;s not so hot for observations within the original range either).</p>
+<p>Of course, since we created the data-generating process ourselves, and know the ground truth in this case, we may as well go ahead and fit the data with the correct functional form, which i this case is a polynomial with degree 2:</p>
+<pre><code class="language-python"># Call our pipeline-generation function
+pipeline = make_pipeline(2)
+
+# Fit to the training data
+pipeline.fit(x[:, None], y)
+
+# Predict values for range of x
+x_range = np.linspace(x.min(), x.max(), 100)
+reg_line = pipeline.predict(x_range[:, None])
+
+# Plot
+plt.scatter(x, y)
+plt.plot(x_range, reg_line)
+mse = mean_squared_error(y, pipeline.predict(x[:, None]))
+plt.title(f&quot;Mean squared error: {mse:.2f}&quot;);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./11_01_overfitting_underfitting_14_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>There, that looks much better.</p>
+<p>Of course, in the real world, we rarely know the ground truth (if we did, we wouldn&rsquo;t need to fit a model in the first place!). So we&rsquo;d have to navigate between the two extremes of overfitting and underfitting in some other way. Finding this delicate balance is one of the central problems of machine learning—perhaps <em>the</em> central problem. For any given dataset, a more flexible model will be able to capture more nuanced, subtle patterns in the data. The cost of flexibility, however, is that such a model is also more likely to hallucinate—i.e., to fit patterns in the data that are only there because of noise, and won&rsquo;t generalize to new samples. Conversely, a less flexible model is only capable of fitting simple patterns in the data. This means it will avoid chasing down rabbit holes full of spurious patterns; but it does so at the cost of missing out on a lot of <em>real</em> patterns.</p>
+<p>One way to think about this is that, as an analyst, the choice you face is almost never between <em>good</em> models and <em>bad</em> models, but rather, between lazy and energetic ones (later on, we&rsquo;ll also see that there are many different ways to be lazy or energetic). In the above example, the straight line is a lazy model: it has only one degree of freedom to play with, and if it can&rsquo;t fit the data well with that one degree of variation, it doesn&rsquo;t care. It&rsquo;ll just sigh and go back to the couch to watch Game of Thrones.</p>
+<p>The 10th-degree polynomial, by contrast, is hyperactive and prone to conspiracy theories: it sees patterns <em>everywhere</em>, and is very interested in convincing you that all of the conspiracies are real.</p>
+<p>Getting it right in any given situation requires you to strike a balance between these two extremes. Unfortunately, the precise point of optimality varies on a case-by-case basis, so there is, as they say in machine learning, <a href="https://en.wikipedia.org/wiki/No_free_lunch_theorem" target="_blank" rel="noopener">no free lunch</a>.</p>
+<p>Later on, we&rsquo;ll connect the ideas of overfitting vs. underfitting (or, relatedly, flexibility vs. stability) to another key concept—the <em>bias-variance tradeoff</em>. For now though, let&rsquo;s hone our intuitions about overfitting and underfitting by interactively playing with our polynomial regression model a bit more.</p>
+<pre><code class="language-python">##### provides interactive widget support
+from ipywidgets import interact
+
+def plot_fit(n=30, sd=0.5, degree=1, seed=500, show_fit=True):
+    np.random.seed(seed)
+
+    x, y = make_xy(n, sd)
+    x_test, y_test = make_xy(n, sd)
+
+    pipeline = make_pipeline(degree)
+    pipeline.fit(x[:, None], y)
+    fig, axes = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(12, 5))
+    axes[0].scatter(x, y)
+    all_x = np.r_[x, x_test]
+    x_range = np.linspace(all_x.min(), all_x.max(), 100)
+    mse = mean_squared_error(y, pipeline.predict(x[:, None]))
+    axes[0].set_title(f&quot;Training sample (MSE = {mse:.2f})&quot;, fontsize=16);
+
+    axes[1].scatter(x_test, y_test, color='g')
+    mse = mean_squared_error(y_test,pipeline.predict(x_test[:, None]))
+    axes[1].set_title(f&quot;Test sample (MSE = {mse:.2f})&quot;, fontsize=16);
+    
+    if show_fit:
+        reg_line = pipeline.predict(x_range[:, None])
+        axes[0].plot(x_range, reg_line)
+        axes[1].plot(x_range, reg_line, 'g')
+
+# uncomment next line for static version
+# plot_fit(degree=10)
+
+interact(plot_fit, n=(10, 500, 10), sd=(0, 5, 0.1), degree=(1, 20), seed=(1, 1000, 1), show_fit=True);
+</code></pre>
+<pre><code>interactive(children=(IntSlider(value=30, description='n', max=500, min=10, step=10), FloatSlider(value=0.5, d…
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/&amp;text=Over%20and%20Underfitting" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/&amp;t=Over%20and%20Underfitting" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Over%20and%20Underfitting&amp;body=https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/&amp;title=Over%20and%20Underfitting" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Over%20and%20Underfitting%20https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://greydongilmore.github.io/courses/ml_intro/11_01_overfitting_underfitting/&amp;title=Over%20and%20Underfitting" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://greydongilmore.github.io/"><img class="avatar mr-3 avatar-square" src="/authors/admin/avatar_huae2c50bee0a2b36792fa6344dac5dcdd_1502657_270x270_fill_lanczos_center_3.png" alt="Greydon Gilmore"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://greydongilmore.github.io/">Greydon Gilmore</a></h5>
+      <h6 class="card-subtitle">Intraoperative Neurophysiologist Biomedical Engineer</h6>
+      <p class="card-text">My research interests include deep brain stimulation, machine learning and signal processing.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:greydon.gilmore@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0001-7523-5734" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.ca/citations?user=0zrqWjsAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Greydon_Gilmore" target="_blank" rel="noopener">
+        <i class="ai ai-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/ml_intro/01_01_python_basics_operations/" rel="next">Operations in Python</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/ml_intro/02_01_plotting/" rel="prev">Plotting Intro</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

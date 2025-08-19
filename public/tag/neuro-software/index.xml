@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Neuro Software | Greydon Gilmore</title>
+    <link>https://greydongilmore.github.io/tag/neuro-software/</link>
+      <atom:link href="https://greydongilmore.github.io/tag/neuro-software/index.xml" rel="self" type="application/rss+xml" />
+    <description>Neuro Software</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2025 Greydon Gilmore</copyright><lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png</url>
+      <title>Neuro Software</title>
+      <link>https://greydongilmore.github.io/tag/neuro-software/</link>
+    </image>
+    
+    <item>
+      <title>Freesurfer Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</link>
+      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</guid>
+      <description>&lt;h2 id=&#34;download-software&#34;&gt;Download software&lt;/h2&gt;
+&lt;p&gt;Download the &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linux software version&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Run the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install some dependancies:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install tcsh
+sudo apt-get install libglu1
+sudo apt-get install libxss1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configurations&#34;&gt;Post-Install Configurations&lt;/h2&gt;
+&lt;p&gt;Add Freesurfer to your path:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;echo &amp;quot;FREESURFER_HOME=/usr/local/freesurfer&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+echo &#39;source $FREESURFER_HOME/SetUpFreeSurfer.sh&#39; &amp;gt;&amp;gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have run the install correctly you will see this output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Setting up environment for FreeSurfer/FS-FAST (and FSL)
+FREESURFER_HOME /usr/local/freesurfer
+FSFAST_HOME     /usr/local/freesurfer/fsfast
+FSF_OUTPUT_FORMAT nii
+SUBJECTS_DIR    /usr/local/freesurfer/subjects
+MNI_DIR         /usr/local/freesurfer/mni
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;define-subjects_dir&#34;&gt;Define subjects_dir&lt;/h2&gt;
+&lt;p&gt;FreeSurfer requires an environment variable called &lt;code&gt;SUBJECTS_DIR&lt;/code&gt;. This is the directory where subject data is stored.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export SUBJECTS_DIR=&amp;lt;path to subject data&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;obtain-license&#34;&gt;Obtain license&lt;/h2&gt;
+&lt;p&gt;You will need to obtain a &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/registration.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;license key&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once you obtain the &lt;code&gt;license.txt&lt;/code&gt; key file, copy it to your FreeSurfer installation directory. This is also the location defined by the &lt;code&gt;FREESURFER_HOME&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /mnt/c/Users/*[your_username]*/Downloads/license.txt $FREESURFER_HOME
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Advanced Normalization Tools</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/ants/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/ants/</guid>
+      <description>&lt;h2 id=&#34;get-the-latest-ants-code&#34;&gt;Get the latest ANTs code&lt;/h2&gt;
+&lt;p&gt;Download the latest code into an arbitrary directory, I use ~/code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir ~/code 
+cd ~/code
+git clone https://github.com/ANTsX/ANTs.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install the ZLIB libraries:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install zlib1g-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;run-cmakemake&#34;&gt;Run CMake/Make&lt;/h2&gt;
+&lt;p&gt;I install my applications in &lt;code&gt;~/Applications&lt;/code&gt;, however the following will install ANTs in &lt;code&gt;~/bin&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/bin/ants
+cd ~/bin/ants
+ccmake ~/code/ANTs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to do an initial configuration. CMake will do some checking and then present options for review. Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; again to do another round of configuration. If there are no errors, you&amp;rsquo;re ready to generate the make files by pressing &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Now you are back at the command line, it&amp;rsquo;s time to compile:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This compiles in the most resource-efficient manner. To save time, you can use multiple threads, for example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make -j 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configuration&#34;&gt;Post-install Configuration&lt;/h2&gt;
+&lt;p&gt;If you want to use ANTs scripts, copy them from the source directory &lt;code&gt;Scripts/&lt;/code&gt; to the bin directory where &lt;code&gt;antsRegistration&lt;/code&gt; etc are located:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cp -r ~/bin/ants/Scripts/* ~/bin/ants/bin/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Assuming you&amp;rsquo;ve built in &lt;code&gt;~/bin/ants&lt;/code&gt;, there will now be a binary directory &lt;code&gt;~/bin/ants/bin&lt;/code&gt;, containing the programs (and scripts if you&amp;rsquo;ve included them). The scripts additionally require ANTSPATH to point to the bin directory including a trailing slash.&lt;/p&gt;
+&lt;p&gt;You will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export ANTSPATH=${HOME}/bin/ants/bin
+export PATH=${ANTSPATH}:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now check this worked correctly:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;which antsRegistration
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NiftyReg Install</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/niftyreg/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/niftyreg/</guid>
+      <description>&lt;h2 id=&#34;download-niftyreg&#34;&gt;Download NiftyReg&lt;/h2&gt;
+&lt;p&gt;Obtain the newest version of &lt;a href=&#34;https://sourceforge.net/projects/niftyreg/files/latest/download&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NiftyReg&lt;/a&gt; or by running the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/code/niftyreg_source
+cd ~/code/niftyreg_source
+git clone https://github.com/SuperElastix/niftyreg.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;run-cmakemake&#34;&gt;Run CMake/Make&lt;/h2&gt;
+&lt;p&gt;Make the build and install directories.&lt;/p&gt;
+&lt;p&gt;The default install location is &lt;code&gt;/usr/local&lt;/code&gt;, which falls on your PATH. This is the easiest location to install. If you want to install somwhere else then specify the path in the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/bin/niftyreg
+cd ~/bin/niftyreg
+ccmake ~/code/niftyreg_source/niftyreg
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following options will be displayed, ensure you change &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable to the install directory path if you don&amp;rsquo;t want to use default:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Parameter&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;BUILD_ALL_DEP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON if you want to build All the dependencies&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;BUILD_SHARED_LIBS&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Build the libraries as shared build the libraries as shared&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;BUILD_TESTING&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON if you want to build the unit tests&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CMAKE_BUILD_TYPE&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Compiling options: Debug Release RelWithDebInfo MinSizeRel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CMAKE_INSTALL_PREFIX&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set the path where the final install will be copied&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;M_LIBRARY&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Path to a library.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;PNG_INCLUDE_DIR&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set if you want NiftyReg to support the PNG file format for 2D images. Note that CMake will try to find the libpng on your system and will build it automatically if it does not find it.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_CUDA&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON if you want to build the GPU code. The CUDA toolkit must be install otherwise CMake will return an error message&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_OPENCL&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON to use OpenCL for multi-CPU implementation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_OPENMP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON to use OpenMP for multi-CPU implementation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_SSE&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON to use SIMD based implementation, mostly for cubic B-Spline related computation. Note that SIMD implementation has only be done for single precision.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Press &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to configure the NiftyReg project, press &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to configure the project. Once the project is correctly configured, press the &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt; key to generate the Makefiles. You can then build and install the project:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo make
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configuration&#34;&gt;Post-Install Configuration&lt;/h2&gt;
+&lt;p&gt;The project should then be installed into the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; directory you previously created.&lt;/p&gt;
+&lt;p&gt;If you changed the install prefix directory, to one not on your PATH, you will need to add NiftyReg to your PATH. In order to use NiftyReg in any terminal, you will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NREG=&amp;lt;path_to_your_niftyreg_install&amp;gt;
+export PATH={NREG}/bin:${PATH}
+export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Close and re-open the linux terminal then run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;reg_f3d
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FMRIB Software Library Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/fsl/</link>
+      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/fsl/</guid>
+      <description>&lt;h2 id=&#34;installing-on-pop_os&#34;&gt;Installing on Pop_OS!&lt;/h2&gt;
+&lt;p&gt;You will first need to run the following steps prior to installing FSL.&lt;/p&gt;
+&lt;p&gt;The following steps were originally written here &lt;a href=&#39;https://forums.linuxmint.com/viewtopic.php?p=1531616&amp;sid=eca87543f47ece83994a3e3b656447c3#p1531616&#39; target=&#34;_blank&#34;&gt; &lt;strong&gt;here&lt;/strong&gt; &lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Make sure you run a backup prior to performing this hack&amp;hellip; just in case.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;move your current OS information files into a temporary location:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /etc/os-release /etc/os-release.pop &amp;amp;&amp;amp; sudo mv /etc/lsb-release /etc/lsb-release.pop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;write a new &lt;code&gt;os-release&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo gedit /etc/os-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;copy the following into this file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NAME=&amp;quot;Ubuntu&amp;quot;
+VERSION=&amp;quot;20.04 LTS (Focal Fossa)&amp;quot;
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME=&amp;quot;Ubuntu 20.04 LTS&amp;quot;
+VERSION_ID=&amp;quot;20.04&amp;quot;
+HOME_URL=&amp;quot;https://www.ubuntu.com/&amp;quot;
+SUPPORT_URL=&amp;quot;https://help.ubuntu.com/&amp;quot;
+BUG_REPORT_URL=&amp;quot;https://bugs.launchpad.net/ubuntu/&amp;quot;
+PRIVACY_POLICY_URL=&amp;quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&amp;quot;
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;write a new lsb-release file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo gedit /etc/lsb-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;copy the following into this file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 20.04 LTS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;now run the fslinstaller.py script in the below section and return here to Step 5 to return your OS information.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;after running the FSL install steps, remove the files you wrote:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo rm /etc/os-release &amp;amp;&amp;amp; sudo rm /etc/lsb-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;move the original files back:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /etc/os-release.pop /etc/os-release &amp;amp;&amp;amp; sudo mv /etc/lsb-release.pop /etc/lsb-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;download-fsl&#34;&gt;Download FSL&lt;/h2&gt;
+&lt;p&gt;The easiest method is to download this &lt;a href=&#34;https://fsl.fmrib.ox.ac.uk/fsldownloads_registration/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python script&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You will need to register. On the subsequent page you will download the &lt;code&gt;fslinstaller.py&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Run the following in a linux terminal (the install will take awhile):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;python /mnt/c/Users/*[your_username]*/Downloads/fslinstaller.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install the package &lt;code&gt;wxpython&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;pip install wxpython
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If that does not work then run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-16.04 wxPython
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;libraries-you-may-need-to-install&#34;&gt;Libraries you may need to install&lt;/h2&gt;
+&lt;h3 id=&#34;multiple-image-network-graphics-library-libmng&#34;&gt;Multiple-image Network Graphics library (libmng)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libmng2
+sudo apt-get install libmng-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;png-library---development-libpng-dev&#34;&gt;PNG library - development (libpng-dev)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libpng-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;optimized-blas-linear-algebra-library-libopenblas-base&#34;&gt;Optimized BLAS (linear algebra) library (libopenblas-base)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libopenblas-base
+export LD_LIBRARY_PATH=/usr/lib/openblas-base/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;libmngso1-error&#34;&gt;libmng.so.1 Error&lt;/h3&gt;
+&lt;p&gt;You will need to create a symbolic link for the library dll &lt;code&gt;libmng.so.1&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo ln -s /usr/lib/x86_64-linux-gnu/libmng.so.2 /usr/lib/x86_64-linux-gnu/libmng.so.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;independent-jpeg-groups-jpeg-runtime-library-libjpeg62&#34;&gt;Independent JPEG Group&amp;rsquo;s JPEG runtime library (libjpeg62)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libjpeg62
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;png-library---runtime-libpng12deb&#34;&gt;PNG library - runtime (libpng12.deb)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb \
+  &amp;amp;&amp;amp; sudo dpkg -i /tmp/libpng12.deb \
+  &amp;amp;&amp;amp; rm /tmp/libpng12.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;gtk-graphical-user-interface-library-gtk20&#34;&gt;GTK+ graphical user interface library (gtk2.0)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install gtk2.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;pulseaudio-for-other-random-libraries&#34;&gt;Pulseaudio for other random libraries&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install pulseaudio
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;you-may-also-receive-an-error-no-d-bus-daemon-running-run-the-following&#34;&gt;You may also receive an error &lt;code&gt;No D-BUS daemon running&lt;/code&gt;, run the following:&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo chown -R *[your username]*:admin ~/.dbus
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installing Automatic Registration Toolbox</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/art/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/art/</guid>
+      <description>&lt;h2 id=&#34;download-art&#34;&gt;Download ART&lt;/h2&gt;
+&lt;p&gt;Download the newest version of &lt;a href=&#34;https://www.nitrc.org/projects/art/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ART&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Make a new directory for the install and extract the tar package into it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir ~/Applications/ART
+cd ~/Applications/ART
+tar -xvzf /mnt/c/Users/*[your_username]*/Downloads/acpcdetect2.0*.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-configuration&#34;&gt;Post Configuration&lt;/h2&gt;
+&lt;p&gt;Set the &lt;code&gt;ARTHOME&lt;/code&gt; environment variable and add the binary directory to your PATH by editing your &lt;code&gt;~/.bashrc&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vim ~/.basrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add these lines to the end:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export ARTHOME=/path/to/ART
+export PATH=$ARTHOME/bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;confirm-installation&#34;&gt;Confirm Installation&lt;/h2&gt;
+&lt;p&gt;Execute &lt;code&gt;acpcdetect&lt;/code&gt; by running command in terminal&lt;/p&gt;
+&lt;p&gt;You may get an error when executing &lt;code&gt;acpcdetect&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;acpcdetect: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you get this error, run the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libatlas-base-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install &lt;code&gt;pnmtopng&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install -y pnmtopng
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Make and CMake Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/cmake/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/cmake/</guid>
+      <description>&lt;h2 id=&#34;install-make&#34;&gt;Install Make&lt;/h2&gt;
+&lt;p&gt;Install build essentials and Make first:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install make
+sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install build-essential
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-cmake&#34;&gt;Install CMake&lt;/h2&gt;
+&lt;p&gt;Download the latest version of the &lt;a href=&#34;https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CMake executable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In your linux shell run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;chmod +x /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
+sudo /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
+export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dcm2niix Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/dcm2niix/</link>
+      <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/dcm2niix/</guid>
+      <description>&lt;h2 id=&#34;run-install&#34;&gt;Run Install&lt;/h2&gt;
+&lt;p&gt;Run the following code in a linux terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install dcm2niix
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-dependencies&#34;&gt;Install Dependencies&lt;/h2&gt;
+&lt;p&gt;There are a few packages that allow dcm2niix to run faster:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install python-gdcm
+sudo apt-get install pigz
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

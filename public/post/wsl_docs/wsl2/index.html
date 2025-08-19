@@ -1,0 +1,1194 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Greydon Gilmore" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Sign up for Windows Insider program  Go to Register for Windows Insider Sign up for Windows Insider program  Activate Windows Insider Builds   Enable Full Diagnostic Data" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/post/wsl_docs/wsl2/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#3f51b5" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cb6b3f381d83e23d75cbf78dd7485887.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://greydongilmore.github.io/post/wsl_docs/wsl2/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Greydon Gilmore" />
+  <meta property="og:url" content="https://greydongilmore.github.io/post/wsl_docs/wsl2/" />
+  <meta property="og:title" content="Activating Windows Linux Subsystem 2 (WSL2) | Greydon Gilmore" />
+  <meta property="og:description" content="Sign up for Windows Insider program  Go to Register for Windows Insider Sign up for Windows Insider program  Activate Windows Insider Builds   Enable Full Diagnostic Data" /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2018-01-28T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2018-01-28T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://greydongilmore.github.io/post/wsl_docs/wsl2/"
+  },
+  "headline": "Activating Windows Linux Subsystem 2 (WSL2)",
+  
+  "datePublished": "2018-01-28T00:00:00Z",
+  "dateModified": "2018-01-28T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Greydon Gilmore"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Greydon Gilmore",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Sign up for Windows Insider program  Go to Register for Windows Insider Sign up for Windows Insider program  Activate Windows Insider Builds   Enable Full Diagnostic Data"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Activating Windows Linux Subsystem 2 (WSL2) | Greydon Gilmore</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="7d90e312326b6cddb06b284ad7dd31bb" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#grants"><span>grants</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#training"><span>training</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>CV</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/files/cv/CVLong_Greydon-Gilmore.pdf"><span>CV long</span></a>
+            
+              <a class="dropdown-item" href="/files/cv/CVShort_Greydon-Gilmore.pdf"><span>CV short</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Activating Windows Linux Subsystem 2 (WSL2)</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span class="author-highlighted">
+      Greydon Gilmore</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jan 28, 2018
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="sign-up-for-windows-insider-program">Sign up for Windows Insider program</h2>
+<ul>
+<li>Go to <a href="https://insider.windows.com/en-us/getting-started/" target="_blank" rel="noopener">Register for Windows Insider</a></li>
+<li>Sign up for Windows Insider program</li>
+</ul>
+<h2 id="activate-windows-insider-builds">Activate Windows Insider Builds</h2>
+<ol>
+<li>
+<p>Enable Full Diagnostic Data</p>
+<ul>
+<li>go to Settings &ndash;&gt; Privacy &ndash;&gt; Diagnostics &amp; feedback &ndash;&gt; Diagnostic data</li>
+<li>Choose <strong>Full</strong> as the option</li>
+</ul>
+</li>
+<li>
+<p>Enable Telemetry Data via Registry</p>
+<ul>
+<li>Open Registry Editor
+<ul>
+<li>Press Windows Key + R then type <code>regedit</code> to open registry editor</li>
+</ul>
+</li>
+<li>Navigate to:</li>
+</ul>
+<pre><code class="language-console">HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\DataCollection
+</code></pre>
+<ul>
+<li>Right-click <strong>DataCollection</strong>, click <strong>New</strong> and then click <strong>DWORD (32-bit) Value</strong></li>
+<li>Name it as  <strong>AllowTelemetry</strong>, and then press <strong>ENTER</strong></li>
+<li>Double-click <strong>AllowTelemetry</strong>, set the value as 3, and then click <strong>OK</strong>.</li>
+</ul>
+ <p align="center">
+   <img width="500" src="img/regedit_telemetry.png">
+ </p>
+<ul>
+<li>Repeat the above steps for:</li>
+</ul>
+<pre><code class="language-console">HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\DataCollection
+</code></pre>
+<ul>
+<li>Restart your computer</li>
+</ul>
+</li>
+<li>
+<p>Group Policy to enable Telemetry</p>
+<ul>
+<li>Press <strong>Windows key + r</strong> and type <strong>gpedit.msc</strong> in the Run prompt, hit <strong>ENTER</strong> to launch group policy editor</li>
+<li>Go to <strong>Computer Configuration</strong> &ndash;&gt; <strong>Administrative Templates</strong> &ndash;&gt; <strong>Windows Components</strong> &ndash;&gt; <strong>Data Collection and Preview Builds</strong></li>
+<li>Double-click <strong>Allow Telemetry</strong></li>
+<li>In the <strong>Options</strong> box, configure the level as 3, and then click <strong>OK</strong></li>
+</ul>
+ <p align="center">
+   <img width="500" src="img/group_telemetry.png">
+ </p>
+</li>
+</ol>
+<h2 id="activate-insider-build">Activate Insider Build</h2>
+<ol>
+<li>
+<p>Search for <strong>Check for Updates</strong> in the Windows search menu</p>
+</li>
+<li>
+<p>In the new window select <strong>Windows Insider Program</strong> at the bottom of the menu</p>
+</li>
+<li>
+<p>Select Get Started and follow the instructions, making sure you select <strong>Fast</strong> when asked</p>
+ <p align="center">
+   <img width="500" src="img/windows_insider_greyed.png">
+ </p>
+</li>
+<li>
+<p>Once you have completed the registration you will need to check for updates and let Windows install the new insider build.</p>
+ <p align="center">
+   <img width="500" src="img/windows_insider_update.png">
+ </p>
+</li>
+<li>
+<p>Once done you should restart your computer</p>
+</li>
+</ol>
+<h2 id="turn-on-linux-subsystem-feature">Turn on linux subsystem feature</h2>
+<ol>
+<li>
+<p>Open Windows PowerShell as administrator and run the commands:</p>
+<pre><code class="language-console">Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+</code></pre>
+</li>
+<li>
+<p>You will need to restart your computer again</p>
+</li>
+</ol>
+<h2 id="download-the-linux-distro">Download the linux distro</h2>
+<ol>
+<li>
+<p>Open the Microsoft Store and choose your favorite Linux distribution by searching for them (I prefer Ubuntu):</p>
+<ul>
+<li><a href="https://www.microsoft.com/en-ca/p/ubuntu/9nblggh4msv6?rtc=1&amp;activetab=pivot:overviewtab" target="_blank" rel="noopener">Ubuntu</a></li>
+<li><a href="https://www.microsoft.com/en-ca/p/debian/9msvkqc78pk6?rtc=1&amp;activetab=pivot:overviewtab" target="_blank" rel="noopener">Debian</a></li>
+</ul>
+</li>
+<li>
+<p>From the distro&rsquo;s page, select <strong>Get</strong></p>
+</li>
+<li>
+<p>Once done installing, open up <strong>Powershell</strong> as administrator and run (replace distro with the name of the distro you installed):</p>
+<pre><code class="language-console">wsl --set-version [Distro] 2
+</code></pre>
+<pre><code class="language-console">wsl --set-default-version 2
+</code></pre>
+</li>
+</ol>
+<h2 id="finalizing">Finalizing</h2>
+<ol>
+<li>
+<p>To complete the initialization of your newly installed distro, launch a new instance by searching in the Start menu and launching the distro</p>
+</li>
+<li>
+<p>The first time a newly installed distro runs, a Console window will open, and you&rsquo;ll be asked to wait for a minute or two for the installation to complete</p>
+</li>
+<li>
+<p>Once installation is complete, you will be prompted to create a new user account (and its password)</p>
+</li>
+<li>
+<p>Most distros ship with an empty/minimal package catalog. You should regularly be updating your package catalog, and upgrading your installed packages using your distro&rsquo;s preferred package manager</p>
+<pre><code class="language-console">sudo apt-get update &amp;&amp; sudo apt-get upgrade
+</code></pre>
+</li>
+</ol>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/windows/">Windows</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/wsl_docs/cmake/" rel="next">Make and CMake Installation</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/wsl_docs/wsl_terminator/" rel="prev">Install Terminator Linux Emulator</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/wsl_docs/wsl_terminator/">Install Terminator Linux Emulator</a></li>
+      
+      <li><a href="/post/windows_docs/windows_sshfs/">Mount Remote Drive with SSHFS</a></li>
+      
+      <li><a href="/post/wsl_docs/wsl/">Activating Windows Linux Subsystem (WSL)</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+  <p class="powered-by">
+    © 2025 Greydon Gilmore
+  </p>
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

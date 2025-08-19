@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows | Greydon Gilmore</title>
+    <link>https://greydongilmore.github.io/tag/windows/</link>
+      <atom:link href="https://greydongilmore.github.io/tag/windows/index.xml" rel="self" type="application/rss+xml" />
+    <description>Windows</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2025 Greydon Gilmore</copyright><lastBuildDate>Sun, 28 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png</url>
+      <title>Windows</title>
+      <link>https://greydongilmore.github.io/tag/windows/</link>
+    </image>
+    
+    <item>
+      <title>Activating Windows Linux Subsystem 2 (WSL2)</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/wsl2/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/wsl2/</guid>
+      <description>&lt;h2 id=&#34;sign-up-for-windows-insider-program&#34;&gt;Sign up for Windows Insider program&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Go to &lt;a href=&#34;https://insider.windows.com/en-us/getting-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Register for Windows Insider&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sign up for Windows Insider program&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;activate-windows-insider-builds&#34;&gt;Activate Windows Insider Builds&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Enable Full Diagnostic Data&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;go to Settings &amp;ndash;&amp;gt; Privacy &amp;ndash;&amp;gt; Diagnostics &amp;amp; feedback &amp;ndash;&amp;gt; Diagnostic data&lt;/li&gt;
+&lt;li&gt;Choose &lt;strong&gt;Full&lt;/strong&gt; as the option&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enable Telemetry Data via Registry&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Open Registry Editor
+&lt;ul&gt;
+&lt;li&gt;Press Windows Key + R then type &lt;code&gt;regedit&lt;/code&gt; to open registry editor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Navigate to:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\DataCollection
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Right-click &lt;strong&gt;DataCollection&lt;/strong&gt;, click &lt;strong&gt;New&lt;/strong&gt; and then click &lt;strong&gt;DWORD (32-bit) Value&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Name it as  &lt;strong&gt;AllowTelemetry&lt;/strong&gt;, and then press &lt;strong&gt;ENTER&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Double-click &lt;strong&gt;AllowTelemetry&lt;/strong&gt;, set the value as 3, and then click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/regedit_telemetry.png&#34;&gt;
+ &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Repeat the above steps for:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\DataCollection
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Restart your computer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Group Policy to enable Telemetry&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Press &lt;strong&gt;Windows key + r&lt;/strong&gt; and type &lt;strong&gt;gpedit.msc&lt;/strong&gt; in the Run prompt, hit &lt;strong&gt;ENTER&lt;/strong&gt; to launch group policy editor&lt;/li&gt;
+&lt;li&gt;Go to &lt;strong&gt;Computer Configuration&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Administrative Templates&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Windows Components&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Data Collection and Preview Builds&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Double-click &lt;strong&gt;Allow Telemetry&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;Options&lt;/strong&gt; box, configure the level as 3, and then click &lt;strong&gt;OK&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/group_telemetry.png&#34;&gt;
+ &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;activate-insider-build&#34;&gt;Activate Insider Build&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Search for &lt;strong&gt;Check for Updates&lt;/strong&gt; in the Windows search menu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the new window select &lt;strong&gt;Windows Insider Program&lt;/strong&gt; at the bottom of the menu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select Get Started and follow the instructions, making sure you select &lt;strong&gt;Fast&lt;/strong&gt; when asked&lt;/p&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/windows_insider_greyed.png&#34;&gt;
+ &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you have completed the registration you will need to check for updates and let Windows install the new insider build.&lt;/p&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/windows_insider_update.png&#34;&gt;
+ &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once done you should restart your computer&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;turn-on-linux-subsystem-feature&#34;&gt;Turn on linux subsystem feature&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open Windows PowerShell as administrator and run the commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will need to restart your computer again&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;download-the-linux-distro&#34;&gt;Download the linux distro&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the Microsoft Store and choose your favorite Linux distribution by searching for them (I prefer Ubuntu):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/ubuntu/9nblggh4msv6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/debian/9msvkqc78pk6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the distro&amp;rsquo;s page, select &lt;strong&gt;Get&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once done installing, open up &lt;strong&gt;Powershell&lt;/strong&gt; as administrator and run (replace distro with the name of the distro you installed):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wsl --set-version [Distro] 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wsl --set-default-version 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;finalizing&#34;&gt;Finalizing&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To complete the initialization of your newly installed distro, launch a new instance by searching in the Start menu and launching the distro&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first time a newly installed distro runs, a Console window will open, and you&amp;rsquo;ll be asked to wait for a minute or two for the installation to complete&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once installation is complete, you will be prompted to create a new user account (and its password)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Most distros ship with an empty/minimal package catalog. You should regularly be updating your package catalog, and upgrading your installed packages using your distro&amp;rsquo;s preferred package manager&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Terminator Linux Emulator</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/wsl_terminator/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/wsl_terminator/</guid>
+      <description>&lt;h2 id=&#34;installing-an-x-server&#34;&gt;Installing an X Server&lt;/h2&gt;
+&lt;p&gt;To run an X Window application, you will need to have an X Server installed and running on your Windows 10 machine. The most popular application is: &lt;a href=&#34;https://sourceforge.net/projects/vcxsrv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VcXsrv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After installing, VcXsrv creates a desktop shortcut. To start the server in multi-window mode run the following command in a command prompt:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;&amp;quot;C:\Program Files\VcXsrv\vcxsrv.exe&amp;quot; :0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl -dpi auto
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;configuring-terminator&#34;&gt;Configuring Terminator&lt;/h2&gt;
+&lt;p&gt;Once VcXsrv is installed, the next step is to install Terminator on WSL Bash:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install terminator
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Terminator will not initalize a config file so you will need to do this manually:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/.config/terminator
+touch ~/.config/terminator/config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try launching Terminator by specifying the X Display to connect to (:0) in the linux shell:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;DISPLAY=:0 terminator &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you receive an error about D-Bus (&lt;code&gt;No D-BUS daemon running&lt;/code&gt;) then press &lt;code&gt;CTRL+C&lt;/code&gt; to abort the previous command and run the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install dbus-x11
+sudo service dbus start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once you have completed the above run the previous command again:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;DISPLAY=:0 terminator &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A nice Terminator window should pop up.&lt;/p&gt;
+&lt;h2 id=&#34;installing-zsh&#34;&gt;Installing Zsh&lt;/h2&gt;
+&lt;p&gt;The next step is to install Zsh with oh-my-zsh. Installation is straightfoward:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install curl wget git zsh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You may receive a message &lt;code&gt;Password: chsh: PAM: Authentication failure&lt;/code&gt; you can ignore this.&lt;/p&gt;
+&lt;p&gt;Set the theme to &amp;ldquo;ys&amp;rdquo; at line 11 by replacing &lt;code&gt;robbyrussell&lt;/code&gt; in &lt;code&gt;.zshrc&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;ZSH_THEME=&amp;quot;ys&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have never used &lt;code&gt;vi&lt;/code&gt; editor before, you will need to press the &lt;code&gt;i&lt;/code&gt; key to enter inout mode to make changes. Once you have made the change you will need to exit input mode by pressing &lt;code&gt;esc&lt;/code&gt;. In order to exit the editor and save you need to press &lt;code&gt;:&lt;/code&gt; followed by &lt;code&gt;wq&lt;/code&gt; to exit the editor with save.&lt;/p&gt;
+&lt;p&gt;The only problem with Bash in WSL is it will always run Bash instead of Zsh. To get around that, add this to the end of your &lt;code&gt;~/.bashrc&lt;/code&gt; which will launch zsh instead when it starts up:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;if [ -t 1 ]; then
+  exec zsh
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;terminator-colorscheme&#34;&gt;Terminator Colorscheme&lt;/h2&gt;
+&lt;p&gt;The next thing is to change the default Terminator colorscheme to Solarized Dark. The easiest way to do this, is to use the awesome node package &lt;a href=&#34;https://github.com/base16-builder/base16-builder&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;base16-builder&lt;/a&gt;. You need to first install Node.js:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+sudo apt install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once you have installed Node.js you can then run the base-16builder install:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo npm install --global base16-builder
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You need to change directory access to the &lt;code&gt;configstore&lt;/code&gt; directory just created:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo chown -R [your_username] /home/[your_username]/.config/configstore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you need to apply the scheme to the terminator config file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p .config/terminator
+base16-builder -s solarized -t terminator -b dark &amp;gt; .config/terminator/config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;dircolors&#34;&gt;Dircolors&lt;/h2&gt;
+&lt;p&gt;To change the dircolors you can use &lt;a href=&#34;https://github.com/seebi/dircolors-solarized&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Solarized dircolors&lt;/a&gt; on Github and downloaded them to &lt;code&gt;.dir_colors&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wget https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
+mv dircolors.256dark .dir_colors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, added this to your &lt;code&gt;.zshrc&lt;/code&gt; to eval the Solarized dircolors on startup:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;if [ -f ~/.dir_colors ]; then
+  eval `dircolors ~/.dir_colors`
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;launching-terminator-directly&#34;&gt;Launching Terminator Directly&lt;/h2&gt;
+&lt;p&gt;To launch a hidden command window using the WShell Object in VBS you need to type the folowing script into a text document.&lt;/p&gt;
+&lt;p&gt;Right click on your desktop and create a new text doc. Then copy the following and save the file with the .vbs extension (e.g. startTerminator.vbs):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;args = &amp;quot;-c&amp;quot; &amp;amp; &amp;quot; -l &amp;quot; &amp;amp; &amp;quot;&amp;quot;&amp;quot;DISPLAY=:0 terminator&amp;quot;&amp;quot;&amp;quot;
+WScript.CreateObject(&amp;quot;Shell.Application&amp;quot;).ShellExecute &amp;quot;bash&amp;quot;, args, &amp;quot;&amp;quot;, &amp;quot;open&amp;quot;, 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Move this &lt;code&gt;.vbs&lt;/code&gt; file into a safe place such as &amp;ldquo;C:\Users[your_username]&amp;rdquo;. Right click on the file and &amp;lsquo;Send to&amp;rsquo; the desktop as a shortcut. Right click on the new shortcut and select properties. In the &amp;lsquo;Target&amp;rsquo; field type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;C:\Windows\System32\wscript.exe C:\Users\*[your_username]*\startTerminator.vbs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Click &amp;lsquo;Apply&amp;rsquo;. You can then set the icon of the shortcut by saving &lt;a href=&#34;https://www.google.com/imgres?imgurl=http://www.iconarchive.com/download/i89875/alecive/flatwoken/Apps-Terminator.ico&amp;amp;imgrefurl=http://www.iconarchive.com/show/flatwoken-icons-by-alecive/Apps-Terminator-icon.html&amp;amp;docid=q0xx5aXq6WGXIM&amp;amp;tbnid=izoeFerwzIqyVM:&amp;amp;vet=1&amp;amp;w=256&amp;amp;h=256&amp;amp;source=sh/x/im&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this icon file&lt;/a&gt; to the same place you saved the &lt;code&gt;.vbs&lt;/code&gt; file. Right click on the shortcut again, properties and at the bottom select &amp;lsquo;Change Icon&amp;hellip;&amp;rsquo;. From here you can select the icon file you just downloaded.&lt;/p&gt;
+&lt;p&gt;In the &amp;lsquo;Start in&amp;rsquo; field type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;%USERPROFILE%
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;rsquo;s impossible to have Termiator start in your Linux home directory through this method since that path is not &amp;ldquo;known&amp;rdquo; to Windows. To get around it, add this to your .zshrc so it CD&amp;rsquo;s to your home directory on startup:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;if [ -t 1 ]; then
+  cd ~
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;other-customizations&#34;&gt;Other customizations&lt;/h2&gt;
+&lt;p&gt;If you want to further modify your terminator theme you can add lines to the file &lt;code&gt;~/.config/terminator/config&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To change the opening size of the terminal window add the variable &lt;code&gt;size&lt;/code&gt; under layouts:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.config/terminator/config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = Base16 Solarized Dark
+      type = Terminal
+    [[[window0]]]
+      parent = &amp;quot;&amp;quot;
+      size = 1594, 465
+      type = Window
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Close terminator and re-open.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mount Remote Drive with SSHFS</title>
+      <link>https://greydongilmore.github.io/post/windows_docs/windows_sshfs/</link>
+      <pubDate>Thu, 28 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/windows_docs/windows_sshfs/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install the latest stable installer of &lt;a href=&#34;https://github.com/billziss-gh/winfsp/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WinFSP&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the latest stable installer of &lt;a href=&#34;https://github.com/billziss-gh/sshfs-win/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SSHFS-Win&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;strong&gt;File Explorer&lt;/strong&gt;, right-click on &lt;strong&gt;This PC&lt;/strong&gt; and choose &lt;strong&gt;Map network drive&lt;/strong&gt;. Choose a drive to mount at and enter the following in the folder field:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;\\sshfs\[your_login_name]@graham.computecanada.ca/projects/rrg-akhanf/cfmm-bids
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure you check the box &lt;strong&gt;Connect using different credentials&lt;/strong&gt; if your computer login password is different from Sharcnet.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;
+  &lt;img width=&#34;500&#34; src=&#34;img/map_network_sshfs.png&#34;&gt;
+&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;You should then see the network drive in your file explorer!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;
+  &lt;img width=&#34;600&#34; src=&#34;img/drive_directory.png&#34;&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Activating Windows Linux Subsystem (WSL)</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/wsl/</link>
+      <pubDate>Wed, 28 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/wsl/</guid>
+      <description>&lt;h2 id=&#34;turn-on-linux-subsystem-feature&#34;&gt;Turn on linux subsystem feature&lt;/h2&gt;
+&lt;p&gt;Open Windows PowerShell as administrator and run the command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Restart your computer when prompted.&lt;/p&gt;
+&lt;h2 id=&#34;download-the-linux-distro&#34;&gt;Download the linux distro&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the Microsoft Store and choose your favorite Linux distribution by searching for them (I prefer Ubuntu):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/ubuntu/9nblggh4msv6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/debian/9msvkqc78pk6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the distro&amp;rsquo;s page, select &amp;ldquo;Get&amp;rdquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To complete the initialization of your newly installed distro, launch a new instance by searching in the Start menu and launching the distro.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first time a newly installed distro runs, a Console window will open, and you&amp;rsquo;ll be asked to wait for a minute or two for the installation to complete.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once installation is complete, you will be prompted to create a new user account (and its password).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Most distros ship with an empty/minimal package catalog. I strongly recommend regularly updating your package catalog, and upgrading your installed packages using your distro&amp;rsquo;s preferred package manager.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;add-link-to-the-linux-subsystem-in-windows-quick-access&#34;&gt;Add link to the linux subsystem in Windows Quick Access&lt;/h2&gt;
+&lt;p&gt;Depending on the version of linux you installed, the absolute path will be found either:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;C:\Users\*[your_username]*\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_*[unique_code]*\LocalState\rootfs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:\Users\*[your_username]*\AppData\Local\lxss&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;When you find the correct location, right click on the parent folder and select &amp;lsquo;Pin to Quick Access&amp;rsquo;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

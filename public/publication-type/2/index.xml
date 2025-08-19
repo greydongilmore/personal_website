@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 | Greydon Gilmore</title>
+    <link>https://greydongilmore.github.io/publication-type/2/</link>
+      <atom:link href="https://greydongilmore.github.io/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
+    <description>2</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2025 Greydon Gilmore</copyright><lastBuildDate>Wed, 29 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png</url>
+      <title>2</title>
+      <link>https://greydongilmore.github.io/publication-type/2/</link>
+    </image>
+    
+    <item>
+      <title>Waveform detection by deep learning reveals multi-area spindles that are selectively modulated by memory load</title>
+      <link>https://greydongilmore.github.io/publication/2022_mofrad_wavform/</link>
+      <pubDate>Wed, 29 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2022_mofrad_wavform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimizing the selection of Parkinson’s disease patients for neuromodulation using the levodopa challenge test</title>
+      <link>https://greydongilmore.github.io/publication/2022_kulshreshtha_levodopa/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2022_kulshreshtha_levodopa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Application of the anatomical fiducials framework to a clinical dataset of patients with Parkinson’s disease</title>
+      <link>https://greydongilmore.github.io/publication/2022_abbass_afids/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2022_abbass_afids/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Adapting the listening time for micro-electrode recordings in deep brain stimulation interventions</title>
+      <link>https://greydongilmore.github.io/publication/2021_martin_listening/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2021_martin_listening/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Extending convolutional neural networks for localizing the subthalamic nucleus from microelectrode recordings in Parkinson’s disease</title>
+      <link>https://greydongilmore.github.io/publication/2021_martin_cnn/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2021_martin_cnn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A novel approach of using brachial plexus blockade as an experimental model for diagnosis of intraoperative nerve dysfunction with somatosensory evoked potentials: a blinded proof-of-concept study</title>
+      <link>https://greydongilmore.github.io/publication/2021_chui_brachial_plexus/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2021_chui_brachial_plexus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Direct visualization and characterization of the human zona incerta and surrounding structures.</title>
+      <link>https://greydongilmore.github.io/publication/2020_lau_direct_visualization/</link>
+      <pubDate>Sun, 01 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2020_lau_direct_visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Image guidance in deep brain stimulation surgery to treat Parkinson&#39;s disease: a comprehensive review</title>
+      <link>https://greydongilmore.github.io/publication/2020_xiao_guidance/</link>
+      <pubDate>Thu, 02 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2020_xiao_guidance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessing the effect of current steering on the total electrical energy delivered and ambulation in Parkinson’s disease</title>
+      <link>https://greydongilmore.github.io/publication/2020_hui_steering/</link>
+      <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2020_hui_steering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Intraoperative Localization of STN During DBS Surgery Using a Data-Driven Model</title>
+      <link>https://greydongilmore.github.io/publication/2020_khosravi_datamodel/</link>
+      <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2020_khosravi_datamodel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zona incerta deep-brain stimulation in orthostatic tremor: efficacy and mechanism of improvement</title>
+      <link>https://greydongilmore.github.io/publication/2019_gilmore_orthostatic/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_gilmore_orthostatic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Forward and backward walking in Parkinson disease: A factor analysis</title>
+      <link>https://greydongilmore.github.io/publication/2019_gilmore_gait/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_gilmore_gait/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Letter to the Editor Regarding “Statistical Shape Analysis of Subthalamic Nucleus in Patients with Parkinson’s Disease”</title>
+      <link>https://greydongilmore.github.io/publication/2019_gilmore_shape/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_gilmore_shape/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unsupervised Clustering of Micro-Electrophysiological Signals for localization of Subthalamic Nucleus during DBS Surgery</title>
+      <link>https://greydongilmore.github.io/publication/2019_khosravi_clustering/</link>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_khosravi_clustering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Effects of Deep Brain Stimulation of the Subthalamic Nucleus Settings on Voice Quality, Intensity, and Prosody in Parkinson&#39;s Disease: Preliminary Evidence for Speech Optimization</title>
+      <link>https://greydongilmore.github.io/publication/2019_abeyesekera/</link>
+      <pubDate>Thu, 31 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_abeyesekera/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Medication status and dual-tasking on turning strategies in Parkinson disease</title>
+      <link>https://greydongilmore.github.io/publication/2019_adamson/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_adamson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Effect of Levodopa on Speech Dysfluency in Parkinson&#39;s Disease</title>
+      <link>https://greydongilmore.github.io/publication/2019_im_dysfluency/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2019_im_dysfluency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voice quality severity and responsiveness to levodopa in Parkinson&#39;s disease</title>
+      <link>https://greydongilmore.github.io/publication/2018_cushnie-sparrow_voiceseverity/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2018_cushnie-sparrow_voiceseverity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Brain Stimulation of the Subthalamic Nucleus Parameter Optimization for Vowel Acoustics and Speech Intelligibility in Parkinson&#39;s Disease</title>
+      <link>https://greydongilmore.github.io/publication/2018_knowles_acoustics/</link>
+      <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2018_knowles_acoustics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Segmentation and detection of physical activities during a sitting task in Parkinson’s disease participants using multiple inertial sensors</title>
+      <link>https://greydongilmore.github.io/publication/2017_memar_segmentation/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2017_memar_segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Using Wearable Technology to Generate Objective Parkinson’s Disease Dyskinesia Severity Score: Possibilities for Home Monitoring</title>
+      <link>https://greydongilmore.github.io/publication/2017_delrobaei_dyskinesia/</link>
+      <pubDate>Mon, 30 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2017_delrobaei_dyskinesia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The current state of postoperative imaging in the presence of deep brain stimulation electrodes</title>
+      <link>https://greydongilmore.github.io/publication/2017_gilmore_dbsimaging/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/publication/2017_gilmore_dbsimaging/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

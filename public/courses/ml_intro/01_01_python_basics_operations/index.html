@@ -1,0 +1,1581 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Greydon Gilmore" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="The following are simple operations you can perform within python. We start with very basic operations and work up to more complex operations such as defining functions and methods
+   Symbol Task Performed     &#43; Addition   - Subtraction   / division   % mod   * multiplication   // floor division   ** to the power of    Arithmetic Operations The following are simple math expressions that can be done in Python." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#3f51b5" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cb6b3f381d83e23d75cbf78dd7485887.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Greydon Gilmore" />
+  <meta property="og:url" content="https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/" />
+  <meta property="og:title" content="Operations in Python | Greydon Gilmore" />
+  <meta property="og:description" content="The following are simple operations you can perform within python. We start with very basic operations and work up to more complex operations such as defining functions and methods
+   Symbol Task Performed     &#43; Addition   - Subtraction   / division   % mod   * multiplication   // floor division   ** to the power of    Arithmetic Operations The following are simple math expressions that can be done in Python." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2019-05-05T00:00:00&#43;01:00"
+      />
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Operations in Python | Greydon Gilmore</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="f0e78606df289232dcb8dd4d4a1a20df" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#grants"><span>grants</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#training"><span>training</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>CV</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/files/cv/CVLong_Greydon-Gilmore.pdf"><span>CV long</span></a>
+            
+              <a class="dropdown-item" href="/files/cv/CVShort_Greydon-Gilmore.pdf"><span>CV short</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Operations in Python</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 5, 2019
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>The following are simple operations you can perform within python. We start with very basic operations and work up to more complex operations such as defining functions and methods</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Task Performed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>Addition</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Subtraction</td>
+</tr>
+<tr>
+<td>/</td>
+<td>division</td>
+</tr>
+<tr>
+<td>%</td>
+<td>mod</td>
+</tr>
+<tr>
+<td>*</td>
+<td>multiplication</td>
+</tr>
+<tr>
+<td>//</td>
+<td>floor division</td>
+</tr>
+<tr>
+<td>**</td>
+<td>to the power of</td>
+</tr>
+</tbody>
+</table>
+<h2 id="arithmetic-operations">Arithmetic Operations</h2>
+<p>The following are simple math expressions that can be done in Python.</p>
+<pre><code class="language-python"># Addition
+1 + 1
+
+# Multiplication
+1 * 3
+
+# Division
+1 / 2
+
+# Square
+2 ** 4
+
+# Find remainder - called modulus
+4 % 2
+
+# Find remainder - called modulus
+5 % 2
+
+# BEDMAS
+(2 + 3) * (5 + 5)
+</code></pre>
+<pre><code>2
+</code></pre>
+<h2 id="variable-assignment">Variable Assignment</h2>
+<p>A name that is used to denote something or a value is called a variable. When assigning variables, the variable name should be something meaningful. This way you will remeber what it is for. Variables can not start with a number or special character. In python, variables can be declared and values can be assigned to it as follows:</p>
+<pre><code class="language-python"># I prefer sepearting words in a variable with '_', you can also use camelCase
+name_of_var = 2
+nameOfVar = 2
+
+# Assign numbers to variables. These are now objects in Python.
+x = 2
+y = 3
+
+# Since they are objects you can now use them to perform operations
+z = x + y
+z
+
+# Multiple variables can be assigned with the same value at once
+x = y = 1
+print (x,y)
+</code></pre>
+<pre><code>1 1
+</code></pre>
+<h2 id="strings">Strings</h2>
+<pre><code class="language-python"># When using strings you can use single quotes or double quotes
+'single quotes'
+&quot;double quotes&quot;
+
+# If you want a string to contain an apostrophe then use double quotes around the string...
+&quot; wrap lot's of other quotes&quot;
+
+</code></pre>
+<pre><code>'single quotes'
+</code></pre>
+<h2 id="printing-variables">Printing variables</h2>
+<pre><code class="language-python">x = 'hello'
+
+# Use the built-in function to print variables/objects out
+print(x)
+
+# Use the format function to set the values within the string enclosed by curly braces {}
+num = 12
+name = 'Sam'
+
+# Either of these methods work...
+print('My number is: {one}, and my name is: {two}'.format(one=num,two=name))
+print('My number is: {}, and my name is: {}'.format(num,name))
+</code></pre>
+<h2 id="lists">Lists</h2>
+<pre><code class="language-python"># With only integers
+[1,2,3]
+
+# With integers and strings
+['hi',1,[1,2]]
+
+# Adding new values to a list
+my_list = ['a','b','c']
+my_list.append('d')
+print(my_list)
+
+# Indexing a list by the items index
+my_list[0]
+
+# Indexing using a slice notation :
+my_list[1:]
+
+# Replace existing values in list
+my_list[0] = 'NEW'
+print(my_list)
+
+# You can create nested lists as well
+nest = [1,2,3,[4,5,['target']]]
+nest[3]
+nest[3][2]
+nest[3][2][0]
+
+</code></pre>
+<pre><code>['a', 'b', 'c', 'd']
+['NEW', 'b', 'c', 'd']
+
+
+
+
+
+'target'
+</code></pre>
+<h2 id="dictionaries">Dictionaries</h2>
+<pre><code class="language-python">d = {'key1':'item1','key2':'item2'}
+d
+
+d['key1']
+</code></pre>
+<h2 id="booleans">Booleans</h2>
+<pre><code class="language-python">True
+</code></pre>
+<pre><code>True
+</code></pre>
+<pre><code class="language-python">False
+</code></pre>
+<pre><code>False
+</code></pre>
+<h2 id="tuples">Tuples</h2>
+<pre><code class="language-python">t = (1,2,3)
+t[0]
+
+# You can not assign items to a tuple like you can with a list
+t[0] = 'NEW'
+</code></pre>
+<h2 id="sets">Sets</h2>
+<pre><code class="language-python">{1,2,3}
+
+{1,2,3,1,2,1,2,3,3,3,3,2,2,2,1,1,2}
+</code></pre>
+<pre><code>{1, 2, 3}
+</code></pre>
+<h2 id="relational-operators">Relational Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Task Performed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==</td>
+<td>True, if it is equal</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>True, if not equal to</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>less than</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>less than or equal to</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>greater than or equal to</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-python"># False statements
+1 &gt; 2
+'hi' == 'bye'
+
+# True statements
+1 &lt; 2
+1 &gt;= 1
+1 &lt;= 4
+1 == 1
+</code></pre>
+<pre><code>False
+</code></pre>
+<h2 id="logic-operators">Logic Operators</h2>
+<pre><code class="language-python"># Using 'and' to indicate both conditions need to be True
+(1 &gt; 2) and (2 &lt; 3)
+
+# Using 'or' to indicate only one conditions needs to be True
+(1 &gt; 2) or (2 &lt; 3)
+
+# You can have as many conditional statements as you want
+(1 == 2) or (2 == 3) or (4 == 4)
+</code></pre>
+<pre><code>False
+</code></pre>
+<h2 id="ifelif-else-statements">if,elif, else Statements</h2>
+<pre><code class="language-python"># IF statement
+if 1 &lt; 2:
+    print('Yep!')
+    
+# IF ELSE statement
+if 1 &lt; 2:
+    print('first')
+else:
+    print('last')
+
+if 1 &gt; 2:
+    print('first')
+else:
+    print('last')
+
+# IF, ELIF, ELSE statement
+if 1 == 2:
+    print('first')
+elif 3 == 3:
+    print('middle')
+else:
+    print('Last')
+</code></pre>
+<pre><code>Yep!
+</code></pre>
+<h2 id="for-loops">For Loops</h2>
+<pre><code class="language-python">seq = [1,2,3,4,5]
+for item in seq:
+    print(item)
+    
+for item in seq:
+    print('Yep')
+
+# You can name the iterator whatever you like
+for jelly in seq:
+    print(jelly+jelly)
+    
+</code></pre>
+<h2 id="while-loops">While Loops</h2>
+<pre><code class="language-python">i = 1
+while i &lt; 5:
+    print('i is: {}'.format(i))
+    i = i+1
+</code></pre>
+<pre><code>i is: 1
+i is: 2
+i is: 3
+i is: 4
+</code></pre>
+<h2 id="range-function">range() function</h2>
+<pre><code class="language-python">range(5)
+
+# Great for using in For loops
+for i in range(5):
+    print(i)
+
+# You can use it to create lists
+list(range(5))
+</code></pre>
+<pre><code>range(0, 5)
+</code></pre>
+<h2 id="list-comprehension">List comprehension</h2>
+<pre><code class="language-python">x = [1,2,3,4]
+
+# Perform operations within a For loop and append the outputs to a list object
+out = []
+for item in x:
+    out.append(item**2)
+print(out)
+</code></pre>
+<p>A very useful technique in Python is the one line for loop:</p>
+<pre><code class="language-python">[item**2 for item in x]
+</code></pre>
+<h2 id="defining-functions">Defining functions</h2>
+<pre><code class="language-python">def my_func(param1='default'):
+    &quot;&quot;&quot;
+    Docstring goes here.
+    &quot;&quot;&quot;
+    print(param1)
+
+# To call your function you need to include brackets at the end
+my_func
+
+my_func()
+</code></pre>
+<p>Now that you have defined your function with an input you can provide new inputs to the function to perform an operation</p>
+<pre><code class="language-python"># You can either call the defined input varible for your function
+my_func(param1='new param')
+
+# Or you can just provide the input, remember if you have multiple function inputs the position of these inputs matter!
+my_func('new param')
+</code></pre>
+<pre><code>new param
+</code></pre>
+<pre><code class="language-python"># Use the 'Return' function to return a value from within your function and assign it to a variable
+def square(x):
+    return x**2
+
+out = square(2)
+print(out)
+</code></pre>
+<h2 id="lambda-map-and-filter">Lambda, map and filter</h2>
+<p>Instead of writing a function you can use the lambda function instead:</p>
+<pre><code class="language-python">def times2(var):
+    return var*2
+
+times2(2)
+
+# lambda
+lambda var: var*2
+
+# map
+seq = [1,2,3,4,5]
+map(times2,seq)
+
+# Combining lambda and map together you get
+list(map(times2,seq))
+
+# Here is more detail
+list(map(lambda var: var*2,seq))
+
+# Using the filter function to return values that meet a condition
+filter(lambda item: item%2 == 0,seq)
+list(filter(lambda item: item%2 == 0,seq))
+</code></pre>
+<pre><code>[2, 4]
+</code></pre>
+<h2 id="methods">Methods</h2>
+<p>One of the most useful aspects of the Python language is that everything is an object and has inherent methods.</p>
+<h3 id="string-methods">string methods</h3>
+<pre><code class="language-python"># Assign 'st' to be a string
+st = 'hello my name is Sam'
+
+# A string type in Python has several methods
+# To return all lowercase
+st.lower()
+
+# All uppercase
+st.upper()
+
+# Split the string at white spaces
+st.split()
+
+# You can use the split method to split at a character you want
+tweet = 'Go Sports! #Sports'
+tweet.split('#')
+
+# You can return only the part of the string you want after the split method
+tweet.split('#')[1]
+</code></pre>
+<h3 id="dictionary-methods">dictionary methods</h3>
+<pre><code class="language-python">d = {'key1': 'item1', 'key2': 'item2'}
+
+# Print the keys in a dictionary
+d.keys()
+
+# Print the items in a dictionary
+d.items()
+</code></pre>
+<pre><code>dict_keys(['key1', 'key2'])
+</code></pre>
+<h3 id="list-methods">list methods</h3>
+<pre><code class="language-python">lst = [1,2,3]
+
+lst.pop()
+lst
+
+# Find a value within a list
+'x' in [1,2,3]
+
+'x' in ['x','y','z']
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/&amp;text=Operations%20in%20Python" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/&amp;t=Operations%20in%20Python" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Operations%20in%20Python&amp;body=https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/&amp;title=Operations%20in%20Python" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Operations%20in%20Python%20https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://greydongilmore.github.io/courses/ml_intro/01_01_python_basics_operations/&amp;title=Operations%20in%20Python" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://greydongilmore.github.io/"><img class="avatar mr-3 avatar-square" src="/authors/admin/avatar_huae2c50bee0a2b36792fa6344dac5dcdd_1502657_270x270_fill_lanczos_center_3.png" alt="Greydon Gilmore"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://greydongilmore.github.io/">Greydon Gilmore</a></h5>
+      <h6 class="card-subtitle">Intraoperative Neurophysiologist Biomedical Engineer</h6>
+      <p class="card-text">My research interests include deep brain stimulation, machine learning and signal processing.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:greydon.gilmore@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0001-7523-5734" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.ca/citations?user=0zrqWjsAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Greydon_Gilmore" target="_blank" rel="noopener">
+        <i class="ai ai-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/ml_intro/04_01_ml_basics/" rel="next">ML Basics Intro</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/ml_intro/11_01_overfitting_underfitting/" rel="prev">Over and Underfitting</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

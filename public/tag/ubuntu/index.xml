@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu | Greydon Gilmore</title>
+    <link>https://greydongilmore.github.io/tag/ubuntu/</link>
+      <atom:link href="https://greydongilmore.github.io/tag/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <description>Ubuntu</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2025 Greydon Gilmore</copyright><lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png</url>
+      <title>Ubuntu</title>
+      <link>https://greydongilmore.github.io/tag/ubuntu/</link>
+    </image>
+    
+    <item>
+      <title>Adding application launch icon to favorites</title>
+      <link>https://greydongilmore.github.io/post/linux_docs/app_icon/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/linux_docs/app_icon/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download your own icon image&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find path to the executable of your application by running (replace brackets with name of applicaion):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;which [name_application]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Copy the path from this output.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Create\edit the &lt;code&gt;.desktop&lt;/code&gt; file for the application by running the command (remember to edit the application name):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;gedit Desktop/[name_application].desktop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the following lines (replace the items in square brackets with your respect application) and save the file with the extension &lt;code&gt;.desktop&lt;/code&gt; (e.g. &lt;code&gt;[application name].desktop&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Icon=[path_to_icon_file]
+Name=[Name your application]
+Comment=[Name your application]
+Exec=[path_to_executable file_from_step2]
+Categories=Development
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Right click on the file (should now be on your desktop), select properties, then permissions and select &lt;code&gt;Allow executing file as program&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, move this file to the desktop launcher path on your system:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /Desktop/*[name_of_file]* /usr/share/applications/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SSHFS Desktop Application</title>
+      <link>https://greydongilmore.github.io/post/linux_docs/graham_shortcut/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/linux_docs/graham_shortcut/</guid>
+      <description>&lt;h2 id=&#34;setup-fuse&#34;&gt;Setup fuse&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following in a terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;modprobe fuse
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a FUSE usergroup and add yourself to the group&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo groupadd fuse
+sudo usermod -a -G fuse $USER
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a set of ssh-keys, press enter when asked to name the file (blank) and press enter when asked to enter a passphrase (blank):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;ssh-keygen -t rsa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Transport the key to the remote server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;ssh-copy-id -i .ssh/id_rsa.pub user@example.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now when you run &lt;code&gt;sshfs&lt;/code&gt; you will not need to enter your password.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;create-shell-script&#34;&gt;Create Shell Script&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to create an empty shell script:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;touch +x ~/Documents/sshfs_mount.sh
+chmod +x ~/Documents/sshfs_mount.sh
+gedit ~/Documents/sshfs_mount.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enter the command you normally run to connect to the remote server, change &lt;code&gt;mount_dir&lt;/code&gt; to match your local mount location:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+mount_dir=&amp;quot;/path/to/mount/directory&amp;quot;
+if (! mountpoint -q $mount_dir); then
+    sshfs user@example.com:/home/[user]/ $mount_dir -o   ServerAliveInterval=15,ServerAliveCountMax=3,Compression=no,follow_symlinks
+else
+    umount $mount_dir
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the script, the filesystem will be mounted/unmounted depending on the status. Save and close the file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;create-desktop-entry-file&#34;&gt;Create Desktop Entry File&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to create an empty shell script:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;touch ~/Documents/sshfs_mount.desktop
+chmod +x ~/Documents/sshfs_mount.desktop
+gedit ~/Documents/sshfs_mount.desktop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Paste the following into the document, ensure you update the brackets:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=[path/to/icon]
+Name=[Name the application]
+Exec=[path/to/sshfs_mount.sh]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save and close.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Move the desktop entry file into the applications directory:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv ~/Documents/sshfs_mount.desktop /usr/share/applications/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search in applications for the desktop entry file, right-click and add to favorites.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Google Remote Desktop</title>
+      <link>https://greydongilmore.github.io/post/linux_docs/remote_desktop/</link>
+      <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/linux_docs/remote_desktop/</guid>
+      <description>&lt;h2 id=&#34;install-remote-desktop-extension&#34;&gt;Install Remote Desktop Extension&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Navigate to &lt;a href=&#34;https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp&#34; target=&#34;blank_&#34;&gt;Chrome Remote Desktop Web Store&lt;/a&gt; and install it by clicking &lt;code&gt;Add to Chrome&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Click &lt;code&gt;Launch App&lt;/code&gt; and the remote desktop app window should open.&lt;/p&gt;
+&lt;h2 id=&#34;install-chrome-remote-desktop-package&#34;&gt;Install Chrome Remote Desktop Package&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; You will now need to get the &lt;code&gt;.deb&lt;/code&gt; for remote desktop with the following command in terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Then install it by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt install ./chrome-remote-desktop_current_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; If the initial installation attempt will fail, simply run &lt;code&gt;sudo apt install -f&lt;/code&gt; to fix the missing dependencies and to complete the installation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install -f
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; You will need to add yourself to the chrome-remote-desktop group then reboot for the changes to take effect.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo usermod -a -G chrome-remote-desktop $USER
+sudo reboot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;create-session-file&#34;&gt;Create Session File&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; You will need to create a remote desktop session file in your home directory:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;gedit ~/.chrome-remote-desktop-session
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Look in &lt;code&gt;/usr/share/xsessions/&lt;/code&gt; for the .desktop file for your linux environment. For example, ElementaryOS has a file named &lt;code&gt;Pantheon&lt;/code&gt; with the following command: &lt;code&gt;gnome-session --session=pantheon&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Within the &lt;code&gt;chrome-remote-desktop-session&lt;/code&gt; file enter the following (make sure to use your respective distro .desktop file):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;exec /usr/sbin/lightdm-session &amp;quot;gnome-session --session=pantheon&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; If running ElementayOS you will also need to add the following to the file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DESKTOP_SESSION=pantheon
+XDG_CURRENT_DESKTOP=Pantheon 
+XDG_RUNTIME_DIR=/run/user/1000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Save the file and close.&lt;/p&gt;
+&lt;h2 id=&#34;post-install-configuration-setting-up-displays&#34;&gt;Post-Install Configuration (Setting up Displays)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Stop Chrome Remote Desktop:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;/opt/google/chrome-remote-desktop/chrome-remote-desktop --stop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Backup the original configuration:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo cp /opt/google/chrome-remote-desktop/chrome-remote-desktop /opt/google/chrome-remote-desktop/chrome-remote-desktop.orig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Edit the config (&lt;code&gt;chrome-remote-desktop&lt;/code&gt;) file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;gedit /opt/google/chrome-remote-desktop/chrome-remote-desktop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; Find &lt;code&gt;DEFAULT_SIZES&lt;/code&gt; and update the remote desktop resolution. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DEFAULT_SIZES = &amp;quot;2560x1440&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; For multiple displays you will need to enter in the resolution for each one:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DEFAULT_SIZES = &amp;quot;2560x1440,2560x1440,2560x1440&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;6.&lt;/strong&gt; Determine your main display number (obtain it with &lt;code&gt;echo $DISPLAY&lt;/code&gt; from terminal). Find &lt;code&gt;FIRST_X_DISPLAY_NUMBER&lt;/code&gt; and set the &lt;code&gt;FIRST_X_DISPLAY_NUMBER&lt;/code&gt; to the display number (Ubuntu 17.10 and lower: usually 0, Ubuntu 18.04: usually 1)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;echo $DISPLAY
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;FIRST_X_DISPLAY_NUMBER = 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;7.&lt;/strong&gt; Around line 425, within the definition for &lt;code&gt;get_unused_display_number()&lt;/code&gt;, comment out sections that look for additional displays by adding &lt;code&gt;#&lt;/code&gt; infront:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# while os.path.exists(X_LOCK_FILE_TEMPLATE % display):
+#   display += 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;8.&lt;/strong&gt; Lastly, find &lt;code&gt;launch_session()&lt;/code&gt; and comment out &lt;code&gt;launch_x_server()&lt;/code&gt; and &lt;code&gt;launch_x_session()&lt;/code&gt; within &lt;code&gt;launch_session()&lt;/code&gt;. You will then add &lt;code&gt;display = self.get_unused_display_number()&lt;/code&gt; and &lt;code&gt;self.child_env[&amp;quot;DISPLAY&amp;quot;] = &amp;quot;:%d&amp;quot; % display&lt;/code&gt; to the definition. The function definition should look like the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def launch_session(self, x_args):
+    self._init_child_env()
+    self._setup_pulseaudio()
+    self._setup_gnubby()
+    #self._launch_x_server(x_args)
+    #self._launch_x_session()
+    display = self.get_unused_display_number()
+    self.child_env[&amp;quot;DISPLAY&amp;quot;] = &amp;quot;:%d&amp;quot; % display
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;9.&lt;/strong&gt; Save and exit the editor. Start Chrome Remote Desktop:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;/opt/google/chrome-remote-desktop/chrome-remote-desktop --start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;launch-remote-desktop&#34;&gt;Launch Remote Desktop&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Finally, head to &lt;a href=&#34;https://remotedesktop.google.com/access/&#34; target=&#34;_blank&#34;&gt;Chrome Remote Web&lt;/a&gt; and Click &lt;code&gt;TURN ON&lt;/code&gt; to enable remote desktop access. Set the system name, set the remote desktop connection PIN and click &lt;code&gt;START&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

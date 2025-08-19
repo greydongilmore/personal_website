@@ -1,0 +1,1580 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Greydon Gilmore" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Linear Regression Let&rsquo;s return to our running house price-prediction example. Predicting sales price from the features is a regression problem, because sale price varies continuously. What we&rsquo;re trying to find is some optimal function that, given a matrix of feature scores, can produce a set of continuous values that best approximates (for whatever definition of &ldquo;best&rdquo; we like) the true house price of our houses." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#3f51b5" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cb6b3f381d83e23d75cbf78dd7485887.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Greydon Gilmore" />
+  <meta property="og:url" content="https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/" />
+  <meta property="og:title" content=" | Greydon Gilmore" />
+  <meta property="og:description" content="Linear Regression Let&rsquo;s return to our running house price-prediction example. Predicting sales price from the features is a regression problem, because sale price varies continuously. What we&rsquo;re trying to find is some optimal function that, given a matrix of feature scores, can produce a set of continuous values that best approximates (for whatever definition of &ldquo;best&rdquo; we like) the true house price of our houses." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+    
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title> | Greydon Gilmore</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="55a2dfe55daed13eadbcaf85b2af91ba" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#grants"><span>grants</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#training"><span>training</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>CV</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/files/cv/CVLong_Greydon-Gilmore.pdf"><span>CV long</span></a>
+            
+              <a class="dropdown-item" href="/files/cv/CVShort_Greydon-Gilmore.pdf"><span>CV short</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1></h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jan 1, 0001
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="linear-regression">Linear Regression</h1>
+<p>Let&rsquo;s return to our running house price-prediction example. Predicting sales price from the features is a regression problem, because sale price varies continuously. What we&rsquo;re trying to find is some optimal function that, given a matrix of feature scores, can produce a set of continuous values that best approximates (for whatever definition of &ldquo;best&rdquo; we like) the true house price of our houses.</p>
+<p>First we import the required libraries then investigate the data:</p>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+all_data = pd.read_csv('../data/house_prices.csv', sep=',', index_col=0).reset_index(drop=True)
+
+all_data.info()
+</code></pre>
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1460 entries, 0 to 1459
+Data columns (total 80 columns):
+MSSubClass       1460 non-null int64
+MSZoning         1460 non-null object
+LotFrontage      1201 non-null float64
+LotArea          1460 non-null int64
+Street           1460 non-null object
+Alley            91 non-null object
+LotShape         1460 non-null object
+LandContour      1460 non-null object
+Utilities        1460 non-null object
+LotConfig        1460 non-null object
+LandSlope        1460 non-null object
+Neighborhood     1460 non-null object
+Condition1       1460 non-null object
+Condition2       1460 non-null object
+BldgType         1460 non-null object
+HouseStyle       1460 non-null object
+OverallQual      1460 non-null int64
+OverallCond      1460 non-null int64
+YearBuilt        1460 non-null int64
+YearRemodAdd     1460 non-null int64
+RoofStyle        1460 non-null object
+RoofMatl         1460 non-null object
+Exterior1st      1460 non-null object
+Exterior2nd      1460 non-null object
+MasVnrType       1452 non-null object
+MasVnrArea       1452 non-null float64
+ExterQual        1460 non-null object
+ExterCond        1460 non-null object
+Foundation       1460 non-null object
+BsmtQual         1423 non-null object
+BsmtCond         1423 non-null object
+BsmtExposure     1422 non-null object
+BsmtFinType1     1423 non-null object
+BsmtFinSF1       1460 non-null int64
+BsmtFinType2     1422 non-null object
+BsmtFinSF2       1460 non-null int64
+BsmtUnfSF        1460 non-null int64
+TotalBsmtSF      1460 non-null int64
+Heating          1460 non-null object
+HeatingQC        1460 non-null object
+CentralAir       1460 non-null object
+Electrical       1459 non-null object
+1stFlrSF         1460 non-null int64
+2ndFlrSF         1460 non-null int64
+LowQualFinSF     1460 non-null int64
+GrLivArea        1460 non-null int64
+BsmtFullBath     1460 non-null int64
+BsmtHalfBath     1460 non-null int64
+FullBath         1460 non-null int64
+HalfBath         1460 non-null int64
+BedroomAbvGr     1460 non-null int64
+KitchenAbvGr     1460 non-null int64
+KitchenQual      1460 non-null object
+TotRmsAbvGrd     1460 non-null int64
+Functional       1460 non-null object
+Fireplaces       1460 non-null int64
+FireplaceQu      770 non-null object
+GarageType       1379 non-null object
+GarageYrBlt      1379 non-null float64
+GarageFinish     1379 non-null object
+GarageCars       1460 non-null int64
+GarageArea       1460 non-null int64
+GarageQual       1379 non-null object
+GarageCond       1379 non-null object
+PavedDrive       1460 non-null object
+WoodDeckSF       1460 non-null int64
+OpenPorchSF      1460 non-null int64
+EnclosedPorch    1460 non-null int64
+3SsnPorch        1460 non-null int64
+ScreenPorch      1460 non-null int64
+PoolArea         1460 non-null int64
+PoolQC           7 non-null object
+Fence            281 non-null object
+MiscFeature      54 non-null object
+MiscVal          1460 non-null int64
+MoSold           1460 non-null int64
+YrSold           1460 non-null int64
+SaleType         1460 non-null object
+SaleCondition    1460 non-null object
+SalePrice        1460 non-null int64
+dtypes: float64(3), int64(34), object(43)
+memory usage: 912.6+ KB
+</code></pre>
+<pre><code class="language-python"># Select only columns that are numeric
+all_data = all_data.select_dtypes(['number'])
+
+# Remove any rows that contain NaN
+for ifeature in list(all_data):
+    all_data = all_data[pd.notnull(all_data[ifeature])]
+
+all_data.shape
+</code></pre>
+<pre><code>(1121, 37)
+</code></pre>
+<p>Let&rsquo;s also plot our target variable, Sales Price, to see what the distribution looks like:</p>
+<pre><code class="language-python">sns.distplot(all_data['SalePrice'])
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="05_02_linear_regression_files/05_02_linear_regression_4_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="training-a-linear-regression-model">Training a Linear Regression Model</h2>
+<p>We will need to first split up our data into an <strong>X</strong> array that contains the features to train on, and a <strong>y</strong> array with the target variable, in this case the Sale Price. We start by setting the X and y variables, split into train and test sets using scikit learns <strong>train_test_split</strong> function and initialize the <strong>LinearRegression</strong> estimator:</p>
+<pre><code class="language-python">from sklearn.model_selection import train_test_split
+
+# Set input features and output variable
+y = all_data['SalePrice']
+X = all_data.drop(['SalePrice'], axis =1)
+
+# Split data into test and train sets
+X_train, X_test, y_train, y_test = train_test_split(X, y.to_numpy().ravel(), test_size=0.30, random_state=101)
+
+# OLS (and many other variants of regression) is housed in the linear_model module
+from sklearn.linear_model import LinearRegression
+
+# initialize the model
+lr_model = LinearRegression()
+</code></pre>
+<p>The <strong>LinearRegression</strong> estimator, unlike many others, has very few configurable parameters. Above, we initialize it with all of the default values by passing no arguments to the function. Now we&rsquo;re ready to fit some data! We can do that by calling the <strong>.fit()</strong> method. This will be true for every <strong>Estimator</strong> in scikit-learn. We will use our training sub-datasets we created:</p>
+<pre><code class="language-python"># Fit the model
+lr_model.fit(X_train, y_train);
+</code></pre>
+<p>Now we have a fitted model we need to evaluate the accuracy of this training process. We always want to evaluate the trained model prior to applying it to test data.</p>
+<pre><code class="language-python"># The sklearn convention is to denote fitted parameters with a trailing underscore
+print('Model y intercept:',lr_model.intercept_,'\n')
+print('Model feature coefficients:',lr_model.coef_,'\n')
+</code></pre>
+<pre><code>Model y intercept: -1348228.3926262031 
+
+Model feature coefficients: [-8.75772924e+01  5.95600326e+01  1.18930737e+00  1.38647884e+04
+  4.91899261e+03  4.10628404e+02  1.81486446e+02  1.51819223e+01
+  2.69056767e+01 -1.07411164e+00 -3.69107465e-01  2.54624576e+01
+  1.84098928e+01  2.14677482e+01  7.35941390e+00  4.72370548e+01
+ -8.14206679e+02 -6.09318362e+03 -1.52754837e+03 -1.82409326e+03
+ -1.58292462e+04 -2.59304669e+04  5.44696494e+03 -4.36801780e+01
+ -4.51893373e+01  4.11495671e+03  2.38219900e+01  4.82163185e+00
+  2.38325092e+01  3.04386635e+01  9.87034508e+00  4.14229568e+01
+  1.26489368e+02 -2.30107736e+00  2.62862323e+02  1.01150684e+02] 
+</code></pre>
+<p>We can use these parameter estimates (y intercept and coefficients) to manually construct and apply a prediction equation (i.e., $\hat{y} = -0.557 + 1.43x$) if we want to. The other thing we can look at is the coefficient.</p>
+<pre><code class="language-python">coeff_df = pd.DataFrame(lr_model.coef_,X.columns,columns=['Coefficient'])
+coeff_df.head()
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coefficient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MSSubClass</th>
+      <td>-87.577292</td>
+    </tr>
+    <tr>
+      <th>LotFrontage</th>
+      <td>59.560033</td>
+    </tr>
+    <tr>
+      <th>LotArea</th>
+      <td>1.189307</td>
+    </tr>
+    <tr>
+      <th>OverallQual</th>
+      <td>13864.788358</td>
+    </tr>
+    <tr>
+      <th>OverallCond</th>
+      <td>4918.992610</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Interpreting the coefficients:</p>
+<ul>
+<li>Holding all other features fixed, a 1 unit increase in <strong>Lot Frontage</strong> is associated with an **increase of $59.56 **.</li>
+<li>Holding all other features fixed, a 1 unit increase in <strong>Lot Area</strong> is associated with an **increase of $1.18 **.</li>
+<li>Holding all other features fixed, a 1 unit increase in <strong>Overall Condition</strong> is associated with an **increase of $4918.99 **.</li>
+</ul>
+<p>The next step is to use the trained model to predict new house Sale Price on new data. We do this by making use of the <strong>.predict()</strong> method that all <strong>Estimator</strong> classes implement. For example, here are the predicted scores for our <strong>X</strong> test data:</p>
+<pre><code class="language-python">lr_predictions = lr_model.predict(X_test)
+
+plt.scatter(y_test,lr_predictions);
+plt.xlabel('Test Data Actual Sales Price');
+plt.ylabel('Predicted Sales Price');
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="05_02_linear_regression_files/05_02_linear_regression_15_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>We can also plot the residual:</p>
+<pre><code class="language-python">sns.distplot((y_test-lr_predictions),bins=50);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="05_02_linear_regression_files/05_02_linear_regression_17_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>Just to underscore how little we had to do, here&rsquo;s the whole example again, in three lines:</p>
+<pre><code class="language-python"># Initialize the linear regression estimator
+lr_model = LinearRegression()
+
+# Fit the model
+lr_model.fit(X_train, y_train)
+
+# Generate predictions
+lr_predictions = lr_model.predict(X_test)
+</code></pre>
+<h1 id="performance-metrics">Performance metrics</h1>
+<p>Once we&rsquo;ve fit our model, it&rsquo;s natural to want to know how well it performs. In machine learning, the focus of model performance is on prediction; typically, we have some objective quantitative metric we care about, and to the degree that a model can produce better values on that metric, we incline to evaluate it more favorably. This doesn&rsquo;t mean that we have to single-mindedly base our evaluation of model on just one quantity; in practice, many other considerations may come into play (e.g., computational efficiency, interpretability, etc.). The point is mainly that machine learning practitioners—at least in applied settings—tend to care much more than traditional scientists do about what models can actually <em>do</em>, and much less about what&rsquo;s going on inside them.</p>
+<h2 id="the-coefficient-of-determination">The coefficient of determination</h2>
+<p>For the rest of this tutorial, we&rsquo;re going to focus our attention on one particular metric of predictive performance: the coefficient of determination, or $R^2$. $R^2$ quantifies the proportion of variance in the outcome variable (e.g., house price) explained by the fitted model:</p>
+<p>R-squared (R2) is the measure used to determine which line minimizes this distance:</p>
+<p><a href="https://www.codecogs.com/eqnedit.php?latex=R^{2}&space;=&space;\frac{Explained&space;variation}{Total&space;variation}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?R^{2}&space;=&space;\frac{Explained&space;variation}{Total&space;variation}" title="R^{2} = \frac{Explained variation}{Total variation}" /></a></p>
+<p>$R^2$ is the most widely used measure of performance in the individual differences literature, and we&rsquo;ll stick with tradition here. But this shouldn&rsquo;t be taken as an indication that there&rsquo;s anything particularly special about $R^2$. In fact, in many applications, it&rsquo;s a pretty bad metric, because it&rsquo;s defined with reference to the relative variation in a particular sample, and completely ignores the absolute deviation of predictions from the true scores (i.e., a model can have an $R^2$ of 1 while generating a predicted score distribution entirely outside the range of the true scores). For our purposes though, $R^2$ is a sensible metric, because for most individual differences variables, absolute scores don&rsquo;t really mean anything anyway—we&rsquo;re almost always interested in how variation across individuals relates to variation in some other measure or construct.</p>
+<p>Here are three other common evaluation metrics for machine learning problems:</p>
+<p><strong>Mean Absolute Error</strong> (MAE) is the mean of the absolute value of the errors:</p>
+<p>$$\frac 1n\sum_{i=1}^n|y_i-\hat{y}_i|$$</p>
+<p><strong>Mean Squared Error</strong> (MSE) is the mean of the squared errors:</p>
+<p>$$\frac 1n\sum_{i=1}^n(y_i-\hat{y}_i)^2$$</p>
+<p><strong>Root Mean Squared Error</strong> (RMSE) is the square root of the mean of the squared errors:</p>
+<p>$$\sqrt{\frac 1n\sum_{i=1}^n(y_i-\hat{y}_i)^2}$$</p>
+<p>Comparing these metrics:</p>
+<ul>
+<li><strong>MAE</strong> is the easiest to understand, because it&rsquo;s the average error.</li>
+<li><strong>MSE</strong> is more popular than MAE, because MSE &ldquo;punishes&rdquo; larger errors, which tends to be useful in the real world.</li>
+<li><strong>RMSE</strong> is even more popular than MSE, because RMSE is interpretable in the &ldquo;y&rdquo; units.</li>
+</ul>
+<p>All of these are <strong>loss functions</strong>, because we want to minimize them.</p>
+<h2 id="how-well-did-we-do">How well did we do?</h2>
+<p>Let&rsquo;s see how well the linear regression model we fitted earlier (using the house features as predictors) explains the variance in sales price. We&rsquo;ll make use of scikit-learn&rsquo;s <strong>metrics</strong> module, which contains a large number of predefined performance metrics. As is true of <strong>Estimator</strong> objects, all metrics in scikit-learn follow the same usage pattern: we pass in the true scores and the model&rsquo;s predicted scores, respectively.</p>
+<pre><code class="language-python"># the metrics module contains predefined scoring functions
+# for commonly used metrics like r^2, MSE, etc. 
+from sklearn import metrics
+
+# scoring functions are called by passing an array of
+# true scores and and an array of predicted scores as
+# inputs
+print('Model score:', metrics.r2_score(y_test, lr_predictions))
+print('MAE:', metrics.mean_absolute_error(y_test, lr_predictions))
+print('MSE:', metrics.mean_squared_error(y_test, lr_predictions))
+print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, lr_predictions)))
+</code></pre>
+<pre><code>Model score: 0.5238801531365112
+MAE: 26110.712069211004
+MSE: 3851956330.37256
+RMSE: 62064.130787215254
+</code></pre>
+<p>Looking at the $R^2$ score we get the amount of variance explained by the model, which means we can explain about 52% of the variance in sales price using 27 features of the home.</p>
+<p>For convenience, scikit-learn estimators have a <strong>.score()</strong> method you can use as an alternative to the above. Instead of generating predicted scores and then explicitly feeding them to a metric function like <strong>r2_score</strong>, you can call <strong>.score()</strong> directly on the estimator after the <strong>fit()</strong> step, and the prediction will be done implicitly:</p>
+<pre><code class="language-python"># Initialize the estimator and fit the data, just like before
+lr_model = LinearRegression()
+lr_model.fit(X_train, y_train)
+# Now instead of generating predictions explicitly,
+# we just call .score(). Note that we lose the ability to
+# specify the metric: LinearRegression.score() always uses
+# the R^2 metric.
+lr_model.score(X_test, y_test)
+</code></pre>
+<pre><code>0.5238801531365112
+</code></pre>
+<p>We can also look at how well we did visually by plotting the predicted vs. actual sales price values:</p>
+<pre><code class="language-python">range_plot = range(100,300)
+
+fig, ax = plt.subplots(figsize=(10,6))
+lr_1 = ax.plot(range_plot, lr_predictions[range_plot], color='blue', label='Linear Regression')
+lr_2 = ax.plot(range_plot, y_test[range_plot], color='red', label = 'Actual')
+ax.set_ylim(0, 800000)
+ax.set_xlim(range_plot[0], range_plot[-1])
+plt.title('Linear Regression: Actual vs. Predicted Sales Price', fontweight='bold')
+plt.xlabel('Sample', fontweight='bold')
+plt.ylabel('Sales Price (USD)', fontweight='bold')
+plt.legend(handles=[lr_1[0],lr_2[0]])
+plt.show()
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="05_02_linear_regression_files/05_02_linear_regression_26_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/&amp;text=" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/&amp;t=" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=&amp;body=https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/&amp;title=" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=%20https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://greydongilmore.github.io/courses/ml_intro/05_linear_regression/05_02_linear_regression/&amp;title=" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://greydongilmore.github.io/"><img class="avatar mr-3 avatar-square" src="/authors/admin/avatar_huae2c50bee0a2b36792fa6344dac5dcdd_1502657_270x270_fill_lanczos_center_3.png" alt="Greydon Gilmore"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://greydongilmore.github.io/">Greydon Gilmore</a></h5>
+      <h6 class="card-subtitle">Intraoperative Neurophysiologist Biomedical Engineer</h6>
+      <p class="card-text">My research interests include deep brain stimulation, machine learning and signal processing.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:greydon.gilmore@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0001-7523-5734" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.ca/citations?user=0zrqWjsAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Greydon_Gilmore" target="_blank" rel="noopener">
+        <i class="ai ai-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/ml_intro/05_linear_regression/05_01_linear_regression/" rel="next"></a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/ml_intro/06_logistic_regression/06_01_logistic_regression/" rel="prev"></a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+  <p class="powered-by">
+    © 2025 Greydon Gilmore
+  </p>
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

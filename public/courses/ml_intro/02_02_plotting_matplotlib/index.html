@@ -1,0 +1,1810 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Greydon Gilmore" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Matplotlib is the &ldquo;grandfather&rdquo; library of data visualization with Python. It was created by John Hunter. He created it to try to replicate MatLab&rsquo;s (another programming language) plotting capabilities in Python." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#3f51b5" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cb6b3f381d83e23d75cbf78dd7485887.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Greydon Gilmore" />
+  <meta property="og:url" content="https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/" />
+  <meta property="og:title" content="Matplotlib | Greydon Gilmore" />
+  <meta property="og:description" content="Matplotlib is the &ldquo;grandfather&rdquo; library of data visualization with Python. It was created by John Hunter. He created it to try to replicate MatLab&rsquo;s (another programming language) plotting capabilities in Python." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2019-05-05T00:00:00&#43;01:00"
+      />
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Matplotlib | Greydon Gilmore</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="5e43ab55bcb31211654987081a43e7a8" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#grants"><span>grants</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#training"><span>training</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>CV</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/files/cv/CVLong_Greydon-Gilmore.pdf"><span>CV long</span></a>
+            
+              <a class="dropdown-item" href="/files/cv/CVShort_Greydon-Gilmore.pdf"><span>CV short</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Matplotlib</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 5, 2019
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Matplotlib is the &ldquo;grandfather&rdquo; library of data visualization with Python. It was created by John Hunter. He created it to try to replicate MatLab&rsquo;s (another programming language) plotting capabilities in Python. So if you happen to be familiar with matlab, matplotlib will feel natural to you.</p>
+<p>It is an excellent 2D and 3D graphics library for generating scientific figures.</p>
+<p>Some of the major Pros of Matplotlib are:</p>
+<ul>
+<li>Generally easy to get started for simple plots</li>
+<li>Support for custom labels and texts</li>
+<li>Great control of every element in a figure</li>
+<li>High-quality output in many formats</li>
+<li>Very customizable in general</li>
+</ul>
+<p>Matplotlib allows you to create reproducible figures programmatically. Let&rsquo;s learn how to use it! Before continuing this lecture, I encourage you just to explore the official <a href="http://matplotlib.org/" target="_blank">Matplotlib</a> web page.</p>
+<h2 id="installation">Installation</h2>
+<p>You&rsquo;ll need to install matplotlib first with either:</p>
+<pre><code class="language-console">pip install matplotlib
+</code></pre>
+<h2 id="importing">Importing</h2>
+<p>Import the <code>matplotlib.pyplot</code> module under the name <code>plt</code> (the tidy way):</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+</code></pre>
+<p>You&rsquo;ll also need to use this line to see plots in the notebook:</p>
+<pre><code class="language-python">%matplotlib inline
+</code></pre>
+<p>That line is only for jupyter notebooks, if you are using another editor, you&rsquo;ll use: <strong>plt.show()</strong> at the end of all your plotting commands to have the figure pop up in another window.</p>
+<h2 id="basic-example">Basic Example</h2>
+<p>Let&rsquo;s walk through a very simple example using two numpy arrays. You can also use lists, but most likely you&rsquo;ll be passing numpy arrays or pandas columns (which essentially also behave like arrays).</p>
+<p>** The data we want to plot:**</p>
+<pre><code class="language-python">import numpy as np
+x = np.linspace(0, 5, 11)
+y = x ** 2
+</code></pre>
+<pre><code class="language-python">x
+</code></pre>
+<pre><code>array([ 0. ,  0.5,  1. ,  1.5,  2. ,  2.5,  3. ,  3.5,  4. ,  4.5,  5. ])
+</code></pre>
+<pre><code class="language-python">y
+</code></pre>
+<pre><code>array([  0.  ,   0.25,   1.  ,   2.25,   4.  ,   6.25,   9.  ,  12.25,
+        16.  ,  20.25,  25.  ])
+</code></pre>
+<h2 id="basic-matplotlib-commands">Basic Matplotlib Commands</h2>
+<p>We can create a very simple line plot using the following ( I encourage you to pause and use Shift+Tab along the way to check out the document strings for the functions we are using).</p>
+<pre><code class="language-python">plt.plot(x, y, 'r') # 'r' is the color red
+plt.xlabel('X Axis Title Here')
+plt.ylabel('Y Axis Title Here')
+plt.title('String Title Here')
+plt.show()
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_10_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="creating-multiplots-on-same-canvas">Creating Multiplots on Same Canvas</h2>
+<pre><code class="language-python"># plt.subplot(nrows, ncols, plot_number)
+plt.subplot(1,2,1)
+plt.plot(x, y, 'r--') # More on color options later
+plt.subplot(1,2,2)
+plt.plot(y, x, 'g*-');
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_12_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<hr>
+<h1 id="matplotlib-object-oriented-method">Matplotlib Object Oriented Method</h1>
+<p>Now that we&rsquo;ve seen the basics, let&rsquo;s break it all down with a more formal introduction of Matplotlib&rsquo;s Object Oriented API. This means we will instantiate figure objects and then call methods or attributes from that object.</p>
+<h2 id="introduction-to-the-object-oriented-method">Introduction to the Object Oriented Method</h2>
+<p>The main idea in using the more formal Object Oriented method is to create figure objects and then just call methods or attributes off of that object. This approach is nicer when dealing with a canvas that has multiple plots on it.</p>
+<p>To begin we create a figure instance. Then we can add axes to that figure:</p>
+<pre><code class="language-python"># Create Figure (empty canvas)
+fig = plt.figure()
+
+# Add set of axes to figure
+axes = fig.add_axes([0.1, 0.1, 0.8, 0.8]) # left, bottom, width, height (range 0 to 1)
+
+# Plot on that set of axes
+axes.plot(x, y, 'b')
+axes.set_xlabel('Set X Label') # Notice the use of set_ to begin methods
+axes.set_ylabel('Set y Label')
+axes.set_title('Set Title')
+</code></pre>
+<pre><code>&lt;matplotlib.text.Text at 0x111c85198&gt;
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_16_1.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>Code is a little more complicated, but the advantage is that we now have full control of where the plot axes are placed, and we can easily add more than one axis to the figure:</p>
+<pre><code class="language-python"># Creates blank canvas
+fig = plt.figure()
+
+axes1 = fig.add_axes([0.1, 0.1, 0.8, 0.8]) # main axes
+axes2 = fig.add_axes([0.2, 0.5, 0.4, 0.3]) # inset axes
+
+# Larger Figure Axes 1
+axes1.plot(x, y, 'b')
+axes1.set_xlabel('X_label_axes2')
+axes1.set_ylabel('Y_label_axes2')
+axes1.set_title('Axes 2 Title')
+
+# Insert Figure Axes 2
+axes2.plot(y, x, 'r')
+axes2.set_xlabel('X_label_axes2')
+axes2.set_ylabel('Y_label_axes2')
+axes2.set_title('Axes 2 Title');
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_18_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="subplots">subplots()</h2>
+<p>The plt.subplots() object will act as a more automatic axis manager.</p>
+<p>Basic use cases:</p>
+<pre><code class="language-python"># Use similar to plt.figure() except use tuple unpacking to grab fig and axes
+fig, axes = plt.subplots()
+
+# Now use the axes object to add stuff to plot
+axes.plot(x, y, 'r')
+axes.set_xlabel('x')
+axes.set_ylabel('y')
+axes.set_title('title');
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_20_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>Then you can specify the number of rows and columns when creating the subplots() object:</p>
+<pre><code class="language-python"># Empty canvas of 1 by 2 subplots
+fig, axes = plt.subplots(nrows=1, ncols=2)
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_22_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<pre><code class="language-python"># Axes is an array of axes to plot on
+axes
+</code></pre>
+<pre><code>array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x111f0f8d0&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1121f5588&gt;], dtype=object)
+</code></pre>
+<p>We can iterate through this array:</p>
+<pre><code class="language-python">for ax in axes:
+    ax.plot(x, y, 'b')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_title('title')
+
+# Display the figure object    
+fig
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_25_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>A common issue with matplolib is overlapping subplots or figures. We ca use <strong>fig.tight_layout()</strong> or <strong>plt.tight_layout()</strong> method, which automatically adjusts the positions of the axes on the figure canvas so that there is no overlapping content:</p>
+<pre><code class="language-python">fig, axes = plt.subplots(nrows=1, ncols=2)
+
+for ax in axes:
+    ax.plot(x, y, 'g')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_title('title')
+
+fig    
+plt.tight_layout()
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_27_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="figure-size-aspect-ratio-and-dpi">Figure size, aspect ratio and DPI</h3>
+<p>Matplotlib allows the aspect ratio, DPI and figure size to be specified when the Figure object is created. You can use the <code>figsize</code> and <code>dpi</code> keyword arguments.</p>
+<ul>
+<li><code>figsize</code> is a tuple of the width and height of the figure in inches</li>
+<li><code>dpi</code> is the dots-per-inch (pixel per inch).</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-python">fig = plt.figure(figsize=(8,4), dpi=100)
+</code></pre>
+<pre><code>&lt;matplotlib.figure.Figure at 0x11228ea58&gt;
+</code></pre>
+<p>The same arguments can also be passed to layout managers, such as the <code>subplots</code> function:</p>
+<pre><code class="language-python">fig, axes = plt.subplots(figsize=(12,3))
+
+axes.plot(x, y, 'r')
+axes.set_xlabel('x')
+axes.set_ylabel('y')
+axes.set_title('title');
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_32_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="saving-figures">Saving figures</h2>
+<p>Matplotlib can generate high-quality output in a number formats, including PNG, JPG, EPS, SVG, PGF and PDF.</p>
+<p>To save a figure to a file we can use the <code>savefig</code> method in the <code>Figure</code> class:</p>
+<pre><code class="language-python">fig.savefig(&quot;filename.png&quot;)
+</code></pre>
+<p>Here we can also optionally specify the DPI and choose between different output formats:</p>
+<pre><code class="language-python">fig.savefig(&quot;filename.png&quot;, dpi=200)
+</code></pre>
+<hr>
+<h2 id="legends-labels-and-titles">Legends, labels and titles</h2>
+<p>Now that we have covered the basics of how to create a figure canvas and add axes instances to the canvas, let&rsquo;s look at how decorate a figure with titles, axis labels, and legends.</p>
+<h3 id="figure-titles">Figure titles</h3>
+<p>A title can be added to each axis instance in a figure. To set the title, use the <code>set_title</code> method in the axes instance:</p>
+<pre><code class="language-python">ax.set_title(&quot;title&quot;);
+</code></pre>
+<h3 id="axis-labels">Axis labels</h3>
+<p>Similarly, with the methods <code>set_xlabel</code> and <code>set_ylabel</code>, we can set the labels of the X and Y axes:</p>
+<pre><code class="language-python">ax.set_xlabel(&quot;x&quot;)
+ax.set_ylabel(&quot;y&quot;);
+</code></pre>
+<h3 id="legends">Legends</h3>
+<p>You can use the <strong>label=&ldquo;label text&rdquo;</strong> keyword argument when plots or other objects are added to the figure, and then using the <strong>legend</strong> method without arguments to add the legend to the figure:</p>
+<pre><code class="language-python">fig = plt.figure()
+
+ax = fig.add_axes([0,0,1,1])
+
+ax.plot(x, x**2, label=&quot;x**2&quot;)
+ax.plot(x, x**3, label=&quot;x**3&quot;)
+ax.legend()
+</code></pre>
+<pre><code>&lt;matplotlib.legend.Legend at 0x113a3d8d0&gt;
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_45_1.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>Notice how are legend overlaps some of the actual plot!</p>
+<p>The <strong>legend</strong> function takes an optional keyword argument <strong>loc</strong> that can be used to specify where in the figure the legend is to be drawn. The allowed values of <strong>loc</strong> are numerical codes for the various places the legend can be drawn. See the <a href="http://matplotlib.org/users/legend_guide.html#legend-location" target="_blank">documentation page</a> for details. Some of the most common <strong>loc</strong> values are:</p>
+<pre><code class="language-python"># Lots of options....
+
+ax.legend(loc=1) # upper right corner
+ax.legend(loc=2) # upper left corner
+ax.legend(loc=3) # lower left corner
+ax.legend(loc=4) # lower right corner
+
+# .. many more options are available
+
+# Most common to choose
+ax.legend(loc=0) # let matplotlib decide the optimal location
+fig
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_47_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="colors-with-the-color-parameter">Colors with the color= parameter</h3>
+<p>We can also define colors by their names or RGB hex codes and optionally provide an alpha value using the <code>color</code> and <code>alpha</code> keyword arguments. Alpha indicates opacity.</p>
+<pre><code class="language-python">fig, ax = plt.subplots()
+
+ax.plot(x, x+1, color=&quot;blue&quot;, alpha=0.5) # half-transparant
+ax.plot(x, x+2, color=&quot;#8B008B&quot;)        # RGB hex code
+ax.plot(x, x+3, color=&quot;#FF8C00&quot;)        # RGB hex code 
+</code></pre>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x112179390&gt;]
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_50_1.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="line-and-marker-styles">Line and marker styles</h3>
+<p>To change the line width, we can use the <code>linewidth</code> or <code>lw</code> keyword argument. The line style can be selected using the <code>linestyle</code> or <code>ls</code> keyword arguments:</p>
+<pre><code class="language-python">fig, ax = plt.subplots(figsize=(12,6))
+
+ax.plot(x, x+1, color=&quot;red&quot;, linewidth=0.25)
+ax.plot(x, x+2, color=&quot;red&quot;, linewidth=0.50)
+ax.plot(x, x+3, color=&quot;red&quot;, linewidth=1.00)
+ax.plot(x, x+4, color=&quot;red&quot;, linewidth=2.00)
+
+# possible linestype options ‘-‘, ‘–’, ‘-.’, ‘:’, ‘steps’
+ax.plot(x, x+5, color=&quot;green&quot;, lw=3, linestyle='-')
+ax.plot(x, x+6, color=&quot;green&quot;, lw=3, ls='-.')
+ax.plot(x, x+7, color=&quot;green&quot;, lw=3, ls=':')
+
+# custom dash
+line, = ax.plot(x, x+8, color=&quot;black&quot;, lw=1.50)
+line.set_dashes([5, 10, 15, 10]) # format: line length, space length, ...
+
+# possible marker symbols: marker = '+', 'o', '*', 's', ',', '.', '1', '2', '3', '4', ...
+ax.plot(x, x+ 9, color=&quot;blue&quot;, lw=3, ls='-', marker='+')
+ax.plot(x, x+10, color=&quot;blue&quot;, lw=3, ls='--', marker='o')
+ax.plot(x, x+11, color=&quot;blue&quot;, lw=3, ls='-', marker='s')
+ax.plot(x, x+12, color=&quot;blue&quot;, lw=3, ls='--', marker='1')
+
+# marker size and color
+ax.plot(x, x+13, color=&quot;purple&quot;, lw=1, ls='-', marker='o', markersize=2)
+ax.plot(x, x+14, color=&quot;purple&quot;, lw=1, ls='-', marker='o', markersize=4)
+ax.plot(x, x+15, color=&quot;purple&quot;, lw=1, ls='-', marker='o', markersize=8, markerfacecolor=&quot;red&quot;)
+ax.plot(x, x+16, color=&quot;purple&quot;, lw=1, ls='-', marker='s', markersize=8, 
+        markerfacecolor=&quot;yellow&quot;, markeredgewidth=3, markeredgecolor=&quot;green&quot;);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_53_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="control-over-axis-appearance">Control over axis appearance</h3>
+<p>In this section we will look at controlling axis sizing properties in a matplotlib figure.</p>
+<h2 id="plot-range">Plot range</h2>
+<p>We can configure the ranges of the axes using the <code>set_ylim</code> and <code>set_xlim</code> methods in the axis object, or <code>axis('tight')</code> for automatically getting &ldquo;tightly fitted&rdquo; axes ranges:</p>
+<pre><code class="language-python">fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+axes[0].plot(x, x**2, x, x**3)
+axes[0].set_title(&quot;default axes ranges&quot;)
+
+axes[1].plot(x, x**2, x, x**3)
+axes[1].axis('tight')
+axes[1].set_title(&quot;tight axes&quot;)
+
+axes[2].plot(x, x**2, x, x**3)
+axes[2].set_ylim([0, 60])
+axes[2].set_xlim([2, 5])
+axes[2].set_title(&quot;custom axes range&quot;);
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_58_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h1 id="special-plot-types">Special Plot Types</h1>
+<p>There are many specialized plots we can create, such as barplots, histograms, scatter plots, and much more. Most of these type of plots we will actually create using seaborn, a statistical plotting library for Python. But here are a few examples of these type of plots:</p>
+<pre><code class="language-python">plt.scatter(x,y)
+</code></pre>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x1122be438&gt;
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_60_1.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<pre><code class="language-python">from random import sample
+data = sample(range(1, 1000), 100)
+plt.hist(data)
+</code></pre>
+<pre><code>(array([ 14.,  11.,   9.,  12.,   6.,   7.,  13.,  13.,   6.,   9.]),
+ array([  28. ,  123.5,  219. ,  314.5,  410. ,  505.5,  601. ,  696.5,
+         792. ,  887.5,  983. ]),
+ &lt;a list of 10 Patch objects&gt;)
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_61_1.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<pre><code class="language-python">data = [np.random.normal(0, std, 100) for std in range(1, 4)]
+
+# rectangular box plot
+plt.boxplot(data,vert=True,patch_artist=True);   
+</code></pre>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="../img/02/01_plotting_matplotlib_62_0.png" alt="png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/&amp;text=Matplotlib" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/&amp;t=Matplotlib" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Matplotlib&amp;body=https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/&amp;title=Matplotlib" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Matplotlib%20https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://greydongilmore.github.io/courses/ml_intro/02_02_plotting_matplotlib/&amp;title=Matplotlib" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://greydongilmore.github.io/"><img class="avatar mr-3 avatar-square" src="/authors/admin/avatar_huae2c50bee0a2b36792fa6344dac5dcdd_1502657_270x270_fill_lanczos_center_3.png" alt="Greydon Gilmore"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://greydongilmore.github.io/">Greydon Gilmore</a></h5>
+      <h6 class="card-subtitle">Intraoperative Neurophysiologist Biomedical Engineer</h6>
+      <p class="card-text">My research interests include deep brain stimulation, machine learning and signal processing.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:greydon.gilmore@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0001-7523-5734" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.ca/citations?user=0zrqWjsAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Greydon_Gilmore" target="_blank" rel="noopener">
+        <i class="ai ai-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/greydongilmore" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/ml_intro/03_02_data_preprocessing/" rel="next">Data Loading</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/ml_intro/04_02_ml_basics_categories/" rel="prev">ML Categories</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

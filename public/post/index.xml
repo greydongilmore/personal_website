@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog | Greydon Gilmore</title>
+    <link>https://greydongilmore.github.io/post/</link>
+      <atom:link href="https://greydongilmore.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Blog</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2025 Greydon Gilmore</copyright><lastBuildDate>Wed, 28 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png</url>
+      <title>Blog</title>
+      <link>https://greydongilmore.github.io/post/</link>
+    </image>
+    
+    <item>
+      <title>Making PDFs Searchable</title>
+      <link>https://greydongilmore.github.io/post/ocr-papers/</link>
+      <pubDate>Wed, 28 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/ocr-papers/</guid>
+      <description>&lt;p&gt;I make use of the advanced search feature in &lt;a href=&#34;https://www.zotero.org/&#34; target=&#34;_blank&#34;&gt;Zotereo&lt;/a&gt; frequently, which enables searching through manuscript PDFs. However, when you obtain manuscript PDF files from online databases, they may not be in a searchable format. This means you are unable to highlight and search for text within the PDF. I have written a small Python function that will recursively search though a directory and convert any found PDF to a searchable format.&lt;/p&gt;
+&lt;p&gt;Optical Character Recognition (OCR) is a method to enable text recognition within images and documents. PDFs contain vector graphics that can contain raster objects (.png, .jpg etc.). The OCR process will first rasterize each page of the PDF file then an OCR &amp;ldquo;layer&amp;rdquo; is created.&lt;/p&gt;
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;
+&lt;p&gt;The code to perform the bulk OCR conversion can be found in this &lt;a href=&#34;https://github.com/greydongilmore/ocr-pdf&#34; target=&#34;_blank&#34;&gt;GitHub repository&lt;/a&gt;. Once you have the project repository stored locally, follow these steps to run OCR on your Zotereo database.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You will need to install the command-line program &lt;a href=&#34;https://ocrmypdf.readthedocs.io/en/latest/installation.html&#34; target=&#34;_blank&#34;&gt;OCRmyPDF&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Next, you will need to determine where Zotereo stores your PDF files. In Zotereo, right-click on any document and select &lt;strong&gt;Show File&lt;/strong&gt;. A new window will pop-up, make note of the full path to parent directory (i.e. /home/Zotereo/storage).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;center&gt;
+    &lt;figure&gt;
+        &lt;img src=&#34;./img/pdf_storage_location.png&#34; alt=&#34;pdf_storage_location&#34; width=&#34;80%&#34;/&gt;
+        &lt;figcaption&gt;Zotereo file storage location.&lt;/figcaption&gt;
+    &lt;/figure&gt;
+&lt;/center&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;In a terminal window, change into the GitHub project repository:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cd /home/user/Documents/Github/ocr-pdf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the required Python libraries by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;python -m pip install -r requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the root of the repository, run the Python script by passing the full directory path determined in the first step:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;python main.py -i &amp;quot;full/path/to/PDF/storage/directory&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This process will take some time. First, the algorithm will search through all the PDFs and determine which files are not searchable. Once the non-searchable PDF files have been found, the OCR process is executed using &lt;strong&gt;ocrmypdf&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Freesurfer Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</link>
+      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</guid>
+      <description>&lt;h2 id=&#34;download-software&#34;&gt;Download software&lt;/h2&gt;
+&lt;p&gt;Download the &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linux software version&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Run the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install some dependancies:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install tcsh
+sudo apt-get install libglu1
+sudo apt-get install libxss1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configurations&#34;&gt;Post-Install Configurations&lt;/h2&gt;
+&lt;p&gt;Add Freesurfer to your path:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;echo &amp;quot;FREESURFER_HOME=/usr/local/freesurfer&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+echo &#39;source $FREESURFER_HOME/SetUpFreeSurfer.sh&#39; &amp;gt;&amp;gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have run the install correctly you will see this output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Setting up environment for FreeSurfer/FS-FAST (and FSL)
+FREESURFER_HOME /usr/local/freesurfer
+FSFAST_HOME     /usr/local/freesurfer/fsfast
+FSF_OUTPUT_FORMAT nii
+SUBJECTS_DIR    /usr/local/freesurfer/subjects
+MNI_DIR         /usr/local/freesurfer/mni
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;define-subjects_dir&#34;&gt;Define subjects_dir&lt;/h2&gt;
+&lt;p&gt;FreeSurfer requires an environment variable called &lt;code&gt;SUBJECTS_DIR&lt;/code&gt;. This is the directory where subject data is stored.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export SUBJECTS_DIR=&amp;lt;path to subject data&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;obtain-license&#34;&gt;Obtain license&lt;/h2&gt;
+&lt;p&gt;You will need to obtain a &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/registration.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;license key&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once you obtain the &lt;code&gt;license.txt&lt;/code&gt; key file, copy it to your FreeSurfer installation directory. This is also the location defined by the &lt;code&gt;FREESURFER_HOME&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /mnt/c/Users/*[your_username]*/Downloads/license.txt $FREESURFER_HOME
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Adding application launch icon to favorites</title>
+      <link>https://greydongilmore.github.io/post/linux_docs/app_icon/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/linux_docs/app_icon/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download your own icon image&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find path to the executable of your application by running (replace brackets with name of applicaion):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;which [name_application]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Copy the path from this output.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Create\edit the &lt;code&gt;.desktop&lt;/code&gt; file for the application by running the command (remember to edit the application name):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;gedit Desktop/[name_application].desktop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the following lines (replace the items in square brackets with your respect application) and save the file with the extension &lt;code&gt;.desktop&lt;/code&gt; (e.g. &lt;code&gt;[application name].desktop&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Icon=[path_to_icon_file]
+Name=[Name your application]
+Comment=[Name your application]
+Exec=[path_to_executable file_from_step2]
+Categories=Development
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Right click on the file (should now be on your desktop), select properties, then permissions and select &lt;code&gt;Allow executing file as program&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, move this file to the desktop launcher path on your system:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /Desktop/*[name_of_file]* /usr/share/applications/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Advanced Normalization Tools</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/ants/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/ants/</guid>
+      <description>&lt;h2 id=&#34;get-the-latest-ants-code&#34;&gt;Get the latest ANTs code&lt;/h2&gt;
+&lt;p&gt;Download the latest code into an arbitrary directory, I use ~/code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir ~/code 
+cd ~/code
+git clone https://github.com/ANTsX/ANTs.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install the ZLIB libraries:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install zlib1g-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;run-cmakemake&#34;&gt;Run CMake/Make&lt;/h2&gt;
+&lt;p&gt;I install my applications in &lt;code&gt;~/Applications&lt;/code&gt;, however the following will install ANTs in &lt;code&gt;~/bin&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/bin/ants
+cd ~/bin/ants
+ccmake ~/code/ANTs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to do an initial configuration. CMake will do some checking and then present options for review. Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; again to do another round of configuration. If there are no errors, you&amp;rsquo;re ready to generate the make files by pressing &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Now you are back at the command line, it&amp;rsquo;s time to compile:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This compiles in the most resource-efficient manner. To save time, you can use multiple threads, for example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make -j 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configuration&#34;&gt;Post-install Configuration&lt;/h2&gt;
+&lt;p&gt;If you want to use ANTs scripts, copy them from the source directory &lt;code&gt;Scripts/&lt;/code&gt; to the bin directory where &lt;code&gt;antsRegistration&lt;/code&gt; etc are located:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cp -r ~/bin/ants/Scripts/* ~/bin/ants/bin/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Assuming you&amp;rsquo;ve built in &lt;code&gt;~/bin/ants&lt;/code&gt;, there will now be a binary directory &lt;code&gt;~/bin/ants/bin&lt;/code&gt;, containing the programs (and scripts if you&amp;rsquo;ve included them). The scripts additionally require ANTSPATH to point to the bin directory including a trailing slash.&lt;/p&gt;
+&lt;p&gt;You will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export ANTSPATH=${HOME}/bin/ants/bin
+export PATH=${ANTSPATH}:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now check this worked correctly:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;which antsRegistration
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SSHFS Desktop Application</title>
+      <link>https://greydongilmore.github.io/post/linux_docs/graham_shortcut/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/linux_docs/graham_shortcut/</guid>
+      <description>&lt;h2 id=&#34;setup-fuse&#34;&gt;Setup fuse&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following in a terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;modprobe fuse
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a FUSE usergroup and add yourself to the group&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo groupadd fuse
+sudo usermod -a -G fuse $USER
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a set of ssh-keys, press enter when asked to name the file (blank) and press enter when asked to enter a passphrase (blank):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;ssh-keygen -t rsa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Transport the key to the remote server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;ssh-copy-id -i .ssh/id_rsa.pub user@example.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now when you run &lt;code&gt;sshfs&lt;/code&gt; you will not need to enter your password.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;create-shell-script&#34;&gt;Create Shell Script&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to create an empty shell script:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;touch +x ~/Documents/sshfs_mount.sh
+chmod +x ~/Documents/sshfs_mount.sh
+gedit ~/Documents/sshfs_mount.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enter the command you normally run to connect to the remote server, change &lt;code&gt;mount_dir&lt;/code&gt; to match your local mount location:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+mount_dir=&amp;quot;/path/to/mount/directory&amp;quot;
+if (! mountpoint -q $mount_dir); then
+    sshfs user@example.com:/home/[user]/ $mount_dir -o   ServerAliveInterval=15,ServerAliveCountMax=3,Compression=no,follow_symlinks
+else
+    umount $mount_dir
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the script, the filesystem will be mounted/unmounted depending on the status. Save and close the file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;create-desktop-entry-file&#34;&gt;Create Desktop Entry File&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to create an empty shell script:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;touch ~/Documents/sshfs_mount.desktop
+chmod +x ~/Documents/sshfs_mount.desktop
+gedit ~/Documents/sshfs_mount.desktop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Paste the following into the document, ensure you update the brackets:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=[path/to/icon]
+Name=[Name the application]
+Exec=[path/to/sshfs_mount.sh]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save and close.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Move the desktop entry file into the applications directory:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv ~/Documents/sshfs_mount.desktop /usr/share/applications/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search in applications for the desktop entry file, right-click and add to favorites.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NiftyReg Install</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/niftyreg/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/niftyreg/</guid>
+      <description>&lt;h2 id=&#34;download-niftyreg&#34;&gt;Download NiftyReg&lt;/h2&gt;
+&lt;p&gt;Obtain the newest version of &lt;a href=&#34;https://sourceforge.net/projects/niftyreg/files/latest/download&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NiftyReg&lt;/a&gt; or by running the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/code/niftyreg_source
+cd ~/code/niftyreg_source
+git clone https://github.com/SuperElastix/niftyreg.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;run-cmakemake&#34;&gt;Run CMake/Make&lt;/h2&gt;
+&lt;p&gt;Make the build and install directories.&lt;/p&gt;
+&lt;p&gt;The default install location is &lt;code&gt;/usr/local&lt;/code&gt;, which falls on your PATH. This is the easiest location to install. If you want to install somwhere else then specify the path in the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/bin/niftyreg
+cd ~/bin/niftyreg
+ccmake ~/code/niftyreg_source/niftyreg
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following options will be displayed, ensure you change &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable to the install directory path if you don&amp;rsquo;t want to use default:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Parameter&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;BUILD_ALL_DEP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON if you want to build All the dependencies&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;BUILD_SHARED_LIBS&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Build the libraries as shared build the libraries as shared&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;BUILD_TESTING&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON if you want to build the unit tests&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CMAKE_BUILD_TYPE&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Compiling options: Debug Release RelWithDebInfo MinSizeRel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CMAKE_INSTALL_PREFIX&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set the path where the final install will be copied&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;M_LIBRARY&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Path to a library.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;PNG_INCLUDE_DIR&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set if you want NiftyReg to support the PNG file format for 2D images. Note that CMake will try to find the libpng on your system and will build it automatically if it does not find it.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_CUDA&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON if you want to build the GPU code. The CUDA toolkit must be install otherwise CMake will return an error message&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_OPENCL&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON to use OpenCL for multi-CPU implementation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_OPENMP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON to use OpenMP for multi-CPU implementation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;USE_SSE&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Set to ON to use SIMD based implementation, mostly for cubic B-Spline related computation. Note that SIMD implementation has only be done for single precision.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Press &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to configure the NiftyReg project, press &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to configure the project. Once the project is correctly configured, press the &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt; key to generate the Makefiles. You can then build and install the project:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo make
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configuration&#34;&gt;Post-Install Configuration&lt;/h2&gt;
+&lt;p&gt;The project should then be installed into the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; directory you previously created.&lt;/p&gt;
+&lt;p&gt;If you changed the install prefix directory, to one not on your PATH, you will need to add NiftyReg to your PATH. In order to use NiftyReg in any terminal, you will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NREG=&amp;lt;path_to_your_niftyreg_install&amp;gt;
+export PATH={NREG}/bin:${PATH}
+export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Close and re-open the linux terminal then run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;reg_f3d
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FMRIB Software Library Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/fsl/</link>
+      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/fsl/</guid>
+      <description>&lt;h2 id=&#34;installing-on-pop_os&#34;&gt;Installing on Pop_OS!&lt;/h2&gt;
+&lt;p&gt;You will first need to run the following steps prior to installing FSL.&lt;/p&gt;
+&lt;p&gt;The following steps were originally written here &lt;a href=&#39;https://forums.linuxmint.com/viewtopic.php?p=1531616&amp;sid=eca87543f47ece83994a3e3b656447c3#p1531616&#39; target=&#34;_blank&#34;&gt; &lt;strong&gt;here&lt;/strong&gt; &lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Make sure you run a backup prior to performing this hack&amp;hellip; just in case.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;move your current OS information files into a temporary location:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /etc/os-release /etc/os-release.pop &amp;amp;&amp;amp; sudo mv /etc/lsb-release /etc/lsb-release.pop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;write a new &lt;code&gt;os-release&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo gedit /etc/os-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;copy the following into this file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NAME=&amp;quot;Ubuntu&amp;quot;
+VERSION=&amp;quot;20.04 LTS (Focal Fossa)&amp;quot;
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME=&amp;quot;Ubuntu 20.04 LTS&amp;quot;
+VERSION_ID=&amp;quot;20.04&amp;quot;
+HOME_URL=&amp;quot;https://www.ubuntu.com/&amp;quot;
+SUPPORT_URL=&amp;quot;https://help.ubuntu.com/&amp;quot;
+BUG_REPORT_URL=&amp;quot;https://bugs.launchpad.net/ubuntu/&amp;quot;
+PRIVACY_POLICY_URL=&amp;quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&amp;quot;
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;write a new lsb-release file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo gedit /etc/lsb-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;copy the following into this file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 20.04 LTS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;now run the fslinstaller.py script in the below section and return here to Step 5 to return your OS information.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;after running the FSL install steps, remove the files you wrote:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo rm /etc/os-release &amp;amp;&amp;amp; sudo rm /etc/lsb-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;move the original files back:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /etc/os-release.pop /etc/os-release &amp;amp;&amp;amp; sudo mv /etc/lsb-release.pop /etc/lsb-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;download-fsl&#34;&gt;Download FSL&lt;/h2&gt;
+&lt;p&gt;The easiest method is to download this &lt;a href=&#34;https://fsl.fmrib.ox.ac.uk/fsldownloads_registration/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python script&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You will need to register. On the subsequent page you will download the &lt;code&gt;fslinstaller.py&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Run the following in a linux terminal (the install will take awhile):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;python /mnt/c/Users/*[your_username]*/Downloads/fslinstaller.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install the package &lt;code&gt;wxpython&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;pip install wxpython
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If that does not work then run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-16.04 wxPython
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;libraries-you-may-need-to-install&#34;&gt;Libraries you may need to install&lt;/h2&gt;
+&lt;h3 id=&#34;multiple-image-network-graphics-library-libmng&#34;&gt;Multiple-image Network Graphics library (libmng)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libmng2
+sudo apt-get install libmng-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;png-library---development-libpng-dev&#34;&gt;PNG library - development (libpng-dev)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libpng-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;optimized-blas-linear-algebra-library-libopenblas-base&#34;&gt;Optimized BLAS (linear algebra) library (libopenblas-base)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libopenblas-base
+export LD_LIBRARY_PATH=/usr/lib/openblas-base/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;libmngso1-error&#34;&gt;libmng.so.1 Error&lt;/h3&gt;
+&lt;p&gt;You will need to create a symbolic link for the library dll &lt;code&gt;libmng.so.1&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo ln -s /usr/lib/x86_64-linux-gnu/libmng.so.2 /usr/lib/x86_64-linux-gnu/libmng.so.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;independent-jpeg-groups-jpeg-runtime-library-libjpeg62&#34;&gt;Independent JPEG Group&amp;rsquo;s JPEG runtime library (libjpeg62)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libjpeg62
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;png-library---runtime-libpng12deb&#34;&gt;PNG library - runtime (libpng12.deb)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb \
+  &amp;amp;&amp;amp; sudo dpkg -i /tmp/libpng12.deb \
+  &amp;amp;&amp;amp; rm /tmp/libpng12.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;gtk-graphical-user-interface-library-gtk20&#34;&gt;GTK+ graphical user interface library (gtk2.0)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install gtk2.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;pulseaudio-for-other-random-libraries&#34;&gt;Pulseaudio for other random libraries&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install pulseaudio
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;you-may-also-receive-an-error-no-d-bus-daemon-running-run-the-following&#34;&gt;You may also receive an error &lt;code&gt;No D-BUS daemon running&lt;/code&gt;, run the following:&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo chown -R *[your username]*:admin ~/.dbus
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Google Remote Desktop</title>
+      <link>https://greydongilmore.github.io/post/linux_docs/remote_desktop/</link>
+      <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/linux_docs/remote_desktop/</guid>
+      <description>&lt;h2 id=&#34;install-remote-desktop-extension&#34;&gt;Install Remote Desktop Extension&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Navigate to &lt;a href=&#34;https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp&#34; target=&#34;blank_&#34;&gt;Chrome Remote Desktop Web Store&lt;/a&gt; and install it by clicking &lt;code&gt;Add to Chrome&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Click &lt;code&gt;Launch App&lt;/code&gt; and the remote desktop app window should open.&lt;/p&gt;
+&lt;h2 id=&#34;install-chrome-remote-desktop-package&#34;&gt;Install Chrome Remote Desktop Package&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; You will now need to get the &lt;code&gt;.deb&lt;/code&gt; for remote desktop with the following command in terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Then install it by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt install ./chrome-remote-desktop_current_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; If the initial installation attempt will fail, simply run &lt;code&gt;sudo apt install -f&lt;/code&gt; to fix the missing dependencies and to complete the installation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install -f
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; You will need to add yourself to the chrome-remote-desktop group then reboot for the changes to take effect.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo usermod -a -G chrome-remote-desktop $USER
+sudo reboot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;create-session-file&#34;&gt;Create Session File&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; You will need to create a remote desktop session file in your home directory:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;gedit ~/.chrome-remote-desktop-session
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Look in &lt;code&gt;/usr/share/xsessions/&lt;/code&gt; for the .desktop file for your linux environment. For example, ElementaryOS has a file named &lt;code&gt;Pantheon&lt;/code&gt; with the following command: &lt;code&gt;gnome-session --session=pantheon&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Within the &lt;code&gt;chrome-remote-desktop-session&lt;/code&gt; file enter the following (make sure to use your respective distro .desktop file):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;exec /usr/sbin/lightdm-session &amp;quot;gnome-session --session=pantheon&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; If running ElementayOS you will also need to add the following to the file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DESKTOP_SESSION=pantheon
+XDG_CURRENT_DESKTOP=Pantheon 
+XDG_RUNTIME_DIR=/run/user/1000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Save the file and close.&lt;/p&gt;
+&lt;h2 id=&#34;post-install-configuration-setting-up-displays&#34;&gt;Post-Install Configuration (Setting up Displays)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Stop Chrome Remote Desktop:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;/opt/google/chrome-remote-desktop/chrome-remote-desktop --stop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Backup the original configuration:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo cp /opt/google/chrome-remote-desktop/chrome-remote-desktop /opt/google/chrome-remote-desktop/chrome-remote-desktop.orig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Edit the config (&lt;code&gt;chrome-remote-desktop&lt;/code&gt;) file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;gedit /opt/google/chrome-remote-desktop/chrome-remote-desktop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; Find &lt;code&gt;DEFAULT_SIZES&lt;/code&gt; and update the remote desktop resolution. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DEFAULT_SIZES = &amp;quot;2560x1440&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; For multiple displays you will need to enter in the resolution for each one:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DEFAULT_SIZES = &amp;quot;2560x1440,2560x1440,2560x1440&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;6.&lt;/strong&gt; Determine your main display number (obtain it with &lt;code&gt;echo $DISPLAY&lt;/code&gt; from terminal). Find &lt;code&gt;FIRST_X_DISPLAY_NUMBER&lt;/code&gt; and set the &lt;code&gt;FIRST_X_DISPLAY_NUMBER&lt;/code&gt; to the display number (Ubuntu 17.10 and lower: usually 0, Ubuntu 18.04: usually 1)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;echo $DISPLAY
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;FIRST_X_DISPLAY_NUMBER = 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;7.&lt;/strong&gt; Around line 425, within the definition for &lt;code&gt;get_unused_display_number()&lt;/code&gt;, comment out sections that look for additional displays by adding &lt;code&gt;#&lt;/code&gt; infront:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# while os.path.exists(X_LOCK_FILE_TEMPLATE % display):
+#   display += 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;8.&lt;/strong&gt; Lastly, find &lt;code&gt;launch_session()&lt;/code&gt; and comment out &lt;code&gt;launch_x_server()&lt;/code&gt; and &lt;code&gt;launch_x_session()&lt;/code&gt; within &lt;code&gt;launch_session()&lt;/code&gt;. You will then add &lt;code&gt;display = self.get_unused_display_number()&lt;/code&gt; and &lt;code&gt;self.child_env[&amp;quot;DISPLAY&amp;quot;] = &amp;quot;:%d&amp;quot; % display&lt;/code&gt; to the definition. The function definition should look like the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def launch_session(self, x_args):
+    self._init_child_env()
+    self._setup_pulseaudio()
+    self._setup_gnubby()
+    #self._launch_x_server(x_args)
+    #self._launch_x_session()
+    display = self.get_unused_display_number()
+    self.child_env[&amp;quot;DISPLAY&amp;quot;] = &amp;quot;:%d&amp;quot; % display
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;9.&lt;/strong&gt; Save and exit the editor. Start Chrome Remote Desktop:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;/opt/google/chrome-remote-desktop/chrome-remote-desktop --start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;launch-remote-desktop&#34;&gt;Launch Remote Desktop&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Finally, head to &lt;a href=&#34;https://remotedesktop.google.com/access/&#34; target=&#34;_blank&#34;&gt;Chrome Remote Web&lt;/a&gt; and Click &lt;code&gt;TURN ON&lt;/code&gt; to enable remote desktop access. Set the system name, set the remote desktop connection PIN and click &lt;code&gt;START&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tips on reading academic papers</title>
+      <link>https://greydongilmore.github.io/post/reading-academic-papers/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/reading-academic-papers/</guid>
+      <description>&lt;p&gt;One frequently asked question amoung graduate students is &amp;ldquo;How do you organize/read manuscripts?&amp;rdquo;. I have found a workflow that works quite well and allows me to stay ontop of the endless amount of new publications.&lt;/p&gt;
+&lt;h2 id=&#34;setup-an-rss-feed&#34;&gt;Setup an RSS feed&lt;/h2&gt;
+&lt;p&gt;The first step to take is setting up an RSS feed so you are notified when a new article is published in an area you are interested in. The RSS manager I use is &lt;a href=&#34;https://feedly.com/i/welcome&#34; target=&#34;_blank&#34;&gt;Feedly&lt;/a&gt;, which is simple and easy to use.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;On the main page, select &lt;code&gt;Get started for free&lt;/code&gt;. If you do not want to link your social media accounts, select &lt;code&gt;Continue with Feedly&lt;/code&gt; and use an email address of your choice.&lt;/li&gt;
+&lt;li&gt;Once you have logged in you should see a search box for searching potential topics. Head over to &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed/&#34; target=&#34;_blank&#34;&gt;PubMed&lt;/a&gt; and perform a common search you use to find articles you are interested in. I will use &lt;code&gt;deep brain stimulation&lt;/code&gt; as an example.&lt;/li&gt;
+&lt;li&gt;Once you search for the term in PubMed you will notice an option to &lt;code&gt;Create RSS&lt;/code&gt; underneath the search box. Click this option. Leave the default options set and click the &lt;strong&gt;XML&lt;/strong&gt; link to open a new tab.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./img/pubmed_search.png&#34; alt=&#34;png&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;In the new tab, copy the full URL and paste it into the search box on the Feedly page and hit Enter. Once the search load click on the &lt;code&gt;Follow&lt;/code&gt; tab, create a new feed for it and you will see it appear on the left side column.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./img/feedly_add.png&#34; alt=&#34;png&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can now login and find all recent articles indexed on PubMed about the topic you are interested in. This is a great tool to use to keep up-to-date on publications.&lt;/p&gt;
+&lt;h2 id=&#34;take-notes&#34;&gt;Take Notes&lt;/h2&gt;
+&lt;p&gt;With any new article I come across, I try to make a quick summary note about it for later reference. A really nice tool for these notes is a software called &lt;a href=&#34;https://notable.md/&#34; target=&#34;_blank&#34;&gt;Notable&lt;/a&gt;. Notable is a Markdown based notetaking application that makes sharing notes very open and easy.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When you open Notable for the first time you will need to set your data directory. If you want to easily sync/share your notes, create a new Github repository and use that as your Notable data directory.&lt;/li&gt;
+&lt;li&gt;I created a template note for myself that I use for each new article I read, which looks like:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./img/notable_template.png&#34; alt=&#34;png&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;If you want the template you can download it &lt;a href=&#34;./static/Untitled.md&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install and work with Github desktop</title>
+      <link>https://greydongilmore.github.io/post/install-github-desktop/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/install-github-desktop/</guid>
+      <description>&lt;p&gt;While working with Git is most often performed at the command line, it can often be daughnting for people who are not as comfortable with a terminal window. GitHub has made the entry point easier by introducing a user interface application - &lt;strong&gt;GitHub Desktop&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;setting-up-github-desktop&#34;&gt;Setting up GitHub Desktop&lt;/h2&gt;
+&lt;p&gt;The first step to take is setting up an RSS feed so you are notified when a new article is published in an area you are interested in. The RSS manager I use is &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;Feedly&lt;/a&gt;, which is simple and easy to use.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install the application from the &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you have installed GitHub Desktop, launch it and sign in with your GitHub account:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;./img/pic_01.png&#34; alt=&#34;pic_01&#34; width=&#34;60%&#34;/&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Once you are signed in, choose &lt;strong&gt;Clone a repository&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;./img/pic_02.png&#34; alt=&#34;pic_02&#34; width=&#34;60%&#34;/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installing Automatic Registration Toolbox</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/art/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/art/</guid>
+      <description>&lt;h2 id=&#34;download-art&#34;&gt;Download ART&lt;/h2&gt;
+&lt;p&gt;Download the newest version of &lt;a href=&#34;https://www.nitrc.org/projects/art/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ART&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Make a new directory for the install and extract the tar package into it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir ~/Applications/ART
+cd ~/Applications/ART
+tar -xvzf /mnt/c/Users/*[your_username]*/Downloads/acpcdetect2.0*.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-configuration&#34;&gt;Post Configuration&lt;/h2&gt;
+&lt;p&gt;Set the &lt;code&gt;ARTHOME&lt;/code&gt; environment variable and add the binary directory to your PATH by editing your &lt;code&gt;~/.bashrc&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vim ~/.basrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add these lines to the end:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export ARTHOME=/path/to/ART
+export PATH=$ARTHOME/bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;confirm-installation&#34;&gt;Confirm Installation&lt;/h2&gt;
+&lt;p&gt;Execute &lt;code&gt;acpcdetect&lt;/code&gt; by running command in terminal&lt;/p&gt;
+&lt;p&gt;You may get an error when executing &lt;code&gt;acpcdetect&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;acpcdetect: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you get this error, run the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install libatlas-base-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install &lt;code&gt;pnmtopng&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install -y pnmtopng
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Make and CMake Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/cmake/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/cmake/</guid>
+      <description>&lt;h2 id=&#34;install-make&#34;&gt;Install Make&lt;/h2&gt;
+&lt;p&gt;Install build essentials and Make first:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install make
+sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install build-essential
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-cmake&#34;&gt;Install CMake&lt;/h2&gt;
+&lt;p&gt;Download the latest version of the &lt;a href=&#34;https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CMake executable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In your linux shell run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;chmod +x /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
+sudo /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
+export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Activating Windows Linux Subsystem 2 (WSL2)</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/wsl2/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/wsl2/</guid>
+      <description>&lt;h2 id=&#34;sign-up-for-windows-insider-program&#34;&gt;Sign up for Windows Insider program&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Go to &lt;a href=&#34;https://insider.windows.com/en-us/getting-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Register for Windows Insider&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sign up for Windows Insider program&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;activate-windows-insider-builds&#34;&gt;Activate Windows Insider Builds&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Enable Full Diagnostic Data&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;go to Settings &amp;ndash;&amp;gt; Privacy &amp;ndash;&amp;gt; Diagnostics &amp;amp; feedback &amp;ndash;&amp;gt; Diagnostic data&lt;/li&gt;
+&lt;li&gt;Choose &lt;strong&gt;Full&lt;/strong&gt; as the option&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enable Telemetry Data via Registry&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Open Registry Editor
+&lt;ul&gt;
+&lt;li&gt;Press Windows Key + R then type &lt;code&gt;regedit&lt;/code&gt; to open registry editor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Navigate to:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\DataCollection
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Right-click &lt;strong&gt;DataCollection&lt;/strong&gt;, click &lt;strong&gt;New&lt;/strong&gt; and then click &lt;strong&gt;DWORD (32-bit) Value&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Name it as  &lt;strong&gt;AllowTelemetry&lt;/strong&gt;, and then press &lt;strong&gt;ENTER&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Double-click &lt;strong&gt;AllowTelemetry&lt;/strong&gt;, set the value as 3, and then click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/regedit_telemetry.png&#34;&gt;
+ &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Repeat the above steps for:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\DataCollection
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Restart your computer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Group Policy to enable Telemetry&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Press &lt;strong&gt;Windows key + r&lt;/strong&gt; and type &lt;strong&gt;gpedit.msc&lt;/strong&gt; in the Run prompt, hit &lt;strong&gt;ENTER&lt;/strong&gt; to launch group policy editor&lt;/li&gt;
+&lt;li&gt;Go to &lt;strong&gt;Computer Configuration&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Administrative Templates&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Windows Components&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Data Collection and Preview Builds&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Double-click &lt;strong&gt;Allow Telemetry&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;Options&lt;/strong&gt; box, configure the level as 3, and then click &lt;strong&gt;OK&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/group_telemetry.png&#34;&gt;
+ &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;activate-insider-build&#34;&gt;Activate Insider Build&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Search for &lt;strong&gt;Check for Updates&lt;/strong&gt; in the Windows search menu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the new window select &lt;strong&gt;Windows Insider Program&lt;/strong&gt; at the bottom of the menu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select Get Started and follow the instructions, making sure you select &lt;strong&gt;Fast&lt;/strong&gt; when asked&lt;/p&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/windows_insider_greyed.png&#34;&gt;
+ &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you have completed the registration you will need to check for updates and let Windows install the new insider build.&lt;/p&gt;
+ &lt;p align=&#34;center&#34;&gt;
+   &lt;img width=&#34;500&#34; src=&#34;img/windows_insider_update.png&#34;&gt;
+ &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once done you should restart your computer&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;turn-on-linux-subsystem-feature&#34;&gt;Turn on linux subsystem feature&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open Windows PowerShell as administrator and run the commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will need to restart your computer again&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;download-the-linux-distro&#34;&gt;Download the linux distro&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the Microsoft Store and choose your favorite Linux distribution by searching for them (I prefer Ubuntu):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/ubuntu/9nblggh4msv6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/debian/9msvkqc78pk6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the distro&amp;rsquo;s page, select &lt;strong&gt;Get&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once done installing, open up &lt;strong&gt;Powershell&lt;/strong&gt; as administrator and run (replace distro with the name of the distro you installed):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wsl --set-version [Distro] 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wsl --set-default-version 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;finalizing&#34;&gt;Finalizing&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To complete the initialization of your newly installed distro, launch a new instance by searching in the Start menu and launching the distro&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first time a newly installed distro runs, a Console window will open, and you&amp;rsquo;ll be asked to wait for a minute or two for the installation to complete&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once installation is complete, you will be prompted to create a new user account (and its password)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Most distros ship with an empty/minimal package catalog. You should regularly be updating your package catalog, and upgrading your installed packages using your distro&amp;rsquo;s preferred package manager&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Terminator Linux Emulator</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/wsl_terminator/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/wsl_terminator/</guid>
+      <description>&lt;h2 id=&#34;installing-an-x-server&#34;&gt;Installing an X Server&lt;/h2&gt;
+&lt;p&gt;To run an X Window application, you will need to have an X Server installed and running on your Windows 10 machine. The most popular application is: &lt;a href=&#34;https://sourceforge.net/projects/vcxsrv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VcXsrv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After installing, VcXsrv creates a desktop shortcut. To start the server in multi-window mode run the following command in a command prompt:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;&amp;quot;C:\Program Files\VcXsrv\vcxsrv.exe&amp;quot; :0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl -dpi auto
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;configuring-terminator&#34;&gt;Configuring Terminator&lt;/h2&gt;
+&lt;p&gt;Once VcXsrv is installed, the next step is to install Terminator on WSL Bash:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install terminator
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Terminator will not initalize a config file so you will need to do this manually:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/.config/terminator
+touch ~/.config/terminator/config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try launching Terminator by specifying the X Display to connect to (:0) in the linux shell:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;DISPLAY=:0 terminator &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you receive an error about D-Bus (&lt;code&gt;No D-BUS daemon running&lt;/code&gt;) then press &lt;code&gt;CTRL+C&lt;/code&gt; to abort the previous command and run the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install dbus-x11
+sudo service dbus start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once you have completed the above run the previous command again:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;DISPLAY=:0 terminator &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A nice Terminator window should pop up.&lt;/p&gt;
+&lt;h2 id=&#34;installing-zsh&#34;&gt;Installing Zsh&lt;/h2&gt;
+&lt;p&gt;The next step is to install Zsh with oh-my-zsh. Installation is straightfoward:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install curl wget git zsh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You may receive a message &lt;code&gt;Password: chsh: PAM: Authentication failure&lt;/code&gt; you can ignore this.&lt;/p&gt;
+&lt;p&gt;Set the theme to &amp;ldquo;ys&amp;rdquo; at line 11 by replacing &lt;code&gt;robbyrussell&lt;/code&gt; in &lt;code&gt;.zshrc&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;ZSH_THEME=&amp;quot;ys&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have never used &lt;code&gt;vi&lt;/code&gt; editor before, you will need to press the &lt;code&gt;i&lt;/code&gt; key to enter inout mode to make changes. Once you have made the change you will need to exit input mode by pressing &lt;code&gt;esc&lt;/code&gt;. In order to exit the editor and save you need to press &lt;code&gt;:&lt;/code&gt; followed by &lt;code&gt;wq&lt;/code&gt; to exit the editor with save.&lt;/p&gt;
+&lt;p&gt;The only problem with Bash in WSL is it will always run Bash instead of Zsh. To get around that, add this to the end of your &lt;code&gt;~/.bashrc&lt;/code&gt; which will launch zsh instead when it starts up:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;if [ -t 1 ]; then
+  exec zsh
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;terminator-colorscheme&#34;&gt;Terminator Colorscheme&lt;/h2&gt;
+&lt;p&gt;The next thing is to change the default Terminator colorscheme to Solarized Dark. The easiest way to do this, is to use the awesome node package &lt;a href=&#34;https://github.com/base16-builder/base16-builder&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;base16-builder&lt;/a&gt;. You need to first install Node.js:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+sudo apt install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once you have installed Node.js you can then run the base-16builder install:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo npm install --global base16-builder
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You need to change directory access to the &lt;code&gt;configstore&lt;/code&gt; directory just created:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo chown -R [your_username] /home/[your_username]/.config/configstore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you need to apply the scheme to the terminator config file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p .config/terminator
+base16-builder -s solarized -t terminator -b dark &amp;gt; .config/terminator/config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;dircolors&#34;&gt;Dircolors&lt;/h2&gt;
+&lt;p&gt;To change the dircolors you can use &lt;a href=&#34;https://github.com/seebi/dircolors-solarized&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Solarized dircolors&lt;/a&gt; on Github and downloaded them to &lt;code&gt;.dir_colors&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;wget https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
+mv dircolors.256dark .dir_colors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, added this to your &lt;code&gt;.zshrc&lt;/code&gt; to eval the Solarized dircolors on startup:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;if [ -f ~/.dir_colors ]; then
+  eval `dircolors ~/.dir_colors`
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;launching-terminator-directly&#34;&gt;Launching Terminator Directly&lt;/h2&gt;
+&lt;p&gt;To launch a hidden command window using the WShell Object in VBS you need to type the folowing script into a text document.&lt;/p&gt;
+&lt;p&gt;Right click on your desktop and create a new text doc. Then copy the following and save the file with the .vbs extension (e.g. startTerminator.vbs):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;args = &amp;quot;-c&amp;quot; &amp;amp; &amp;quot; -l &amp;quot; &amp;amp; &amp;quot;&amp;quot;&amp;quot;DISPLAY=:0 terminator&amp;quot;&amp;quot;&amp;quot;
+WScript.CreateObject(&amp;quot;Shell.Application&amp;quot;).ShellExecute &amp;quot;bash&amp;quot;, args, &amp;quot;&amp;quot;, &amp;quot;open&amp;quot;, 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Move this &lt;code&gt;.vbs&lt;/code&gt; file into a safe place such as &amp;ldquo;C:\Users[your_username]&amp;rdquo;. Right click on the file and &amp;lsquo;Send to&amp;rsquo; the desktop as a shortcut. Right click on the new shortcut and select properties. In the &amp;lsquo;Target&amp;rsquo; field type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;C:\Windows\System32\wscript.exe C:\Users\*[your_username]*\startTerminator.vbs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Click &amp;lsquo;Apply&amp;rsquo;. You can then set the icon of the shortcut by saving &lt;a href=&#34;https://www.google.com/imgres?imgurl=http://www.iconarchive.com/download/i89875/alecive/flatwoken/Apps-Terminator.ico&amp;amp;imgrefurl=http://www.iconarchive.com/show/flatwoken-icons-by-alecive/Apps-Terminator-icon.html&amp;amp;docid=q0xx5aXq6WGXIM&amp;amp;tbnid=izoeFerwzIqyVM:&amp;amp;vet=1&amp;amp;w=256&amp;amp;h=256&amp;amp;source=sh/x/im&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this icon file&lt;/a&gt; to the same place you saved the &lt;code&gt;.vbs&lt;/code&gt; file. Right click on the shortcut again, properties and at the bottom select &amp;lsquo;Change Icon&amp;hellip;&amp;rsquo;. From here you can select the icon file you just downloaded.&lt;/p&gt;
+&lt;p&gt;In the &amp;lsquo;Start in&amp;rsquo; field type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;%USERPROFILE%
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;rsquo;s impossible to have Termiator start in your Linux home directory through this method since that path is not &amp;ldquo;known&amp;rdquo; to Windows. To get around it, add this to your .zshrc so it CD&amp;rsquo;s to your home directory on startup:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;if [ -t 1 ]; then
+  cd ~
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;other-customizations&#34;&gt;Other customizations&lt;/h2&gt;
+&lt;p&gt;If you want to further modify your terminator theme you can add lines to the file &lt;code&gt;~/.config/terminator/config&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To change the opening size of the terminal window add the variable &lt;code&gt;size&lt;/code&gt; under layouts:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;vi ~/.config/terminator/config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = Base16 Solarized Dark
+      type = Terminal
+    [[[window0]]]
+      parent = &amp;quot;&amp;quot;
+      size = 1594, 465
+      type = Window
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Close terminator and re-open.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dcm2niix Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/dcm2niix/</link>
+      <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/dcm2niix/</guid>
+      <description>&lt;h2 id=&#34;run-install&#34;&gt;Run Install&lt;/h2&gt;
+&lt;p&gt;Run the following code in a linux terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install dcm2niix
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-dependencies&#34;&gt;Install Dependencies&lt;/h2&gt;
+&lt;p&gt;There are a few packages that allow dcm2niix to run faster:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install python-gdcm
+sudo apt-get install pigz
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mount Remote Drive with SSHFS</title>
+      <link>https://greydongilmore.github.io/post/windows_docs/windows_sshfs/</link>
+      <pubDate>Thu, 28 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/windows_docs/windows_sshfs/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install the latest stable installer of &lt;a href=&#34;https://github.com/billziss-gh/winfsp/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WinFSP&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the latest stable installer of &lt;a href=&#34;https://github.com/billziss-gh/sshfs-win/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SSHFS-Win&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;strong&gt;File Explorer&lt;/strong&gt;, right-click on &lt;strong&gt;This PC&lt;/strong&gt; and choose &lt;strong&gt;Map network drive&lt;/strong&gt;. Choose a drive to mount at and enter the following in the folder field:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;\\sshfs\[your_login_name]@graham.computecanada.ca/projects/rrg-akhanf/cfmm-bids
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure you check the box &lt;strong&gt;Connect using different credentials&lt;/strong&gt; if your computer login password is different from Sharcnet.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;
+  &lt;img width=&#34;500&#34; src=&#34;img/map_network_sshfs.png&#34;&gt;
+&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;You should then see the network drive in your file explorer!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;
+  &lt;img width=&#34;600&#34; src=&#34;img/drive_directory.png&#34;&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Activating Windows Linux Subsystem (WSL)</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/wsl/</link>
+      <pubDate>Wed, 28 Jan 2015 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/wsl/</guid>
+      <description>&lt;h2 id=&#34;turn-on-linux-subsystem-feature&#34;&gt;Turn on linux subsystem feature&lt;/h2&gt;
+&lt;p&gt;Open Windows PowerShell as administrator and run the command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Restart your computer when prompted.&lt;/p&gt;
+&lt;h2 id=&#34;download-the-linux-distro&#34;&gt;Download the linux distro&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the Microsoft Store and choose your favorite Linux distribution by searching for them (I prefer Ubuntu):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/ubuntu/9nblggh4msv6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-ca/p/debian/9msvkqc78pk6?rtc=1&amp;amp;activetab=pivot:overviewtab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the distro&amp;rsquo;s page, select &amp;ldquo;Get&amp;rdquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To complete the initialization of your newly installed distro, launch a new instance by searching in the Start menu and launching the distro.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first time a newly installed distro runs, a Console window will open, and you&amp;rsquo;ll be asked to wait for a minute or two for the installation to complete.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once installation is complete, you will be prompted to create a new user account (and its password).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Most distros ship with an empty/minimal package catalog. I strongly recommend regularly updating your package catalog, and upgrading your installed packages using your distro&amp;rsquo;s preferred package manager.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;add-link-to-the-linux-subsystem-in-windows-quick-access&#34;&gt;Add link to the linux subsystem in Windows Quick Access&lt;/h2&gt;
+&lt;p&gt;Depending on the version of linux you installed, the absolute path will be found either:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;C:\Users\*[your_username]*\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_*[unique_code]*\LocalState\rootfs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:\Users\*[your_username]*\AppData\Local\lxss&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;When you find the correct location, right click on the parent folder and select &amp;lsquo;Pin to Quick Access&amp;rsquo;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
