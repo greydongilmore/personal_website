@@ -26,7 +26,7 @@ interests:
 # Education to show in About widget
 education:
   courses:
-  - course: Postdoc in Department of Mathematics
+  - course: Postdoctoral in Mathematics
     institution: Western University
     year: 2022-2024
   - course: Ph.D. Biomedical Engineering
@@ -75,5 +75,4 @@ email: ""
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-
-<p style='text-align: justify;'> <b>Greydon Gilmore</b> obtained a Ph.D. in Biomedical Engineering at Western University (<a href="https://ir.lib.uwo.ca/etd/8545/" target="_blank">Western thesis repository</a>). His thesis work involved the development of an open-source stereotactic planning software for functional neurosurgery. His primary research interests include cranial electrodes inserted for movement disorders and epilepsy. The goal is to improve surgical targeting accuracy and post-operative localization of electrodes.</p>
+<p style='text-align: justify;'> I earned my Ph.D. in Biomedical Engineering at Western University, where I built open-source stereotactic planning software for functional neurosurgery. My work focuses on improving targeting accuracy and post-operative electrode localization for movement disorders and epilepsy through imaging, electrophysiology, and clinical software.</p>

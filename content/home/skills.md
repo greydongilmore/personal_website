@@ -9,7 +9,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 20
 
-title: Skills
+title: 
 subtitle:
 
 spacing:
@@ -19,23 +19,18 @@ spacing:
 # - Add/remove as many `feature` blocks below as you like.
 # - For available icons, see: https://wowchemy.com/docs/page-builder/#icons
 feature:
-- description: "Python, Bash, R, Matlab, git"
+- description: "Python, MATLAB, R, Bash, Git"
   icon: code
   icon_pack: fa
   name: Programming
-- description: "FSL, ANTS, NiftyReg, 3D Slicer"
+- description: "ANTs, FSL, NiftyReg, 3D Slicer"
   icon: brain
   icon_pack: fa
   name: Neuroimaging
-- description: "Extracellular, LFP"
+- description: "Single-unit & LFP (DBS/SEEG), EEG/iEEG"
   icon: "spike"
   icon_pack: "custom"
-  name: "Electrophysiology"
-# Uncomment to use emoji icons.
-#- icon: ":smile:"
-#  icon_pack: "emoji"
-#  name: "Emojiness"
-#  description: "100%"  
+  name: "Intraoperative Neurophysiology"
 
 # Uncomment to use custom SVG icons.
 # Place your custom SVG icon in `assets/media/icons/`.

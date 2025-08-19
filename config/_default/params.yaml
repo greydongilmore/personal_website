@@ -7,6 +7,7 @@
 
 theme: ocean
 day_night: true
+show_day_night: false
 font: 'Arial'
 font_size: L
 
@@ -20,29 +21,22 @@ twitter: ''
 
 # Contact (edit or remove options as required)
 
-email: greydongilmore@gmail.com
+email: greydon.gilmore@gmail.com
 phone: 1.613.852.9282
-address:
-  street: 339 Windermere Rd.
-  city: London
-  region: ONT
-  postcode: 'N6A 5A5'
-  country: Canada
-  country_code: CA
+#address:
+#  street: 339 Windermere Rd.
+#  city: London
+#  region: 'ON'
+#  postcode: 'N6A 5A5'
+#  country: Canada
+#  country_code: CA
 directions: ""
-office_hours:
-  - 'Monday 10:00 to 13:00'
-  - 'Wednesday 09:00 to 10:00'
 appointment_url: ''
-contact_links:
-  - icon: twitter
-    icon_pack: fab
-    name: DM Me
-    link: 'https://twitter.com/GilmoreGreydon'
-  - icon: skype
-    icon_pack: fab
-    name: Skype Me
-    link: 'skype:greydon.gilmore'
+#contact_links:
+#  - icon: twitter
+#    icon_pack: fab
+#    name: DM Me
+#    link: 'https://twitter.com/GilmoreGreydon'
 
 # Site header
 
@@ -98,7 +92,7 @@ abstract_length: 135
 plugins_js: []
 avatar:
   gravatar: false
-  shape: circle
+  shape: square
 publications:
   date_format: January 2006
   citation_style: apa
