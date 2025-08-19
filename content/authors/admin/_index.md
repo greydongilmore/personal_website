@@ -6,7 +6,7 @@ title: Greydon Gilmore
 superuser: true
 
 # Role/position/tagline
-role: Electrophysiologist
+role: Intraoperative Neurophysiologist Biomedical Engineer
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -28,7 +28,7 @@ education:
   courses:
   - course: Postdoc in Department of Mathematics
     institution: Western University
-    year: 2022-current
+    year: 2022-2024
   - course: Ph.D. Biomedical Engineering
     institution: Western University
     year: 2017-2022
@@ -47,9 +47,9 @@ social:
 - icon: envelope
   icon_pack: fas
   link: "mailto:greydon.gilmore@gmail.com"
-- icon: twitter
+- icon: orcid
   icon_pack: fab
-  link: https://twitter.com/GilmoreGreydon
+  link: https://orcid.org/0000-0001-7523-5734
 - icon: google-scholar
   icon_pack: ai
   link: https://scholar.google.ca/citations?user=0zrqWjsAAAAJ&hl=en&oi=ao
@@ -65,9 +65,9 @@ social:
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-- icon: cv
-  icon_pack: ai
-  link: files/cv/CVLong_Greydon-Gilmore.pdf
+#- icon: cv
+#  icon_pack: ai
+#  link: files/cv/CVLong_Greydon-Gilmore.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""

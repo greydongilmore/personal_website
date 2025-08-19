@@ -13,9 +13,9 @@ main:
   - name: grants
     url: '#grants'
     weight: 30
-  - name: posts
-    url: '#posts'
-    weight: 40
+#  - name: posts
+#    url: '#posts'
+#    weight: 40
   - name: courses
     url: '#courses'
     weight: 50
