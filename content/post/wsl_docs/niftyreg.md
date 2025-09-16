@@ -11,6 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Neuro Software"]
 authors: ["admin"]
+show_date: false
 
 # Optional header image (relative to `assets/media/` folder).
 header:
@@ -23,24 +24,26 @@ header:
 Obtain the newest version of [NiftyReg](https://sourceforge.net/projects/niftyreg/files/latest/download) or by running the following:
 
 ```console
-mkdir -p ~/code/niftyreg_source
-cd ~/code/niftyreg_source
-git clone https://github.com/SuperElastix/niftyreg.git
+mkdir -p ~/Documents/code/niftyreg_source
+cd ~/Documents/code/niftyreg_source
+git clone https://github.com/SuperElastix/niftyreg.git .
 ```
 
 ## Run CMake/Make
 
-Make the build and install directories. 
+Make the build directory.
 
-The default install location is ```/usr/local```, which falls on your PATH. This is the easiest location to install. If you want to install somwhere else then specify the path in the ```CMAKE_INSTALL_PREFIX``` variable.
+The default install location is `/usr/local`, which falls on your PATH. This is the easiest location to install. If you want to install somwhere else then specify the path in the `CMAKE_INSTALL_PREFIX` variable.
 
 ```console
 mkdir -p ~/bin/niftyreg
 cd ~/bin/niftyreg
-ccmake ~/code/niftyreg_source/niftyreg
+ccmake ~/Documents/code/niftyreg_source
 ```
 
-The following options will be displayed, ensure you change ```CMAKE_INSTALL_PREFIX``` variable to the install directory path if you don't want to use default:
+The following options will be displayed, ensure you change `CMAKE_INSTALL_PREFIX` variable to the install directory path if you don't want to use default:
+
+To avoid compiling errors, turn `USE_OPENMP` OFF.
 
 | Parameter                   | Value                                   |
 |:----------------------------|:----------------------------------------|
@@ -59,20 +62,20 @@ The following options will be displayed, ensure you change ```CMAKE_INSTALL_PREF
 Press __'c'__ to configure the NiftyReg project, press __'c'__ to configure the project. Once the project is correctly configured, press the __'g'__ key to generate the Makefiles. You can then build and install the project:
 
 ```console
-sudo make
+sudo make -j
 sudo make install
 ```
 
 ## Post-Install Configuration
 
-The project should then be installed into the ```CMAKE_INSTALL_PREFIX``` directory you previously created. 
+The project should then be installed into the `CMAKE_INSTALL_PREFIX` directory you previously created. 
 
-If you changed the install prefix directory, to one not on your PATH, you will need to add NiftyReg to your PATH. In order to use NiftyReg in any terminal, you will need to edit your ```.bashrc``` or ```.profile``` file by adding the following lines:
+If you changed the install prefix directory, to one not on your PATH, you will need to add NiftyReg to your PATH. In order to use NiftyReg in any terminal, you will need to edit your `.bashrc` or `.profile` file by adding the following lines:
 
 ```
 NREG=<path_to_your_niftyreg_install>
-export PATH={NREG}/bin:${PATH}
-export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
+export PATH=$PATH:$NREG/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NREG/lib
 ```
 
 Close and re-open the linux terminal then run:

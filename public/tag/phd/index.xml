@@ -145,12 +145,18 @@
     </item>
     
     <item>
-      <title>Install and work with Github desktop</title>
+      <title>Github desktop Install</title>
       <link>https://greydongilmore.github.io/post/install-github-desktop/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
       <guid>https://greydongilmore.github.io/post/install-github-desktop/</guid>
       <description>&lt;p&gt;While working with Git is most often performed at the command line, it can often be daughnting for people who are not as comfortable with a terminal window. GitHub has made the entry point easier by introducing a user interface application - &lt;strong&gt;GitHub Desktop&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;setting-up-github-desktop&#34;&gt;Setting up GitHub Desktop&lt;/h2&gt;
+&lt;h2 id=&#34;installing-on-ubuntu&#34;&gt;Installing on Ubuntu&lt;/h2&gt;
+&lt;p&gt;Download the linux version of the application from &lt;a href=&#34;https://github.com/shiftkey/desktop/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Run the following command (replacing the filename with the one you downloaded):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cd ~/Downloads
+sudo dpkg -i GitHubDesktop-linux-amd64-3.4.13-linux1.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;installing-on-windows&#34;&gt;Installing on Windows&lt;/h2&gt;
 &lt;p&gt;The first step to take is setting up an RSS feed so you are notified when a new article is published in an area you are interested in. The RSS manager I use is &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;Feedly&lt;/a&gt;, which is simple and easy to use.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;

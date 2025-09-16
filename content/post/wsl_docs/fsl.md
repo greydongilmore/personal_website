@@ -1,5 +1,5 @@
 ---
-title: FMRIB Software Library Installation
+title: FSL (FMRIB Software Library) Install
 subtitle:
 summary:
 date: "2019-10-28T00:00:00Z"
@@ -11,7 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Neuro Software"]
 authors: ["admin"]
-
+show_date: false
 # Optional header image (relative to `assets/media/` folder).
 header:
   caption: ""

@@ -30,8 +30,9 @@
   
     
   
-  <meta name="description" content="Get the latest ANTs code Download the latest code into an arbitrary directory, I use ~/code:
-mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will also need to install the ZLIB libraries:" />
+  <meta name="description" content="Get the latest ANTs code You will need to install the ZLIB libraries:
+sudo apt install zlib1g-dev  Obtain the newest version of ANTs by running the following:
+mkdir -p ~/Documents/code/ants_source cd ~/Documents/code/ants_source git clone https://github." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/post/wsl_docs/ants/" />
@@ -295,9 +296,10 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
   
   <meta property="og:site_name" content="Greydon Gilmore" />
   <meta property="og:url" content="https://greydongilmore.github.io/post/wsl_docs/ants/" />
-  <meta property="og:title" content="Install Advanced Normalization Tools | Greydon Gilmore" />
-  <meta property="og:description" content="Get the latest ANTs code Download the latest code into an arbitrary directory, I use ~/code:
-mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will also need to install the ZLIB libraries:" /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:title" content="ANTs (Advanced Normalization Tools) Install | Greydon Gilmore" />
+  <meta property="og:description" content="Get the latest ANTs code You will need to install the ZLIB libraries:
+sudo apt install zlib1g-dev  Obtain the newest version of ANTs by running the following:
+mkdir -p ~/Documents/code/ants_source cd ~/Documents/code/ants_source git clone https://github." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -332,7 +334,7 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
     "@type": "WebPage",
     "@id": "https://greydongilmore.github.io/post/wsl_docs/ants/"
   },
-  "headline": "Install Advanced Normalization Tools",
+  "headline": "ANTs (Advanced Normalization Tools) Install",
   
   "datePublished": "2020-09-28T00:00:00Z",
   "dateModified": "2020-09-28T00:00:00Z",
@@ -350,7 +352,7 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
       "url": "https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Get the latest ANTs code Download the latest code into an arbitrary directory, I use ~/code:\nmkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will also need to install the ZLIB libraries:"
+  "description": "Get the latest ANTs code You will need to install the ZLIB libraries:\nsudo apt install zlib1g-dev  Obtain the newest version of ANTs by running the following:\nmkdir -p ~/Documents/code/ants_source cd ~/Documents/code/ants_source git clone https://github."
 }
 </script>
 
@@ -366,7 +368,7 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
 
 
 
-  <title>Install Advanced Normalization Tools | Greydon Gilmore</title>
+  <title>ANTs (Advanced Normalization Tools) Install | Greydon Gilmore</title>
 </head>
 
 
@@ -573,14 +575,37 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
-          </a>
-          <div class="dropdown-menu">
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
             
-              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
             
-          </div>
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>posts</span></a>
         </li>
 
         
@@ -749,7 +774,7 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
   
   
 <div class="article-container pt-3">
-  <h1>Install Advanced Normalization Tools</h1>
+  <h1>ANTs (Advanced Normalization Tools) Install</h1>
 
   
 
@@ -772,14 +797,6 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sep 28, 2020
-  </span>
   
 
   
@@ -813,35 +830,31 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
 
     <div class="article-style">
       <h2 id="get-the-latest-ants-code">Get the latest ANTs code</h2>
-<p>Download the latest code into an arbitrary directory, I use ~/code:</p>
-<pre><code class="language-console">mkdir ~/code 
-cd ~/code
-git clone https://github.com/ANTsX/ANTs.git
+<p>You will need to install the ZLIB libraries:</p>
+<pre><code class="language-console">sudo apt install zlib1g-dev
 </code></pre>
-<p>You will also need to install the ZLIB libraries:</p>
-<pre><code class="language-console">sudo apt-get install zlib1g-dev
+<p>Obtain the newest version of <a href="https://github.com/ANTsX/ANTs/releases/latest" target="_blank" rel="noopener">ANTs</a> by running the following:</p>
+<pre><code class="language-console">mkdir -p ~/Documents/code/ants_source
+cd ~/Documents/code/ants_source
+git clone https://github.com/ANTsX/ANTs.git .
 </code></pre>
 <h2 id="run-cmakemake">Run CMake/Make</h2>
-<p>I install my applications in <code>~/Applications</code>, however the following will install ANTs in <code>~/bin</code>:</p>
+<p>Make the build directory.</p>
+<p>The default install location is <code>/opt/ANTs</code>, which falls on your PATH. This is the easiest location to install. If you want to install somewhere else then specify the path in the <code>CMAKE_INSTALL_PREFIX</code> variable.</p>
 <pre><code class="language-console">mkdir -p ~/bin/ants
 cd ~/bin/ants
-ccmake ~/code/ANTs
+ccmake ~/Documents/code/ants_source
 </code></pre>
-<p>Hit <strong>&lsquo;c&rsquo;</strong> to do an initial configuration. CMake will do some checking and then present options for review. Hit <strong>&lsquo;c&rsquo;</strong> again to do another round of configuration. If there are no errors, you&rsquo;re ready to generate the make files by pressing <strong>&lsquo;g&rsquo;</strong>.</p>
+<p>Hit <strong>&lsquo;c&rsquo;</strong> to do an initial configuration. CMAKE will do some checking and then present options for review. Hit <strong>&lsquo;c&rsquo;</strong> again to do another round of configuration. If there are no errors, you&rsquo;re ready to generate the make files by pressing <strong>&lsquo;g&rsquo;</strong>.</p>
 <p>Now you are back at the command line, it&rsquo;s time to compile:</p>
-<pre><code class="language-console">make
+<pre><code class="language-console">make -j
 </code></pre>
-<p>This compiles in the most resource-efficient manner. To save time, you can use multiple threads, for example:</p>
-<pre><code class="language-console">make -j 2
+<pre><code class="language-console">cd ~/bin/ants/ANTS-build
+sudo make install
 </code></pre>
 <h2 id="post-install-configuration">Post-install Configuration</h2>
-<p>If you want to use ANTs scripts, copy them from the source directory <code>Scripts/</code> to the bin directory where <code>antsRegistration</code> etc are located:</p>
-<pre><code class="language-console">cp -r ~/bin/ants/Scripts/* ~/bin/ants/bin/
-</code></pre>
-<p>Assuming you&rsquo;ve built in <code>~/bin/ants</code>, there will now be a binary directory <code>~/bin/ants/bin</code>, containing the programs (and scripts if you&rsquo;ve included them). The scripts additionally require ANTSPATH to point to the bin directory including a trailing slash.</p>
-<p>You will need to edit your <code>.bashrc</code> or <code>.profile</code> file by adding the following lines:</p>
-<pre><code class="language-console">export ANTSPATH=${HOME}/bin/ants/bin
-export PATH=${ANTSPATH}:$PATH
+<p>You will need to edit your <code>.bashrc</code> or <code>.zshrc</code> file by adding the following lines:</p>
+<pre><code class="language-console">export PATH=$PATH:/opt/ANTs/bin
 </code></pre>
 <p>Now check this worked correctly:</p>
 <pre><code class="language-console">which antsRegistration
@@ -908,15 +921,15 @@ export PATH=${ANTSPATH}:$PATH
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/wsl_docs/freesurfer/">Freesurfer Installation</a></li>
-      
       <li><a href="/post/wsl_docs/niftyreg/">NiftyReg Install</a></li>
       
-      <li><a href="/post/wsl_docs/fsl/">FMRIB Software Library Installation</a></li>
+      <li><a href="/post/wsl_docs/fsl/">FSL (FMRIB Software Library) Install</a></li>
       
-      <li><a href="/post/wsl_docs/art/">Installing Automatic Registration Toolbox</a></li>
+      <li><a href="/post/wsl_docs/art/">ART (Automatic Registration Toolbox) Install</a></li>
       
-      <li><a href="/post/wsl_docs/cmake/">Make and CMake Installation</a></li>
+      <li><a href="/post/wsl_docs/cmake/">Make and CMake Install</a></li>
+      
+      <li><a href="/post/wsl_docs/dcm2niix/">Dcm2niix Install</a></li>
       
     </ul>
   </div>

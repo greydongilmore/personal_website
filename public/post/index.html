@@ -296,7 +296,7 @@
   
   <meta property="og:site_name" content="Greydon Gilmore" />
   <meta property="og:url" content="https://greydongilmore.github.io/post/" />
-  <meta property="og:title" content="Blog | Greydon Gilmore" />
+  <meta property="og:title" content="Posts | Greydon Gilmore" />
   <meta property="og:description" content="Intraoperative Neurophysiologist Biomedical Engineer" /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
@@ -317,7 +317,7 @@
 
 
 
-  <title>Blog | Greydon Gilmore</title>
+  <title>Posts | Greydon Gilmore</title>
 </head>
 
 
@@ -524,14 +524,37 @@
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
-          </a>
-          <div class="dropdown-menu">
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
             
-              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
             
-          </div>
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>posts</span></a>
         </li>
 
         
@@ -700,7 +723,7 @@
     
   
 <div class="universal-wrapper pt-3">
-  <h1>Blog</h1>
+  <h1>Posts</h1>
 
   
 
@@ -771,113 +794,6 @@
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Jul 28, 2021
-  </span>
-  
-
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <div class="section-subheading article-title mb-0 mt-0">
-      <a href="/post/wsl_docs/freesurfer/" >Freesurfer Installation</a>
-    </div>
-
-    
-    <a href="/post/wsl_docs/freesurfer/"  class="summary-link">
-      <div class="article-style">
-        Download software Download the linux software version.
-Run the following command:
-sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz  You will also need to install some dependancies:
-sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libxss1  Post-Install Configurations Add Freesurfer to your path:
-      </div>
-    </a>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-  
-  
-  <div>
-    
-
-  <span class="author-highlighted">
-      Greydon Gilmore</span>
-  </div>
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Feb 20, 2021
-  </span>
   
 
   
@@ -969,14 +885,6 @@ which [name_application]    Copy the path from this output.
   
 
   
-  <span class="article-date">
-    
-    
-      
-    
-    Sep 28, 2020
-  </span>
-  
 
   
 
@@ -1030,14 +938,15 @@ which [name_application]    Copy the path from this output.
   <div class="media-body">
 
     <div class="section-subheading article-title mb-0 mt-0">
-      <a href="/post/wsl_docs/ants/" >Install Advanced Normalization Tools</a>
+      <a href="/post/wsl_docs/ants/" >ANTs (Advanced Normalization Tools) Install</a>
     </div>
 
     
     <a href="/post/wsl_docs/ants/"  class="summary-link">
       <div class="article-style">
-        Get the latest ANTs code Download the latest code into an arbitrary directory, I use ~/code:
-mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will also need to install the ZLIB libraries:
+        Get the latest ANTs code You will need to install the ZLIB libraries:
+sudo apt install zlib1g-dev  Obtain the newest version of ANTs by running the following:
+mkdir -p ~/Documents/code/ants_source cd ~/Documents/code/ants_source git clone https://github.
       </div>
     </a>
     
@@ -1065,14 +974,6 @@ mkdir ~/code cd ~/code git clone https://github.com/ANTsX/ANTs.git  You will als
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sep 28, 2020
-  </span>
   
 
   
@@ -1164,14 +1065,6 @@ sudo groupadd fuse sudo usermod -a -G fuse $USER    Create a set of ssh-keys, pr
   
 
   
-  <span class="article-date">
-    
-    
-      
-    
-    Sep 28, 2020
-  </span>
-  
 
   
 
@@ -1232,7 +1125,8 @@ sudo groupadd fuse sudo usermod -a -G fuse $USER    Create a set of ssh-keys, pr
     <a href="/post/wsl_docs/niftyreg/"  class="summary-link">
       <div class="article-style">
         Download NiftyReg Obtain the newest version of NiftyReg or by running the following:
-mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git  Run CMake/Make Make the build and install directories.
+mkdir -p ~/Documents/code/niftyreg_source cd ~/Documents/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git .  Run CMake/Make Make the build directory.
+The default install location is /usr/local, which falls on your PATH.
       </div>
     </a>
     
@@ -1260,14 +1154,6 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Jun 28, 2020
-  </span>
   
 
   
@@ -1322,7 +1208,7 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
   <div class="media-body">
 
     <div class="section-subheading article-title mb-0 mt-0">
-      <a href="/post/wsl_docs/fsl/" >FMRIB Software Library Installation</a>
+      <a href="/post/wsl_docs/fsl/" >FSL (FMRIB Software Library) Install</a>
     </div>
 
     
@@ -1358,14 +1244,6 @@ Make sure you run a backup prior to performing this hack&hellip; just in case.
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Oct 28, 2019
-  </span>
   
 
   
@@ -1456,14 +1334,6 @@ Make sure you run a backup prior to performing this hack&hellip; just in case.
   
 
   
-  <span class="article-date">
-    
-    
-      
-    
-    Sep 28, 2019
-  </span>
-  
 
   
 
@@ -1552,13 +1422,95 @@ Make sure you run a backup prior to performing this hack&hellip; just in case.
   
 
   
-  <span class="article-date">
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+      
+    </div>
+
     
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+    
+  
     
       
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <div class="section-subheading article-title mb-0 mt-0">
+      <a href="/post/wsl_docs/art/" >ART (Automatic Registration Toolbox) Install</a>
+    </div>
+
     
-    Jul 28, 2018
-  </span>
+    <a href="/post/wsl_docs/art/"  class="summary-link">
+      <div class="article-style">
+        Download ART Download the newest version of ART
+Make a new directory for the install and extract the tar package into it:
+mkdir ~/Applications/ART cd ~/Applications/ART tar -xvzf /mnt/c/Users/*[your_username]*/Downloads/acpcdetect2.0*.tar.gz  Post Configuration Set the ARTHOME environment variable and add the binary directory to your PATH by editing your ~/.
+      </div>
+    </a>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+        
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span class="author-highlighted">
+      Greydon Gilmore</span>
+  </div>
+  
+  
+
   
 
   
@@ -1613,7 +1565,7 @@ Make sure you run a backup prior to performing this hack&hellip; just in case.
   <div class="media-body">
 
     <div class="section-subheading article-title mb-0 mt-0">
-      <a href="/post/install-github-desktop/" >Install and work with Github desktop</a>
+      <a href="/post/install-github-desktop/" >Github desktop Install</a>
     </div>
 
     
@@ -1647,14 +1599,6 @@ Make sure you run a backup prior to performing this hack&hellip; just in case.
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Jun 28, 2018
-  </span>
   
 
   

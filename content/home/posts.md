@@ -2,7 +2,7 @@
 # An instance of the Pages widget.
 # Documentation: https://wowchemy.com/docs/page-builder/
 widget: pages
-active: false
+active: true
 # This file represents a page section.
 headless: true
 
@@ -11,6 +11,7 @@ weight: 60
 
 title: Recent Posts
 subtitle:
+show_date: false
 
 content:
   # Page type to display. E.g. post, talk, publication...

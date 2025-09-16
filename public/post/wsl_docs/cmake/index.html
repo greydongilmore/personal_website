@@ -295,7 +295,7 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
   
   <meta property="og:site_name" content="Greydon Gilmore" />
   <meta property="og:url" content="https://greydongilmore.github.io/post/wsl_docs/cmake/" />
-  <meta property="og:title" content="Make and CMake Installation | Greydon Gilmore" />
+  <meta property="og:title" content="Make and CMake Install | Greydon Gilmore" />
   <meta property="og:description" content="Install Make Install build essentials and Make first:
 sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install build-essential  Install CMake Download the latest version of the CMake executable." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
@@ -332,7 +332,7 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
     "@type": "WebPage",
     "@id": "https://greydongilmore.github.io/post/wsl_docs/cmake/"
   },
-  "headline": "Make and CMake Installation",
+  "headline": "Make and CMake Install",
   
   "datePublished": "2018-06-28T00:00:00Z",
   "dateModified": "2018-06-28T00:00:00Z",
@@ -366,7 +366,7 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
 
 
 
-  <title>Make and CMake Installation | Greydon Gilmore</title>
+  <title>Make and CMake Install | Greydon Gilmore</title>
 </head>
 
 
@@ -573,14 +573,37 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
-          </a>
-          <div class="dropdown-menu">
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
             
-              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
             
-          </div>
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>posts</span></a>
         </li>
 
         
@@ -749,7 +772,7 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
   
   
 <div class="article-container pt-3">
-  <h1>Make and CMake Installation</h1>
+  <h1>Make and CMake Install</h1>
 
   
 
@@ -772,14 +795,6 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
   
   
 
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Jun 28, 2018
-  </span>
   
 
   
@@ -818,11 +833,16 @@ sudo apt-get install make sudo apt-get update &amp;&amp; sudo apt-get install bu
 sudo apt-get update &amp;&amp; sudo apt-get install build-essential
 </code></pre>
 <h2 id="install-cmake">Install CMake</h2>
-<p>Download the latest version of the <a href="https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh" target="_blank" rel="noopener">CMake executable</a>.</p>
-<p>In your linux shell run:</p>
-<pre><code class="language-console">chmod +x /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
-sudo /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
-export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
+<p>Download the latest version of the <a href="https://cmake.org/download/#latest" target="_blank" rel="noopener">CMake executable</a>.</p>
+<p>In your linux shell run (replacing VERSION with the version you downloaded):</p>
+<pre><code class="language-console">VERSION=4.1.1
+cd ~/Downloads
+chmod +x cmake-$VERSION-linux-x86_64.sh
+sudo ./cmake-$VERSION-linux-x86_64.sh
+sudo mv cmake-$VERSION-linux-x86_64 ~/bin/cmake
+</code></pre>
+<p>Then add the following line to your <code>.basrc</code> or <code>.zshrc</code>, replacing the path with the path to cmake install on your system:</p>
+<pre><code>export PATH=$PATH:$HOME/bin/cmake/bin
 </code></pre>
 
     </div>
@@ -862,7 +882,7 @@ export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/post/wsl_docs/art/" rel="next">Installing Automatic Registration Toolbox</a>
+    <a href="/post/install-github-desktop/" rel="next">Github desktop Install</a>
   </div>
   
   
@@ -886,15 +906,15 @@ export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/wsl_docs/freesurfer/">Freesurfer Installation</a></li>
-      
-      <li><a href="/post/wsl_docs/ants/">Install Advanced Normalization Tools</a></li>
+      <li><a href="/post/wsl_docs/ants/">ANTs (Advanced Normalization Tools) Install</a></li>
       
       <li><a href="/post/wsl_docs/niftyreg/">NiftyReg Install</a></li>
       
-      <li><a href="/post/wsl_docs/fsl/">FMRIB Software Library Installation</a></li>
+      <li><a href="/post/wsl_docs/fsl/">FSL (FMRIB Software Library) Install</a></li>
       
-      <li><a href="/post/wsl_docs/art/">Installing Automatic Registration Toolbox</a></li>
+      <li><a href="/post/wsl_docs/art/">ART (Automatic Registration Toolbox) Install</a></li>
+      
+      <li><a href="/post/wsl_docs/dcm2niix/">Dcm2niix Install</a></li>
       
     </ul>
   </div>

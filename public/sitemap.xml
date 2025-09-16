@@ -250,11 +250,11 @@
   <url>
     <loc></loc><lastmod>2022-01-01T00:00:00+00:00</lastmod></url>
   <url>
-    <loc>https://greydongilmore.github.io/post/</loc><lastmod>2021-07-28T00:00:00+00:00</lastmod></url>
-  <url>
     <loc>https://greydongilmore.github.io/post/ocr-papers/</loc><lastmod>2021-07-28T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://greydongilmore.github.io/tag/phd/</loc><lastmod>2021-07-28T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://greydongilmore.github.io/post/</loc><lastmod>2021-07-28T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://greydongilmore.github.io/tags/</loc><lastmod>2021-07-28T00:00:00+00:00</lastmod></url>
   <url>
@@ -286,10 +286,6 @@
   <url>
     <loc></loc><lastmod>2021-03-31T00:00:00+00:00</lastmod></url>
   <url>
-    <loc>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</loc><lastmod>2021-02-20T00:00:00+00:00</lastmod></url>
-  <url>
-    <loc>https://greydongilmore.github.io/tag/neuro-software/</loc><lastmod>2021-02-20T00:00:00+00:00</lastmod></url>
-  <url>
     <loc></loc><lastmod>2020-11-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc></loc><lastmod>2020-11-01T00:00:00+00:00</lastmod></url>
@@ -307,6 +303,8 @@
     <loc>https://greydongilmore.github.io/post/linux_docs/app_icon/</loc><lastmod>2020-09-28T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://greydongilmore.github.io/post/wsl_docs/ants/</loc><lastmod>2020-09-28T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://greydongilmore.github.io/tag/neuro-software/</loc><lastmod>2020-09-28T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://greydongilmore.github.io/post/linux_docs/graham_shortcut/</loc><lastmod>2020-09-28T00:00:00+00:00</lastmod></url>
   <url>
@@ -394,9 +392,9 @@
   <url>
     <loc>https://greydongilmore.github.io/publication/2018_cushnie-sparrow_voiceseverity/</loc><lastmod>2018-07-22T00:00:00+00:00</lastmod></url>
   <url>
-    <loc>https://greydongilmore.github.io/post/install-github-desktop/</loc><lastmod>2018-06-28T00:00:00+00:00</lastmod></url>
-  <url>
     <loc>https://greydongilmore.github.io/post/wsl_docs/art/</loc><lastmod>2018-06-28T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://greydongilmore.github.io/post/install-github-desktop/</loc><lastmod>2018-06-28T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://greydongilmore.github.io/post/wsl_docs/cmake/</loc><lastmod>2018-06-28T00:00:00+00:00</lastmod></url>
   <url>
@@ -448,4 +446,6 @@
   <url>
     <loc>https://greydongilmore.github.io/courses/ml_intro/06_logistic_regression/06_01_logistic_regression/</loc></url>
   <url>
-    <loc>https://greydongilmore.github.io/categories/</loc></url></urlset>
+    <loc>https://greydongilmore.github.io/categories/</loc></url>
+  <url>
+    <loc>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</loc></url></urlset>

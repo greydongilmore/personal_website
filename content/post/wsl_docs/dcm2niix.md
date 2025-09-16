@@ -1,5 +1,5 @@
 ---
-title: Dcm2niix Installation
+title: Dcm2niix Install
 subtitle:
 summary:
 date: "2017-05-28T00:00:00Z"
@@ -11,7 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Neuro Software"]
 authors: ["admin"]
-
+show_date: false
 # Optional header image (relative to `assets/media/` folder).
 header:
   caption: ""

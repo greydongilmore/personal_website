@@ -1,5 +1,5 @@
 ---
-title: Make and CMake Installation
+title: Make and CMake Install
 subtitle:
 summary:
 date: "2018-06-28T00:00:00Z"
@@ -11,7 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Neuro Software"]
 authors: ["admin"]
-
+show_date: false
 # Optional header image (relative to `assets/media/` folder).
 header:
   caption: ""
@@ -28,12 +28,20 @@ sudo apt-get update && sudo apt-get install build-essential
 ```
 
 ## Install CMake
-Download the latest version of the [CMake executable](https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh). 
+Download the latest version of the [CMake executable](https://cmake.org/download/#latest). 
 
-In your linux shell run:
+In your linux shell run (replacing VERSION with the version you downloaded):
 
 ```console
-chmod +x /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
-sudo /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
-export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
+VERSION=4.1.1
+cd ~/Downloads
+chmod +x cmake-$VERSION-linux-x86_64.sh
+sudo ./cmake-$VERSION-linux-x86_64.sh
+sudo mv cmake-$VERSION-linux-x86_64 ~/bin/cmake
+```
+
+Then add the following line to your `.basrc` or `.zshrc`, replacing the path with the path to cmake install on your system:
+
+```
+export PATH=$PATH:$HOME/bin/cmake/bin
 ```

@@ -1,5 +1,5 @@
 ---
-title: Install Advanced Normalization Tools
+title: ANTs (Advanced Normalization Tools) Install
 subtitle:
 summary:
 date: "2020-09-28T00:00:00Z"
@@ -11,6 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Neuro Software"]
 authors: ["admin"]
+show_date: false
 
 # Optional header image (relative to `assets/media/` folder).
 header:
@@ -20,58 +21,51 @@ header:
 
 ## Get the latest ANTs code
 
-Download the latest code into an arbitrary directory, I use ~/code:
+You will need to install the ZLIB libraries:
 
 ```console
-mkdir ~/code 
-cd ~/code
-git clone https://github.com/ANTsX/ANTs.git
+sudo apt install zlib1g-dev
 ```
-You will also need to install the ZLIB libraries:
+
+Obtain the newest version of [ANTs](https://github.com/ANTsX/ANTs/releases/latest) by running the following:
 
 ```console
-sudo apt-get install zlib1g-dev
+mkdir -p ~/Documents/code/ants_source
+cd ~/Documents/code/ants_source
+git clone https://github.com/ANTsX/ANTs.git .
 ```
 
 ## Run CMake/Make
 
-I install my applications in ```~/Applications```, however the following will install ANTs in ```~/bin```:
+Make the build directory.
+
+The default install location is `/opt/ANTs`, which falls on your PATH. This is the easiest location to install. If you want to install somewhere else then specify the path in the `CMAKE_INSTALL_PREFIX` variable.
 
 ```console
 mkdir -p ~/bin/ants
 cd ~/bin/ants
-ccmake ~/code/ANTs
+ccmake ~/Documents/code/ants_source
 ```
 
-Hit __'c'__ to do an initial configuration. CMake will do some checking and then present options for review. Hit __'c'__ again to do another round of configuration. If there are no errors, you're ready to generate the make files by pressing __'g'__.
+Hit __'c'__ to do an initial configuration. CMAKE will do some checking and then present options for review. Hit __'c'__ again to do another round of configuration. If there are no errors, you're ready to generate the make files by pressing __'g'__.
 
 Now you are back at the command line, it's time to compile:
 
 ```console
-make
+make -j
 ```
 
-This compiles in the most resource-efficient manner. To save time, you can use multiple threads, for example:
-
 ```console
-make -j 2
+cd ~/bin/ants/ANTS-build
+sudo make install
 ```
 
 ## Post-install Configuration
 
-If you want to use ANTs scripts, copy them from the source directory ```Scripts/``` to the bin directory where ```antsRegistration``` etc are located:
+You will need to edit your `.bashrc` or `.zshrc` file by adding the following lines:
 
 ```console
-cp -r ~/bin/ants/Scripts/* ~/bin/ants/bin/
-```
-
-Assuming you've built in ```~/bin/ants```, there will now be a binary directory ```~/bin/ants/bin```, containing the programs (and scripts if you've included them). The scripts additionally require ANTSPATH to point to the bin directory including a trailing slash.
-
-You will need to edit your ```.bashrc``` or ```.profile``` file by adding the following lines:
-
-```console
-export ANTSPATH=${HOME}/bin/ants/bin
-export PATH=${ANTSPATH}:$PATH
+export PATH=$PATH:/opt/ANTs/bin
 ```
 
 Now check this worked correctly:

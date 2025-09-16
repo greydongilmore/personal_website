@@ -13,16 +13,16 @@ main:
   - name: grants
     url: '#grants'
     weight: 30
-#  - name: posts
-#    url: '#posts'
-#    weight: 40
-  - name: courses
-    url: '#courses'
-    weight: 50
-    identifier: courses_main
-  - name: phys 2130
-    parent: courses_main
-    url: 'courses/phys2130'
+  - name: posts
+    url: '#posts'
+    weight: 40
+  #- name: courses
+  #  url: '#courses'
+  #  weight: 50
+  #  identifier: courses_main
+  #- name: phys 2130
+  #  parent: courses_main
+  #  url: 'courses/phys2130'
   - name: training
     url: '#training'
     weight: 60

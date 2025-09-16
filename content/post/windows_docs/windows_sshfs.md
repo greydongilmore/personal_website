@@ -11,7 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Windows"]
 authors: ["admin"]
-
+show_date: false
 # Optional header image (relative to `assets/media/` folder).
 header:
   caption: ""

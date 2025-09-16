@@ -30,10 +30,9 @@
   
     
   
-  <meta name="description" content="Download software Download the linux software version.
-Run the following command:
-sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz  You will also need to install some dependancies:
-sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libxss1  Post-Install Configurations Add Freesurfer to your path:" />
+  <meta name="description" content="Download software Download the .deb file for Freesurfer.
+Run the following command (replacing the filename with the one you downloaded):
+cd ~/Downloads sudo dpkg -i freesurfer_ubuntu22-8.1.0_amd64.deb  You will also need to install some dependancies:" />
 
   
   <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/post/wsl_docs/freesurfer/" />
@@ -298,19 +297,13 @@ sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libx
   <meta property="og:site_name" content="Greydon Gilmore" />
   <meta property="og:url" content="https://greydongilmore.github.io/post/wsl_docs/freesurfer/" />
   <meta property="og:title" content="Freesurfer Installation | Greydon Gilmore" />
-  <meta property="og:description" content="Download software Download the linux software version.
-Run the following command:
-sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz  You will also need to install some dependancies:
-sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libxss1  Post-Install Configurations Add Freesurfer to your path:" /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="Download software Download the .deb file for Freesurfer.
+Run the following command (replacing the filename with the one you downloaded):
+cd ~/Downloads sudo dpkg -i freesurfer_ubuntu22-8.1.0_amd64.deb  You will also need to install some dependancies:" /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
-      <meta
-        property="article:published_time"
-        content="2021-02-20T00:00:00&#43;00:00"
-      />
     
-    <meta property="article:modified_time" content="2021-02-20T00:00:00&#43;00:00">
   
 
   
@@ -338,8 +331,8 @@ sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libx
   },
   "headline": "Freesurfer Installation",
   
-  "datePublished": "2021-02-20T00:00:00Z",
-  "dateModified": "2021-02-20T00:00:00Z",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -354,7 +347,7 @@ sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libx
       "url": "https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Download software Download the linux software version.\nRun the following command:\nsudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz  You will also need to install some dependancies:\nsudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libxss1  Post-Install Configurations Add Freesurfer to your path:"
+  "description": "Download software Download the .deb file for Freesurfer.\nRun the following command (replacing the filename with the one you downloaded):\ncd ~/Downloads sudo dpkg -i freesurfer_ubuntu22-8.1.0_amd64.deb  You will also need to install some dependancies:"
 }
 </script>
 
@@ -577,14 +570,37 @@ sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libx
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
-          </a>
-          <div class="dropdown-menu">
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
             
-              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
             
-          </div>
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>posts</span></a>
         </li>
 
         
@@ -777,14 +793,6 @@ sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libx
   
 
   
-  <span class="article-date">
-    
-    
-      
-    
-    Feb 20, 2021
-  </span>
-  
 
   
 
@@ -817,9 +825,10 @@ sudo apt-get install tcsh sudo apt-get install libglu1 sudo apt-get install libx
 
     <div class="article-style">
       <h2 id="download-software">Download software</h2>
-<p>Download the <a href="https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz" target="_blank" rel="noopener">linux software version</a>.</p>
-<p>Run the following command:</p>
-<pre><code class="language-console">sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+<p>Download the <code>.deb</code> file for <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/rel7downloads" target="_blank" rel="noopener">Freesurfer</a>.</p>
+<p>Run the following command (replacing the filename with the one you downloaded):</p>
+<pre><code class="language-console">cd ~/Downloads
+sudo dpkg -i freesurfer_ubuntu22-8.1.0_amd64.deb
 </code></pre>
 <p>You will also need to install some dependancies:</p>
 <pre><code class="language-console">sudo apt-get install tcsh
@@ -831,7 +840,7 @@ sudo apt-get install libxss1
 <pre><code class="language-console">echo &quot;FREESURFER_HOME=/usr/local/freesurfer&quot; &gt;&gt; ~/.bashrc
 echo 'source $FREESURFER_HOME/SetUpFreeSurfer.sh' &gt;&gt; ~/.bashrc
 </code></pre>
-<p>If you have run the install correctly you will see this output:</p>
+<p>If you have run the install correctly you will see this output when you close and open a new terminal window:</p>
 <pre><code class="language-console">Setting up environment for FreeSurfer/FS-FAST (and FSL)
 FREESURFER_HOME /usr/local/freesurfer
 FSFAST_HOME     /usr/local/freesurfer/fsfast
@@ -840,13 +849,13 @@ SUBJECTS_DIR    /usr/local/freesurfer/subjects
 MNI_DIR         /usr/local/freesurfer/mni
 </code></pre>
 <h2 id="define-subjects_dir">Define subjects_dir</h2>
-<p>FreeSurfer requires an environment variable called <code>SUBJECTS_DIR</code>. This is the directory where subject data is stored.</p>
+<p>FreeSurfer requires an environment variable called <code>SUBJECTS_DIR</code>. This is the directory where subject data is stored, put this in your <code>~/.bashrc</code> or <code>~/.zshrc</code>:</p>
 <pre><code class="language-console">export SUBJECTS_DIR=&lt;path to subject data&gt;
 </code></pre>
 <h2 id="obtain-license">Obtain license</h2>
 <p>You will need to obtain a <a href="https://surfer.nmr.mgh.harvard.edu/registration.html" target="_blank" rel="noopener">license key</a>.</p>
 <p>Once you obtain the <code>license.txt</code> key file, copy it to your FreeSurfer installation directory. This is also the location defined by the <code>FREESURFER_HOME</code> environment variable.</p>
-<pre><code class="language-console">sudo mv /mnt/c/Users/*[your_username]*/Downloads/license.txt $FREESURFER_HOME
+<pre><code class="language-console">sudo mv ~/Downloads/license.txt $FREESURFER_HOME
 </code></pre>
 
     </div>
@@ -886,15 +895,9 @@ MNI_DIR         /usr/local/freesurfer/mni
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/post/ocr-papers/" rel="next">Making PDFs Searchable</a>
+    <a href="/post/wsl_docs/wsl/" rel="next">Activating Windows Linux Subsystem (WSL)</a>
   </div>
   
-  
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Previous</div>
-    <a href="/post/linux_docs/app_icon/" rel="prev">Adding application launch icon to favorites</a>
-  </div>
   
 </div>
 
@@ -910,15 +913,15 @@ MNI_DIR         /usr/local/freesurfer/mni
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/wsl_docs/ants/">Install Advanced Normalization Tools</a></li>
+      <li><a href="/post/wsl_docs/ants/">ANTs (Advanced Normalization Tools) Install</a></li>
       
       <li><a href="/post/wsl_docs/niftyreg/">NiftyReg Install</a></li>
       
-      <li><a href="/post/wsl_docs/fsl/">FMRIB Software Library Installation</a></li>
+      <li><a href="/post/wsl_docs/fsl/">FSL (FMRIB Software Library) Install</a></li>
       
-      <li><a href="/post/wsl_docs/art/">Installing Automatic Registration Toolbox</a></li>
+      <li><a href="/post/wsl_docs/art/">ART (Automatic Registration Toolbox) Install</a></li>
       
-      <li><a href="/post/wsl_docs/cmake/">Make and CMake Installation</a></li>
+      <li><a href="/post/wsl_docs/cmake/">Make and CMake Install</a></li>
       
     </ul>
   </div>

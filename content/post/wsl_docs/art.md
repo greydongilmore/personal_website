@@ -1,5 +1,5 @@
 ---
-title: Installing Automatic Registration Toolbox
+title: ART (Automatic Registration Toolbox) Install
 subtitle:
 summary:
 date: "2018-06-28T00:00:00Z"
@@ -11,7 +11,7 @@ comments: false  # Show comments?
 private: false
 tags: ["Neuro Software"]
 authors: ["admin"]
-
+show_date: false
 # Optional header image (relative to `assets/media/` folder).
 header:
   caption: ""

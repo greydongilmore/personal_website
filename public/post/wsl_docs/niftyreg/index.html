@@ -31,7 +31,8 @@
     
   
   <meta name="description" content="Download NiftyReg Obtain the newest version of NiftyReg or by running the following:
-mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git  Run CMake/Make Make the build and install directories." />
+mkdir -p ~/Documents/code/niftyreg_source cd ~/Documents/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git .  Run CMake/Make Make the build directory.
+The default install location is /usr/local, which falls on your PATH." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://greydongilmore.github.io/post/wsl_docs/niftyreg/" />
@@ -297,7 +298,8 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
   <meta property="og:url" content="https://greydongilmore.github.io/post/wsl_docs/niftyreg/" />
   <meta property="og:title" content="NiftyReg Install | Greydon Gilmore" />
   <meta property="og:description" content="Download NiftyReg Obtain the newest version of NiftyReg or by running the following:
-mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git  Run CMake/Make Make the build and install directories." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
+mkdir -p ~/Documents/code/niftyreg_source cd ~/Documents/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git .  Run CMake/Make Make the build directory.
+The default install location is /usr/local, which falls on your PATH." /><meta property="og:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -350,7 +352,7 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
       "url": "https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Download NiftyReg Obtain the newest version of NiftyReg or by running the following:\nmkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git  Run CMake/Make Make the build and install directories."
+  "description": "Download NiftyReg Obtain the newest version of NiftyReg or by running the following:\nmkdir -p ~/Documents/code/niftyreg_source cd ~/Documents/code/niftyreg_source git clone https://github.com/SuperElastix/niftyreg.git .  Run CMake/Make Make the build directory.\nThe default install location is /usr/local, which falls on your PATH."
 }
 </script>
 
@@ -573,14 +575,37 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>courses</span><span class="caret"></span>
-          </a>
-          <div class="dropdown-menu">
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
             
-              <a class="dropdown-item" href="/courses/phys2130"><span>phys 2130</span></a>
             
-          </div>
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>posts</span></a>
         </li>
 
         
@@ -773,14 +798,6 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
   
 
   
-  <span class="article-date">
-    
-    
-      
-    
-    Jun 28, 2020
-  </span>
-  
 
   
 
@@ -814,18 +831,19 @@ mkdir -p ~/code/niftyreg_source cd ~/code/niftyreg_source git clone https://gith
     <div class="article-style">
       <h2 id="download-niftyreg">Download NiftyReg</h2>
 <p>Obtain the newest version of <a href="https://sourceforge.net/projects/niftyreg/files/latest/download" target="_blank" rel="noopener">NiftyReg</a> or by running the following:</p>
-<pre><code class="language-console">mkdir -p ~/code/niftyreg_source
-cd ~/code/niftyreg_source
-git clone https://github.com/SuperElastix/niftyreg.git
+<pre><code class="language-console">mkdir -p ~/Documents/code/niftyreg_source
+cd ~/Documents/code/niftyreg_source
+git clone https://github.com/SuperElastix/niftyreg.git .
 </code></pre>
 <h2 id="run-cmakemake">Run CMake/Make</h2>
-<p>Make the build and install directories.</p>
+<p>Make the build directory.</p>
 <p>The default install location is <code>/usr/local</code>, which falls on your PATH. This is the easiest location to install. If you want to install somwhere else then specify the path in the <code>CMAKE_INSTALL_PREFIX</code> variable.</p>
 <pre><code class="language-console">mkdir -p ~/bin/niftyreg
 cd ~/bin/niftyreg
-ccmake ~/code/niftyreg_source/niftyreg
+ccmake ~/Documents/code/niftyreg_source
 </code></pre>
 <p>The following options will be displayed, ensure you change <code>CMAKE_INSTALL_PREFIX</code> variable to the install directory path if you don&rsquo;t want to use default:</p>
+<p>To avoid compiling errors, turn <code>USE_OPENMP</code> OFF.</p>
 <table>
 <thead>
 <tr>
@@ -881,15 +899,15 @@ ccmake ~/code/niftyreg_source/niftyreg
 </tbody>
 </table>
 <p>Press <strong>&lsquo;c&rsquo;</strong> to configure the NiftyReg project, press <strong>&lsquo;c&rsquo;</strong> to configure the project. Once the project is correctly configured, press the <strong>&lsquo;g&rsquo;</strong> key to generate the Makefiles. You can then build and install the project:</p>
-<pre><code class="language-console">sudo make
+<pre><code class="language-console">sudo make -j
 sudo make install
 </code></pre>
 <h2 id="post-install-configuration">Post-Install Configuration</h2>
 <p>The project should then be installed into the <code>CMAKE_INSTALL_PREFIX</code> directory you previously created.</p>
 <p>If you changed the install prefix directory, to one not on your PATH, you will need to add NiftyReg to your PATH. In order to use NiftyReg in any terminal, you will need to edit your <code>.bashrc</code> or <code>.profile</code> file by adding the following lines:</p>
 <pre><code>NREG=&lt;path_to_your_niftyreg_install&gt;
-export PATH={NREG}/bin:${PATH}
-export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
+export PATH=$PATH:$NREG/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NREG/lib
 </code></pre>
 <p>Close and re-open the linux terminal then run:</p>
 <pre><code class="language-console">reg_f3d
@@ -939,7 +957,7 @@ export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/post/wsl_docs/fsl/" rel="prev">FMRIB Software Library Installation</a>
+    <a href="/post/wsl_docs/fsl/" rel="prev">FSL (FMRIB Software Library) Install</a>
   </div>
   
 </div>
@@ -956,15 +974,15 @@ export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/wsl_docs/freesurfer/">Freesurfer Installation</a></li>
+      <li><a href="/post/wsl_docs/ants/">ANTs (Advanced Normalization Tools) Install</a></li>
       
-      <li><a href="/post/wsl_docs/ants/">Install Advanced Normalization Tools</a></li>
+      <li><a href="/post/wsl_docs/fsl/">FSL (FMRIB Software Library) Install</a></li>
       
-      <li><a href="/post/wsl_docs/fsl/">FMRIB Software Library Installation</a></li>
+      <li><a href="/post/wsl_docs/art/">ART (Automatic Registration Toolbox) Install</a></li>
       
-      <li><a href="/post/wsl_docs/art/">Installing Automatic Registration Toolbox</a></li>
+      <li><a href="/post/wsl_docs/cmake/">Make and CMake Install</a></li>
       
-      <li><a href="/post/wsl_docs/cmake/">Make and CMake Installation</a></li>
+      <li><a href="/post/wsl_docs/dcm2niix/">Dcm2niix Install</a></li>
       
     </ul>
   </div>

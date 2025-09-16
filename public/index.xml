@@ -12526,46 +12526,6 @@ iplot(choromap)
     </item>
     
     <item>
-      <title>Freesurfer Installation</title>
-      <link>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</link>
-      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</guid>
-      <description>&lt;h2 id=&#34;download-software&#34;&gt;Download software&lt;/h2&gt;
-&lt;p&gt;Download the &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linux software version&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Run the following command:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo tar -C /usr/local -xzvf /mnt/c/Users/*[your_username]*/Downloads/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You will also need to install some dependancies:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install tcsh
-sudo apt-get install libglu1
-sudo apt-get install libxss1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;post-install-configurations&#34;&gt;Post-Install Configurations&lt;/h2&gt;
-&lt;p&gt;Add Freesurfer to your path:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;echo &amp;quot;FREESURFER_HOME=/usr/local/freesurfer&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
-echo &#39;source $FREESURFER_HOME/SetUpFreeSurfer.sh&#39; &amp;gt;&amp;gt; ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you have run the install correctly you will see this output:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Setting up environment for FreeSurfer/FS-FAST (and FSL)
-FREESURFER_HOME /usr/local/freesurfer
-FSFAST_HOME     /usr/local/freesurfer/fsfast
-FSF_OUTPUT_FORMAT nii
-SUBJECTS_DIR    /usr/local/freesurfer/subjects
-MNI_DIR         /usr/local/freesurfer/mni
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;define-subjects_dir&#34;&gt;Define subjects_dir&lt;/h2&gt;
-&lt;p&gt;FreeSurfer requires an environment variable called &lt;code&gt;SUBJECTS_DIR&lt;/code&gt;. This is the directory where subject data is stored.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export SUBJECTS_DIR=&amp;lt;path to subject data&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;obtain-license&#34;&gt;Obtain license&lt;/h2&gt;
-&lt;p&gt;You will need to obtain a &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/registration.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;license key&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Once you obtain the &lt;code&gt;license.txt&lt;/code&gt; key file, copy it to your FreeSurfer installation directory. This is also the location defined by the &lt;code&gt;FREESURFER_HOME&lt;/code&gt; environment variable.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv /mnt/c/Users/*[your_username]*/Downloads/license.txt $FREESURFER_HOME
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Direct visualization and characterization of the human zona incerta and surrounding structures.</title>
       <link>https://greydongilmore.github.io/publication/2020_lau_direct_visualization/</link>
       <pubDate>Sun, 01 Nov 2020 00:00:00 +0000</pubDate>
@@ -12629,40 +12589,36 @@ Categories=Development
     </item>
     
     <item>
-      <title>Install Advanced Normalization Tools</title>
+      <title>ANTs (Advanced Normalization Tools) Install</title>
       <link>https://greydongilmore.github.io/post/wsl_docs/ants/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       <guid>https://greydongilmore.github.io/post/wsl_docs/ants/</guid>
       <description>&lt;h2 id=&#34;get-the-latest-ants-code&#34;&gt;Get the latest ANTs code&lt;/h2&gt;
-&lt;p&gt;Download the latest code into an arbitrary directory, I use ~/code:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir ~/code 
-cd ~/code
-git clone https://github.com/ANTsX/ANTs.git
+&lt;p&gt;You will need to install the ZLIB libraries:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt install zlib1g-dev
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You will also need to install the ZLIB libraries:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install zlib1g-dev
+&lt;p&gt;Obtain the newest version of &lt;a href=&#34;https://github.com/ANTsX/ANTs/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ANTs&lt;/a&gt; by running the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/Documents/code/ants_source
+cd ~/Documents/code/ants_source
+git clone https://github.com/ANTsX/ANTs.git .
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;run-cmakemake&#34;&gt;Run CMake/Make&lt;/h2&gt;
-&lt;p&gt;I install my applications in &lt;code&gt;~/Applications&lt;/code&gt;, however the following will install ANTs in &lt;code&gt;~/bin&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Make the build directory.&lt;/p&gt;
+&lt;p&gt;The default install location is &lt;code&gt;/opt/ANTs&lt;/code&gt;, which falls on your PATH. This is the easiest location to install. If you want to install somewhere else then specify the path in the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/bin/ants
 cd ~/bin/ants
-ccmake ~/code/ANTs
+ccmake ~/Documents/code/ants_source
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to do an initial configuration. CMake will do some checking and then present options for review. Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; again to do another round of configuration. If there are no errors, you&amp;rsquo;re ready to generate the make files by pressing &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to do an initial configuration. CMAKE will do some checking and then present options for review. Hit &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; again to do another round of configuration. If there are no errors, you&amp;rsquo;re ready to generate the make files by pressing &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Now you are back at the command line, it&amp;rsquo;s time to compile:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make -j
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This compiles in the most resource-efficient manner. To save time, you can use multiple threads, for example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;make -j 2
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cd ~/bin/ants/ANTS-build
+sudo make install
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;post-install-configuration&#34;&gt;Post-install Configuration&lt;/h2&gt;
-&lt;p&gt;If you want to use ANTs scripts, copy them from the source directory &lt;code&gt;Scripts/&lt;/code&gt; to the bin directory where &lt;code&gt;antsRegistration&lt;/code&gt; etc are located:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cp -r ~/bin/ants/Scripts/* ~/bin/ants/bin/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Assuming you&amp;rsquo;ve built in &lt;code&gt;~/bin/ants&lt;/code&gt;, there will now be a binary directory &lt;code&gt;~/bin/ants/bin&lt;/code&gt;, containing the programs (and scripts if you&amp;rsquo;ve included them). The scripts additionally require ANTSPATH to point to the bin directory including a trailing slash.&lt;/p&gt;
-&lt;p&gt;You will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export ANTSPATH=${HOME}/bin/ants/bin
-export PATH=${ANTSPATH}:$PATH
+&lt;p&gt;You will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.zshrc&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export PATH=$PATH:/opt/ANTs/bin
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now check this worked correctly:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;which antsRegistration
@@ -12778,18 +12734,19 @@ Exec=[path/to/sshfs_mount.sh]
       <guid>https://greydongilmore.github.io/post/wsl_docs/niftyreg/</guid>
       <description>&lt;h2 id=&#34;download-niftyreg&#34;&gt;Download NiftyReg&lt;/h2&gt;
 &lt;p&gt;Obtain the newest version of &lt;a href=&#34;https://sourceforge.net/projects/niftyreg/files/latest/download&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NiftyReg&lt;/a&gt; or by running the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/code/niftyreg_source
-cd ~/code/niftyreg_source
-git clone https://github.com/SuperElastix/niftyreg.git
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/Documents/code/niftyreg_source
+cd ~/Documents/code/niftyreg_source
+git clone https://github.com/SuperElastix/niftyreg.git .
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;run-cmakemake&#34;&gt;Run CMake/Make&lt;/h2&gt;
-&lt;p&gt;Make the build and install directories.&lt;/p&gt;
+&lt;p&gt;Make the build directory.&lt;/p&gt;
 &lt;p&gt;The default install location is &lt;code&gt;/usr/local&lt;/code&gt;, which falls on your PATH. This is the easiest location to install. If you want to install somwhere else then specify the path in the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;mkdir -p ~/bin/niftyreg
 cd ~/bin/niftyreg
-ccmake ~/code/niftyreg_source/niftyreg
+ccmake ~/Documents/code/niftyreg_source
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The following options will be displayed, ensure you change &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; variable to the install directory path if you don&amp;rsquo;t want to use default:&lt;/p&gt;
+&lt;p&gt;To avoid compiling errors, turn &lt;code&gt;USE_OPENMP&lt;/code&gt; OFF.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -12845,15 +12802,15 @@ ccmake ~/code/niftyreg_source/niftyreg
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Press &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to configure the NiftyReg project, press &lt;strong&gt;&amp;lsquo;c&amp;rsquo;&lt;/strong&gt; to configure the project. Once the project is correctly configured, press the &lt;strong&gt;&amp;lsquo;g&amp;rsquo;&lt;/strong&gt; key to generate the Makefiles. You can then build and install the project:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo make
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo make -j
 sudo make install
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;post-install-configuration&#34;&gt;Post-Install Configuration&lt;/h2&gt;
 &lt;p&gt;The project should then be installed into the &lt;code&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; directory you previously created.&lt;/p&gt;
 &lt;p&gt;If you changed the install prefix directory, to one not on your PATH, you will need to add NiftyReg to your PATH. In order to use NiftyReg in any terminal, you will need to edit your &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file by adding the following lines:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;NREG=&amp;lt;path_to_your_niftyreg_install&amp;gt;
-export PATH={NREG}/bin:${PATH}
-export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
+export PATH=$PATH:$NREG/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NREG/lib
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Close and re-open the linux terminal then run:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;reg_f3d
@@ -12878,7 +12835,7 @@ export LD_LIBRARY_PATH={NREG}/lib:${LD_LIBRARY_PATH}
     </item>
     
     <item>
-      <title>FMRIB Software Library Installation</title>
+      <title>FSL (FMRIB Software Library) Install</title>
       <link>https://greydongilmore.github.io/post/wsl_docs/fsl/</link>
       <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
       <guid>https://greydongilmore.github.io/post/wsl_docs/fsl/</guid>
@@ -13353,31 +13310,7 @@ $$&lt;/p&gt;
     </item>
     
     <item>
-      <title>Install and work with Github desktop</title>
-      <link>https://greydongilmore.github.io/post/install-github-desktop/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/post/install-github-desktop/</guid>
-      <description>&lt;p&gt;While working with Git is most often performed at the command line, it can often be daughnting for people who are not as comfortable with a terminal window. GitHub has made the entry point easier by introducing a user interface application - &lt;strong&gt;GitHub Desktop&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;setting-up-github-desktop&#34;&gt;Setting up GitHub Desktop&lt;/h2&gt;
-&lt;p&gt;The first step to take is setting up an RSS feed so you are notified when a new article is published in an area you are interested in. The RSS manager I use is &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;Feedly&lt;/a&gt;, which is simple and easy to use.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Install the application from the &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Once you have installed GitHub Desktop, launch it and sign in with your GitHub account:&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;./img/pic_01.png&#34; alt=&#34;pic_01&#34; width=&#34;60%&#34;/&gt;&lt;/p&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;Once you are signed in, choose &lt;strong&gt;Clone a repository&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;./img/pic_02.png&#34; alt=&#34;pic_02&#34; width=&#34;60%&#34;/&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Installing Automatic Registration Toolbox</title>
+      <title>ART (Automatic Registration Toolbox) Install</title>
       <link>https://greydongilmore.github.io/post/wsl_docs/art/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
       <guid>https://greydongilmore.github.io/post/wsl_docs/art/</guid>
@@ -13411,7 +13344,37 @@ export PATH=$ARTHOME/bin:$PATH
     </item>
     
     <item>
-      <title>Make and CMake Installation</title>
+      <title>Github desktop Install</title>
+      <link>https://greydongilmore.github.io/post/install-github-desktop/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/install-github-desktop/</guid>
+      <description>&lt;p&gt;While working with Git is most often performed at the command line, it can often be daughnting for people who are not as comfortable with a terminal window. GitHub has made the entry point easier by introducing a user interface application - &lt;strong&gt;GitHub Desktop&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;installing-on-ubuntu&#34;&gt;Installing on Ubuntu&lt;/h2&gt;
+&lt;p&gt;Download the linux version of the application from &lt;a href=&#34;https://github.com/shiftkey/desktop/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Run the following command (replacing the filename with the one you downloaded):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cd ~/Downloads
+sudo dpkg -i GitHubDesktop-linux-amd64-3.4.13-linux1.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;installing-on-windows&#34;&gt;Installing on Windows&lt;/h2&gt;
+&lt;p&gt;The first step to take is setting up an RSS feed so you are notified when a new article is published in an area you are interested in. The RSS manager I use is &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;Feedly&lt;/a&gt;, which is simple and easy to use.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install the application from the &lt;a href=&#34;https://desktop.github.com/&#34; target=&#34;_blank&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you have installed GitHub Desktop, launch it and sign in with your GitHub account:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;./img/pic_01.png&#34; alt=&#34;pic_01&#34; width=&#34;60%&#34;/&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Once you are signed in, choose &lt;strong&gt;Clone a repository&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;./img/pic_02.png&#34; alt=&#34;pic_02&#34; width=&#34;60%&#34;/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Make and CMake Install</title>
       <link>https://greydongilmore.github.io/post/wsl_docs/cmake/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
       <guid>https://greydongilmore.github.io/post/wsl_docs/cmake/</guid>
@@ -13421,11 +13384,16 @@ export PATH=$ARTHOME/bin:$PATH
 sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install build-essential
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;install-cmake&#34;&gt;Install CMake&lt;/h2&gt;
-&lt;p&gt;Download the latest version of the &lt;a href=&#34;https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CMake executable&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In your linux shell run:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;chmod +x /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
-sudo /mnt/c/Users/*[your_username]*/Downloads/cmake-*-Linux-x86_64.sh
-export PATH=~/cmake-3.13.3-Linux-x86_64/bin/:$PATH
+&lt;p&gt;Download the latest version of the &lt;a href=&#34;https://cmake.org/download/#latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CMake executable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In your linux shell run (replacing VERSION with the version you downloaded):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;VERSION=4.1.1
+cd ~/Downloads
+chmod +x cmake-$VERSION-linux-x86_64.sh
+sudo ./cmake-$VERSION-linux-x86_64.sh
+sudo mv cmake-$VERSION-linux-x86_64 ~/bin/cmake
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then add the following line to your &lt;code&gt;.basrc&lt;/code&gt; or &lt;code&gt;.zshrc&lt;/code&gt;, replacing the path with the path to cmake install on your system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export PATH=$PATH:$HOME/bin/cmake/bin
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -13713,7 +13681,7 @@ fi
     </item>
     
     <item>
-      <title>Dcm2niix Installation</title>
+      <title>Dcm2niix Install</title>
       <link>https://greydongilmore.github.io/post/wsl_docs/dcm2niix/</link>
       <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
       <guid>https://greydongilmore.github.io/post/wsl_docs/dcm2niix/</guid>
@@ -14840,6 +14808,47 @@ print(classification_report(y_test,predictions))
 &lt;li&gt;Maybe the Cabin letter could be a feature&lt;/li&gt;
 &lt;li&gt;Is there any info you can get from the ticket?&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Freesurfer Installation</title>
+      <link>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://greydongilmore.github.io/post/wsl_docs/freesurfer/</guid>
+      <description>&lt;h2 id=&#34;download-software&#34;&gt;Download software&lt;/h2&gt;
+&lt;p&gt;Download the &lt;code&gt;.deb&lt;/code&gt; file for &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/fswiki/rel7downloads&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Freesurfer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Run the following command (replacing the filename with the one you downloaded):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;cd ~/Downloads
+sudo dpkg -i freesurfer_ubuntu22-8.1.0_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will also need to install some dependancies:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo apt-get install tcsh
+sudo apt-get install libglu1
+sudo apt-get install libxss1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;post-install-configurations&#34;&gt;Post-Install Configurations&lt;/h2&gt;
+&lt;p&gt;Add Freesurfer to your path:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;echo &amp;quot;FREESURFER_HOME=/usr/local/freesurfer&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+echo &#39;source $FREESURFER_HOME/SetUpFreeSurfer.sh&#39; &amp;gt;&amp;gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have run the install correctly you will see this output when you close and open a new terminal window:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;Setting up environment for FreeSurfer/FS-FAST (and FSL)
+FREESURFER_HOME /usr/local/freesurfer
+FSFAST_HOME     /usr/local/freesurfer/fsfast
+FSF_OUTPUT_FORMAT nii
+SUBJECTS_DIR    /usr/local/freesurfer/subjects
+MNI_DIR         /usr/local/freesurfer/mni
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;define-subjects_dir&#34;&gt;Define subjects_dir&lt;/h2&gt;
+&lt;p&gt;FreeSurfer requires an environment variable called &lt;code&gt;SUBJECTS_DIR&lt;/code&gt;. This is the directory where subject data is stored, put this in your &lt;code&gt;~/.bashrc&lt;/code&gt; or &lt;code&gt;~/.zshrc&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;export SUBJECTS_DIR=&amp;lt;path to subject data&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;obtain-license&#34;&gt;Obtain license&lt;/h2&gt;
+&lt;p&gt;You will need to obtain a &lt;a href=&#34;https://surfer.nmr.mgh.harvard.edu/registration.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;license key&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once you obtain the &lt;code&gt;license.txt&lt;/code&gt; key file, copy it to your FreeSurfer installation directory. This is also the location defined by the &lt;code&gt;FREESURFER_HOME&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;sudo mv ~/Downloads/license.txt $FREESURFER_HOME
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
