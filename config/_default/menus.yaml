@@ -34,9 +34,9 @@ main:
     identifier: cv_main
   - name: CV short
     parent: cv_main
-    url: "files/cv/CVShort_Greydon-Gilmore.pdf"
+    url: "files/cv/CVShort-Greydon_Gilmore.pdf"
     target: "_blank"
   - name: CV long
     parent: cv_main
-    url: "files/cv/CVLong_Greydon-Gilmore.pdf"
+    url: "files/cv/CVLong-Greydon_Gilmore.pdf"
     target: "_blank"
