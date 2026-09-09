@@ -5,68 +5,12 @@
     <link>https://greydongilmore.github.io/publication-type/1/</link>
       <atom:link href="https://greydongilmore.github.io/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
     <description>1</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2026 Greydon Gilmore</copyright><lastBuildDate>Fri, 18 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2026 Greydon Gilmore</copyright><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://greydongilmore.github.io/media/icon_hu5403136dfb5484a5cb3dfe5767696fab_109253_512x512_fill_lanczos_center_3.png</url>
       <title>1</title>
       <link>https://greydongilmore.github.io/publication-type/1/</link>
     </image>
-    
-    <item>
-      <title>The impact of localization and registration accuracy on estimates of deep brain stimulation electrode position in stereotactic space</title>
-      <link>https://greydongilmore.github.io/publication/2025_abbass_loc_impact/</link>
-      <pubDate>Fri, 18 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2025_abbass_loc_impact/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mapping the topographic organization of the human zona incerta using diffusion MRI</title>
-      <link>https://greydongilmore.github.io/publication/2025_haast_mapping_zi-copy/</link>
-      <pubDate>Mon, 03 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2025_haast_mapping_zi-copy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mapping the topographic organization of the human zona incerta using diffusion MRI</title>
-      <link>https://greydongilmore.github.io/publication/2025_haast_mapping_zi/</link>
-      <pubDate>Mon, 03 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2025_haast_mapping_zi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Radiofrequency-thermocoagulation in pediatric epilepsy surgery: a systematic review and pooled analysis of cases</title>
-      <link>https://greydongilmore.github.io/publication/2025_bottan_thermocoag/</link>
-      <pubDate>Mon, 13 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2025_bottan_thermocoag/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Disrupting the epileptogenic network with stereoelectroencephalography-guided radiofrequency thermocoagulation</title>
-      <link>https://greydongilmore.github.io/publication/2024_kreinter_disrupt_rf/</link>
-      <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2024_kreinter_disrupt_rf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MRI-degad: toward accurate conversion of gadolinium-enhanced T1w MRIs to non-contrast-enhanced scans using CNNs</title>
-      <link>https://greydongilmore.github.io/publication/2024_ogunsanya_degad/</link>
-      <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2024_ogunsanya_degad/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statistical segmentation model for accurate electrode positioning in Parkinson&#39;s deep brain stimulation based on clinical low-resolution image data and electrophysiology</title>
-      <link>https://greydongilmore.github.io/publication/2024_varga_statistic_seg/</link>
-      <pubDate>Thu, 14 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://greydongilmore.github.io/publication/2024_varga_statistic_seg/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Lack of spontaneous typical seizures during intracranial monitoring with stereo-electroencephalography</title>

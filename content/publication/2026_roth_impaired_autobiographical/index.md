@@ -1,12 +1,12 @@
 ---
-title: "Mapping the topographic organization of the human zona incerta using diffusion MRI"
+title: "Impaired autobiographical remembering and future thinking in temporal lobe epilepsy"
 
-authors: ['Roy Haast','Jason Kai','Alaa Taha','Violet Liu', admin, 'Maxime Guye','Ali R Khan','Jonathan C. Lau']
-date: "2025-02-03T00:00:00"
-doi: "10.7554/eLife.103530.1"
+authors: ['Rebecca Roth', 'Victor Karpychev', 'Jessica Decker', 'Andrew Schell', 'Stephan Hamann', admin, 'Nimit Desai', 'Daniel Schacter', 'Leonardo Bonilha', 'Ezequiel Gleichgerrcht']
+date: "2026-10-03T00:00:00"
+doi: "10.1016/j.yebeh.2026.111173"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2025-02-03T00:00:00"
+publishDate: "2026-10-03T00:00:00"
 
 # Publication type.
 # 0 = Uncategorized
@@ -16,10 +16,10 @@ publishDate: "2025-02-03T00:00:00"
 # 4 = Report
 # 5 = Book
 # 6 = Book section
-publication_types: ["1"]
+publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "In *eLife*"
+publication: "In *Epilepsy & Behavior*"
 publication_short: ""
 
 # Abstract and optional shortened version.
@@ -34,13 +34,13 @@ tags:
 featured: false
 
 # links:
-url_pdf: "publication/2025_Haast_mapping_zi/Haast et al. - 2025 - Mapping the topographic organization of the human zona incerta using diffusion MRI.pdf"
+url_pdf: "publication/2026_roth_impaired_autobiographical/Roth et al. - 2026 - Impaired autobiographical remembering and future thinking in temporal lobe epilepsy.pdf"
 url_code: ''
 url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
-url_source: 'https://elifesciences.org/reviewed-preprints/103530v1'
+url_source: 'https://www.epilepsybehavior.com/article/S1525-5050(26)00294-5/abstract'
 url_video: ''
 
 # Featured image
